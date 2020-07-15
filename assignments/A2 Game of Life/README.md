@@ -1,5 +1,6 @@
+![Screenshot](screenshot.png "Screenshot")
 
-##(a) What concerns you identified, and how you separated them
+## (a) What concerns you identified, and how you separated them
 
 I grouped concerns into separate modules (in src/js and src/css) as follows:
 
@@ -42,7 +43,7 @@ I grouped concerns into separate modules (in src/js and src/css) as follows:
   the collection of preset starting states
   
 
-##(b) How you exploited functionals in your code
+## (b) How you exploited functionals in your code
 
 I decided to represent the board as a list (see makeBoard in gol.model.js).
 This allowed me to easily exploit the default Array functionals. If instead I had represented the board as an array of arrays, I would have had to implement its own functionals, more complex. The tradeoff is that I had to maintain board dimensions and cell coordinates separately.
@@ -54,9 +55,9 @@ The private functional forEachNeighbour inside makeBoard abstracts iteration ove
 Modules iterate over the preset initial states collection using map and forEach.
 
 
-##(c) Any interesting design ideas you had or tradeoffs that you made
+## (c) Any interesting design ideas you had or tradeoffs that you made
 
-###How I used the Model-View-Controller design pattern
+### How I used the Model-View-Controller design pattern
 
 I decided to structure the app as described in the book Single Page Applications (Mikowski), and it paid off. 
 
@@ -76,13 +77,13 @@ The tradeoff is that,  although the learning curve was rather steep, now I am we
 
 > See [the notes](https://docs.google.com/document/d/1CE09C3VuBsZ4lW5KP41j-aJsDtCUVR_rPev98pJtt7w/edit?usp=sharing) I took while reading the book.
 
-###Other design decisions
+### Other design decisions
 
 I also separated the data (in this case it's just the preset states collection) into its own module, given that is should be maintained independently. Although a board is represented in the model as a list of booleans, I decided to represent preset boards (in the Data module) as array literals of  _0_  and  _1_ . The reason is that this is much easier to type than  _true_  and   _false_ . However, when loaded into de module the 1s and 0s are transformed into booleans. This was trivial by using Array map. The tradeoff was worth it as this design decision saved much time, by allowing a more convenient notation.
 
 > So, by designing a [little language](https://ocw.mit.edu/ans7870/6/6.005/s16/classes/26-little-languages/index.html), business logic that would normally belong to the Model could instead be stored as Data, and be understood and modified separately.
 
-###Criticism
+### Criticism
 
 The visual design can be improved. 
 - There is too much empty space at laptop size. Maybe the board should be much bigger, and the other placed controlls to the side. 
