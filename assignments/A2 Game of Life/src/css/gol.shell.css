@@ -1,0 +1,38 @@
+.gol-shell {
+  --color: lightgray;
+}
+
+.gol-shell {
+  align-items: center;
+  color: var(--color);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0 auto;
+  padding: 0 5px;
+}
+
+.gol-shell-title h1 {
+  font-family: 'Nova Square', cursive;
+}
+
+.gol-shell-main, .gol-shell-aside {
+	width: 100%;
+}
+
+button, input {
+  background-color: var(--color);
+  color: white;
+  font-size: 14px;
+  padding: 1px 10px;
+}
+
+button {
+  border-radius: 10px;
+  font-weight: bold;
+  margin: 0 10px;
+}
+	button[disabled] {
+		background-color: gray;
+		border-color: gray;
+	}

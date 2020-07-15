@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game of Life</title>
+    <meta charset="utf-8" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+
+    <!-- START MODULE CSS FILES -->
+    <link rel="stylesheet" href="css/gol.css" />
+    <link rel="stylesheet" href="css/gol.shell.css" />
+    <link rel="stylesheet" href="css/gol.bord.css" />
+    <link rel="stylesheet" href="css/gol.pre.css" />
+    <link rel="stylesheet" href="css/gol.anim.css" />
+    <link rel="stylesheet" href="css/gol.dim.css" />
+    <!-- START MODULE CSS FILES -->
+    
+    <!-- START MODULE JAVASCRIPT FILES -->
+    <script type="text/javascript" src="js/gol.js"></script>
+    <script type="text/javascript" src="js/gol.util.js"></script>
+    <script type="text/javascript" src="js/gol.data.js"></script>
+    <script type="text/javascript" src="js/gol.model.js"></script>
+    <script type="text/javascript" src="js/gol.util_b.js"></script>
+    <script type="text/javascript" src="js/gol.shell.js"></script>
+    <script type="text/javascript" src="js/gol.bord.js"></script>
+    <script type="text/javascript" src="js/gol.pre.js"></script>
+    <script type="text/javascript" src="js/gol.anim.js"></script>
+    <script type="text/javascript" src="js/gol.dim.js"></script>
+    <!-- END MODULE JAVASCRIPT FILES -->
+ 
+
+    <script type="text/javascript">
+      // bootsrtap the Game of Life app
+      window.addEventListener('load', () => {
+        gol.init_module( document.querySelector( '#gol' ) );        
+      });
+    </script>
+  </head>
+  <body>
+    <div id="gol"></div>
+  </body>
+</html>

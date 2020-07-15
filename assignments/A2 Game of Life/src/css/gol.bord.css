@@ -1,0 +1,20 @@
+.gol-bord-board {
+  background-color: lightgray;
+  column-gap: 2px;
+  display: grid;
+  height: max-content;
+  margin: 10px auto 20px;
+  max-height: 300px;
+  max-width: 100%;
+  width: max-content;
+  overflow: scroll;
+  row-gap: 2px;
+}
+
+.gol-bord-cell {
+	background-color: white;
+}
+
+.gol-bord-cell-alive {
+	background-color: black;
+}

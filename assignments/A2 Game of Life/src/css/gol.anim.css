@@ -1,0 +1,11 @@
+.gol-anim-start-button {
+  background: green;
+  border-color: green;
+  color: white;
+}
+
+.gol-anim-stop-button {
+  background: red;
+  border-color: red;
+  color: white;
+}

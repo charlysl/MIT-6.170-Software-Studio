@@ -1,0 +1,30 @@
+
+
+.gol-pre-board-list {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	overflow: scroll;
+}
+
+.gol-pre-board-wrapper {
+	margin: 20px 10px;
+}
+
+.gol-pre-board {
+	column-gap: 1px;
+	background-color: lightgrey;
+	row-gap: 1px;
+}
+
+.gol-pre-cell {
+	background-color: white;
+}
+
+.gol-pre-cell-alive {
+	background-color: black;
+}
+
+.gol-pre-board-name {
+	text-align: center;
+}
