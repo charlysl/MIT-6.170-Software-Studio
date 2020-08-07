@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fritter</title>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/services.js"></script>
+    <script>
+      window.onload = function () {
+        fri.initModule();
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Fritter</h1>
+    <main>
+      <section class="user-api">
+        <h2>User API</h2>
+        <label>
+          username:
+          <input class="user-name-input" type="text" value="user0" />
+        </label>
+        <label>
+          password:
+          <input class="user-password-input" type="text" value="pwd0" />
+        </label>
+        <button class="session-login-button">Login</button>
+        <button class="session-logout-button">Logout</button>
+        <button class="user-create-button">Create</button>
+        <button class="user-edit-button">Edit</button>
+        <button class="user-delete-button">Delete</button>
+      </section>
+      <section class="user-api">
+        <h2>Freet API</h2>
+        <label>
+          tweetId:
+          <input name="freet-id-input" type="text" value="" />
+        </label>
+        <label>
+          message:
+          <input name="freet-message-input" type="text" value="" />
+        </label>
+        <label>
+          author:
+          <input name="freet-author-input" type="text" value="" />
+        </label>
+        <button class="freet-create-button">Create</button>
+        <button class="freet-edit-button">Edit</button>
+        <button class="freet-delete-button">Delete</button>
+        <button class="freet-upvote-button">Upvote</button>
+        <button class="freet-downvote-button">Downvote</button>
+        <button class="freet-all-button">All</button>
+        <button class="freet-search-button">Search</button>
+      </section>
+    </main>
+  </body>
+</html>

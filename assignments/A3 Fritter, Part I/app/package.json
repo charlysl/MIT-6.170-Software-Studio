@@ -1,0 +1,39 @@
+{
+  "name": "fritter",
+  "version": "1.0.0",
+  "description": "6.170 3rd assignment",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/start.js",
+    "test": "jest src/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlysl/MIT-6.170-Software-Studio.git"
+  },
+  "keywords": [
+    "6.170",
+    "OCW",
+    "fritter",
+    "node.js"
+  ],
+  "author": "carlossl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charlysl/MIT-6.170-Software-Studio/issues"
+  },
+  "homepage": "https://github.com/charlysl/MIT-6.170-Software-Studio#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
+    "uuid": "^8.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.0",
+    "supertest": "^4.0.2"
+  }
+}
