@@ -20,14 +20,14 @@ const userService = require( '../services/userService' );
 * Location header to URL /api/user/:user_id is returned
 * @error {403} - if the name is not unique
 */
-router.post( '/', function ( req, res ) {
+router.post( '/', function ( req, res, next ) {
   userService.create(req.body.name, req.body.password)
   .then(( user_id ) => {
     const location = '/api/user/' + user_id;
     res.location(location).status(201).end();
   })
-  .catch(( ex ) => {
-    res.status(403).send(ex).end();
+  .catch(( err ) => {
+    handleError( err, req, res, next );
   });
 });
 
@@ -73,13 +73,8 @@ router.put( '/', function ( req, res, next ) {
   .then(()=>{
     res.status(204).end();
   })
-  .catch(( ex )=>{
-    if ( ex.message.match( /DuplicateName/ ) ) {
-      res.status(403).send(ex).end();
-    } else {
-      res.status(500).send(ex).end();
-      next(ex);
-    }
+  .catch(( err )=>{
+    handleError( err, req, res, next );
   });
 });
 
@@ -97,6 +92,15 @@ router.delete( '/', function ( req, res ) {
     res.status(204).end();
   })
 });
+
+const handleError = function ( err, req, res, next ) {
+  if ( err.message.match( /DuplicateName/ ) ) {
+     res.status(403).send().end();
+  } else {
+    res.status(500).send().end();
+    next(err);
+  }
+}
 
 module.exports = router;
 
