@@ -28,7 +28,6 @@ router.post( '/login', function ( req, res ) {
     res.status(204).end();
   })
   .catch(( ex ) => {
-    console.log('ex: ' + ex.toString());
     if (ex.message.match(/InvalidCredentials/)) {
       res.status(403).send(ex).end();
     } else {
@@ -43,10 +42,17 @@ router.post( '/login', function ( req, res ) {
  *
  *  @name DELETE/api/session
  *  @return {204} - the user has been succesfully logged out
+ *  @throws {401} - if the user is not logged in
  */
 router.delete( '/logout', function ( req, res ) {
-  delete req.session.user_id;
-  res.status(204).end();
+  const user_id = req.session.user_id;
+
+  if ( user_id === null ) {
+    res.status(401).end();
+  } else {
+    req.session.user_id = null; //TODO find better way to logout
+    res.status(204).end();
+  }
 });
  
  module.exports = router;

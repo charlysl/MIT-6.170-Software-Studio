@@ -9,6 +9,7 @@ const router = express.Router();
 
 const userService = require( '../services/userService' );
 
+
 /**
 * Create user account
 *
@@ -29,7 +30,17 @@ router.post( '/', function ( req, res ) {
     res.status(403).send(ex).end();
   });
 });
-  
+
+router.all( '*', (req,res,next)=>{
+  const user_id = req.session.user_id;
+
+  if ( user_id === undefined ) {
+    res.status(401).end();
+  } else {
+    next();
+  }
+});
+
 /**
 * Edit user account
 *
@@ -44,11 +55,18 @@ router.post( '/', function ( req, res ) {
 * @error {401} - if the user is not logged in
 * @error {403} - if the new name is not unique
 */
-router.put( '/', function ( req, res ) {
-  const user = {
-    user_id :   req.session.user_id,
-    name    :   req.body.name,
-    password:   req.body.password
+router.put( '/', function ( req, res, next ) {
+  const name = req.body.name;
+  const password = req.body.password;
+
+  const user = { user_id :   req.session.user_id };
+
+  if ( name !== undefined ) {
+    user.name = name;
+  }
+
+  if ( password !== undefined ) {
+    user.password = password;
   }
 
   userService.edit( user )
@@ -60,6 +78,7 @@ router.put( '/', function ( req, res ) {
       res.status(403).send(ex).end();
     } else {
       res.status(500).send(ex).end();
+      next(ex);
     }
   });
 });
@@ -72,7 +91,11 @@ router.put( '/', function ( req, res ) {
 * @error {401} - if the user is not logged in
 */
 router.delete( '/', function ( req, res ) {
-  res.status(500).send({message: 'unimplemented'}).end();
+  const user_id = req.session.user_id;
+  userService.remove( user_id )
+  .then(()=>{
+    res.status(204).end();
+  })
 });
 
 module.exports = router;

@@ -23,6 +23,7 @@ const userMap = {};
 //  - Keys must be strings
 //  - Values must be objects with a name and a password 
 //    property
+//  - user_id property must be equal to the key
 //  - Names and passwords must be strings.
 //  - User names must be unique
 //
@@ -57,6 +58,10 @@ const checkRep = function() {
     if ( ( typeof(user.password) !== 'string' )) {
       throw new Error( 'user password is not a string: ' 
                         + user.password );
+    }
+    if ( ( key !== user.user_id ) ) {
+      throw new Error( 'key !== user.user_id: ' 
+                        + key + ' !== ' + user.user_id );
     }
     if ( nameSet.has( user.name ) ) {
       throw new Error( 'user name is duplicate: ' 
@@ -138,6 +143,10 @@ module.exports.get = function( name ) {
 * already existing name.  
 */
 module.exports.edit = function ( user ) {
+  if ( !user.user_id ) { //assertion
+    throw new Error('invalid user.user_id: ' + user.user_id);
+  }
+
   return new Promise((resolve,reject)=>{
     try {
       const old_user = userMap[ user.user_id ];

@@ -24,6 +24,12 @@ app.use(session({
 
 app.use( '/api', router );
 
+app.use( ( err, req, res, next ) => {
+  // every time there is a 500, call next(ex)
+  // it will be handled here
+  console.log( err );
+});
+
 // needed for testing with jest and supertests
 // "You want to allow each test file to start a server 
 //  on their own."

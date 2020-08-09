@@ -28,7 +28,7 @@ module.exports.create = function( name, password) {
 * @throws {DuplicateName} - there is another user with name
 */
 module.exports.edit = function ( user ) {
-  throw new Error("unimplemented");
+  return userModel.edit( user );
 }
 
 /*
@@ -36,7 +36,7 @@ module.exports.edit = function ( user ) {
 * @param {string} user_id - the user identifier
 */
 module.exports.remove = function ( user_id ) {
-  throw new Error("unimplemented");
+  return userModel.remove( user_id );
 }
 
 /*

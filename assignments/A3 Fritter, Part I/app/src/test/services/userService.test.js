@@ -1,28 +1,40 @@
 const userService = require('../../services/userService');
 
 /**
-* Testing strategy for users
+* Testing strategy for userService.create
 *
 * Partition input space as follows:
 * 
 * name is unique: yes, no
 */
 
-const name = 'service_user1';
-const password = 'password1';
+const name = 'name';
+const password = 'password';
 let user_id;
 
 describe('services/userService.create', () => {
 
+  let user_id;
+
   test('creates a user', ()=>{
-    return expect(userService.create( name, password ))
-      .resolves.toMatch(/.+/);
+    return expect(
+        userService.create( name, password )
+        .then(( the_user_id )=>{
+          user_id = the_user_id;
+          return user_id;
+        })
+      ).resolves.toMatch(/.+/);
   });
 
   test ('throws an exception if name is duplicate', ()=>{
     return expect(userService.create( name, password ))
       .rejects.toThrow(/DuplicateName/);
   });
+
+  afterAll(()=>{
+    return userService.remove( user_id );
+  });
+
 });
 
 
@@ -55,6 +67,7 @@ describe('services/userService.create', () => {
 describe('services/userService.edit', () => {
 
   let user_id;
+  let new_user_id;
 
   beforeEach(()=>{
     // create a user to be edited and to set user_id
@@ -64,55 +77,142 @@ describe('services/userService.edit', () => {
     });
   });
 
-  afterEach(()=>{
-    // remove the user with user_id
-    return userService.remove( user_id );
-  });
-
   test('changes name, keeps old password', () => { 
-      const user = {
-        user_id,
-        name: 'new_name',
-        password
-      };
+    const user = {
+      user_id,
+      name: 'new_name',
+      password
+    };
 
-      return userService.edit( 'new_name', password )
+    expect(
+      userService.edit( user )
       .then(()=>{
-        return 
-          userService.authenticate( 'new_name', password);
+        return userService
+                .authenticate( 'new_name', password );
       })
-      .resolves.toBe( user_id );
-    });
+    ).resolves.toBe( user_id );
+  });
 
   test('changes password, keeps old name', () => {
+    const user = {
+      user_id,
+      name,
+      password: 'new_password'
+    };
 
+    expect(
+      userService.edit( user )
+      .then(()=>{
+        return userService
+                .authenticate( name, 'new_password' );
+      })
+    ).resolves.toBe( user_id );
   });
 
-  test('throws exception when changin to duplicate name', 
+  test('throws exception when changing to duplicate name, '
+        + 'with a password', 
     () => {
-
+      expect(
+        userService.create( 'new_name', 'new_password' )
+        .then(( the_user_id )=>{
+          new_user_id = the_user_id;
+          return userService.edit({
+            user_id,
+            name: 'new_name',
+            password
+          })
+        })
+      ).rejects.toThrow( /DuplicateName/ )
   });
 
   test('keeps old name', () => {
+    const user = {
+      user_id,
+      name
+    };
 
+    expect(
+      userService.edit( user )
+      .then(()=>{
+        return userService
+                .authenticate( name, password );
+      })
+    ).resolves.toBe( user_id );
   });
 
   test('keeps old password', () => {
+    const user = {
+      user_id,
+      password
+    };
 
+    expect(
+      userService.edit( user )
+      .then(()=>{
+        return userService
+                .authenticate( name, password);
+      })
+    ).resolves.toBe( user_id );
   });
 
   test('changes name',  () => {
+    const user = {
+      user_id,
+      name: 'new_name',
+    };
 
+    expect(
+      userService.edit( user )
+      .then(()=>{
+        return userService
+                .authenticate( 'new_name', password);
+      })
+    ).resolves.toBe( user_id );
   });
 
   test('changes password', () => {
+    const user = {
+      user_id,
+      name,
+      password: 'new_password'
+    };
 
+    expect(
+      userService.edit( user )
+      .then(()=>{
+        return userService
+                .authenticate( name, 'new_password' );
+      })
+    ).resolves.toBe( user_id );
   });
 
   test('throws exception when changing to duplicate name', 
     ()=> {
+      expect(
+        userService.create( 'new_name', 'new_password' )
+        .then(( the_user_id )=>{
+          new_user_id = the_user_id;
+          return userService.edit({
+            user_id,
+            name: 'new_name',
+          })
+        })
+      ).rejects.toThrow( /DuplicateName/ )
+  });
 
-    });
+  afterEach(()=>{
+    // remove the user with user_id
+    return userService.remove( user_id )
+    .then(()=>{
+      // remove the new_name user that was created 
+      // by some tests
+      if ( new_user_id ) {
+        const promise = userService.remove( new_user_id );
+        new_user_id = undefined;
+        return promise;
+      }
+    })
+  });
 
 });
 
@@ -140,7 +240,7 @@ describe('services/userService.remove', ()=>{
   test('removes a user', ()=>{
     return userService.remove( user_id )
     .then(()=>{
-      return userService.create( user, password);
+      return userService.create( name, password);
     })
     .then(( the_user_id )=> {
       user_id = the_user_id;
@@ -169,6 +269,16 @@ describe('services/userService.remove', ()=>{
 */
 
 describe('services/userService.authenticate', () => {
+
+  let user_id;
+
+  beforeAll(()=>{
+    userService.create( name, password )
+    .then(( the_user_id )=>{
+      user_id = the_user_id;
+    })
+  });
+
   test('returns user id if credentials are valid', () => {
     return expect(userService.authenticate( name, password ))
       .resolves.toMatch( /.+/ );
@@ -183,4 +293,9 @@ describe('services/userService.authenticate', () => {
     return expect(userService.authenticate( name , 'no' ))
       .rejects.toThrow( /InvalidCredentials/ );
   });
+
+  afterAll(()=>{
+    userService.remove( user_id );
+  })
+
 });
