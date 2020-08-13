@@ -1,5 +1,7 @@
 const uuid = require('uuid');
 
+const freetModel = require('./freetModel');
+
 /**
 * models/userModel.js
 *
@@ -84,6 +86,7 @@ const checkRep = function() {
 */
 module.exports.insert = function( name, password ) {
   return new Promise((resolve, reject) => {
+
     try {
       getUserByName( name );
       reject( new Error('DuplicateName: ' + name) );
@@ -174,13 +177,19 @@ module.exports.edit = function ( user ) {
 
 /**
 * Remove a user
+*
+* TODO should also remove its freets
+*
 * @return {Promise} - a promise that doesn't resolve 
 * to any value.
 */
 module.exports.remove = function( user_id ) {
   return new Promise((resolve,reject)=>{
-    delete userMap[ user_id ];
-    resolve();
+    deleteAllUserFreets( user_id )
+    .then(()=>{
+      delete userMap[ user_id ];
+      resolve();
+    });
   });
 }
 
@@ -210,3 +219,18 @@ const isDuplicateName = function ( user ) {
     return false;
   }
 }
+
+const deleteAllUserFreets =function ( user_id ) {
+  return freetModel.search({author_id: user_id})
+  .then(( freet_list )=>{
+    const promises = [];
+    freet_list.forEach(( freet )=>{
+      promises.push(
+        freetModel.delete( freet.freet_id )
+      );
+    });
+    return Promise.all( promises );
+  });
+}
+
+

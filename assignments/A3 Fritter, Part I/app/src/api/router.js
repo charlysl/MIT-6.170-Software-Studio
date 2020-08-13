@@ -3,12 +3,12 @@ const express = require( 'express' );
 
 const userRouter = require('./userRouter');
 const sessionRouter = require('./sessionRouter');
-const fritterRouter = require( './fritterRouter' );
+const freetRouter = require( './freetRouter' );
 
 const router = express.Router();
 
 router.use( '/user', userRouter );
 router.use( '/session' , sessionRouter );
-router.use( '/fritter', fritterRouter );
+router.use( '/freet', freetRouter );
 
 module.exports = router;

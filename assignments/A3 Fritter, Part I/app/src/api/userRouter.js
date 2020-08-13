@@ -7,7 +7,10 @@
 const express = require( 'express' );
 const router = express.Router();
 
+const routerUtils = require( './routerUtils' );
+
 const userService = require( '../services/userService' );
+
 
 
 /**
@@ -31,15 +34,7 @@ router.post( '/', function ( req, res, next ) {
   });
 });
 
-router.all( '*', (req,res,next)=>{
-  const user_id = req.session.user_id;
-
-  if ( user_id === undefined ) {
-    res.status(401).end();
-  } else {
-    next();
-  }
-});
+router.all( '*', routerUtils.checkAuthenticated );
 
 /**
 * Edit user account

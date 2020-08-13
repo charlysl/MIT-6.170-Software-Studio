@@ -27,6 +27,7 @@ app.use( '/api', router );
 app.use( ( err, req, res, next ) => {
   // every time there is a 500, call next(ex)
   // it will be handled here
+  console.log( '500: internal server exception:' ); 
   console.log( err );
 });
 
