@@ -17,14 +17,20 @@ const userService = require( '../services/userService' );
 * Create user account
 *
 * @name POST/user
-* @param {string} name - The user's login name, must be unique
+* @param {string} name - The username, must be unique
 * @param {string} password - The user's login password
 * @return {201} - if the user was succesfully created, a
 * Location header to URL /api/user/:user_id is returned
-* @error {403} - if the name is not unique
+* @throws {400} - if username or password are missing
+* @throws {403} - if the name is not unique
 */
 router.post( '/', function ( req, res, next ) {
-  userService.create(req.body.name, req.body.password)
+  const
+    username = req.body.name,
+    password = req.body.password
+  ;
+
+  userService.create( username, password )
   .then(( user_id ) => {
     const location = '/api/user/' + user_id;
     res.location(location).status(201).end();
@@ -89,7 +95,9 @@ router.delete( '/', function ( req, res ) {
 });
 
 const handleError = function ( err, req, res, next ) {
-  if ( err.message.match( /DuplicateName/ ) ) {
+  if (        err.message.match( /MissingParameter/ ) ) {
+     res.status(400).send().end();
+  } else if ( err.message.match( /DuplicateName/ ) ) {
      res.status(403).send().end();
   } else {
     res.status(500).send().end();

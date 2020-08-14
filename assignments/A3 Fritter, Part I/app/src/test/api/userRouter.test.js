@@ -7,6 +7,8 @@ const supertest = require('supertest');
 * Partition input as follows:
 *
 * name is unique: yes, no
+* name is missing: yes, no
+* password is missing: yes, no
 *
 * Observer: POST/api/login
 *
@@ -30,7 +32,7 @@ describe('POST/api/user', ()=>{
       });
   });
 
-  test('does not allow duplicate user names', (done)=>{
+  test('throws 403 if duplicate username', (done)=>{
     supertest(app)
       .post('/api/user')
       .send({name, password})
@@ -40,6 +42,29 @@ describe('POST/api/user', ()=>{
         done();
       });
   });
+
+  test('throws 400 if username is missing', (done)=>{
+    supertest(app)
+      .post('/api/user')
+      .send({password})
+      .expect(400)
+      .end((err,res)=>{
+        if (err) return done(err);
+        done();
+      });
+  });  
+
+  test('throws 400 if password is missing', (done)=>{
+    supertest(app)
+      .post('/api/user')
+      .send({name})
+      .expect(400)
+      .end((err,res)=>{
+        if (err) return done(err);
+        done();
+      });
+  });  
+
 });
 
 

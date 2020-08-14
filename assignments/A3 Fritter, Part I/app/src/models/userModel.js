@@ -87,6 +87,11 @@ const checkRep = function() {
 module.exports.insert = function( name, password ) {
   return new Promise((resolve, reject) => {
 
+    if ( name === undefined || password === undefined ) {
+      reject( new Error('MissingParameter name and/or password') );
+      return;
+    }
+
     try {
       getUserByName( name );
       reject( new Error('DuplicateName: ' + name) );
