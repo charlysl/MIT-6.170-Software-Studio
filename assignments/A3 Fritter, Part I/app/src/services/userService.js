@@ -9,13 +9,15 @@ const userModel = require('../models/userModel');
 * @throws {/DuplicateName/} - if user name is duplicate
 */
 module.exports.create = function( name, password) {
+
   return new Promise((resolve,reject)=>{
-    try {
-      user_id = userModel.insert( name, password );
-      return resolve( user_id );
-    } catch (ex) {
-      return reject( ex );
-    }   
+    userModel.insert( name, password )
+    .then(( user_id )=>{
+      resolve( user_id );
+    })
+    .catch(( err )=>{
+      reject( err );
+    });
   })
 }
 

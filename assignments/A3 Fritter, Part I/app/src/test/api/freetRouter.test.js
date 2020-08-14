@@ -365,20 +365,145 @@ describe('GET/api/freet', ()=>{
     return Promise.all( promises );
 
   });
-
 });
 
 //-------------------------------------------------------
 //              END TESTS FOR GET/api/freet
 //-------------------------------------------------------
 
+/**
+* Testing Strategy for POST/api/freet/:freet_id/vote
+* 
+* Partition input as follows:
+*
+* logged in: yes, no
+* freet_id exists: yes, no
+* user is author: yes, no
+* direction: up, down
+*
+* Cover each value at least once:
+*
+* [not logged in, is not author, freet_id,   up] -> 401
+* [    logged in,     is author, freet_id,   up] -> 403
+* [    logged in, is not author, freet_id,   up] -> 204
+* [    logged in, is not author, freet_id, down] -> 204
+* [    logged in, is not author, wrong_id,   up] -> 404
+*
+* Setup:  POST/api/user
+*         POST/api/session/login
+*         POST/api/freet
+*         ...
+*         DELETE/api/user
+*         DELETE/api/session/logout
+*
+* Observer: GET/api/freet
+*/
+
+describe('POST/api/freet/:freet_id/vote', ()=>{
+
+  let author_agent = supertest.agent(app),
+      not_author_agent = supertest.agent(app),
+      ids   = {}
+  ;
+
+  beforeEach(()=>{
+    return createUserLoginAndFreet( author_agent, ids )
+          .then(()=>{
+            return createUserAndLogin( not_author_agent, 'name2' );
+          });
+  });
+
+  // it('whatever', (done)=>{
+  //   expect(1).toBe(1); done();
+  // });
+
+  it('returns 401 when upvoting a freet if not logged in', (done)=>{
+    const agent     = supertest(app),    //not logged in
+          freet_id  = ids.freet_id
+    ;
+
+
+    agent
+    .post('/api/freet/' + freet_id + '/vote?direction=up')
+    .send()
+    .expect(401)
+    .end((err,res)=>{
+      if (err) return done(res);
+      done();
+    });
+  });
+
+  it('returns 403 when upvoting a freet if author logged in', (done)=>{
+    const agent     = author_agent,
+          freet_id  = ids.freet_id
+    ;
+
+    agent
+    .post('/api/freet/' + freet_id + '/vote?direction=up')
+    .send()
+    .expect(403)
+    .end((err,res)=>{
+      if (err) return done(res);
+      done();
+    });
+  });
+
+  it('returns 204 when upvoting a freet if not author logged in', (done)=>{
+    const direction       = 'up',
+          expected_votes  = 1,
+          agent           = not_author_agent,
+          freet_id        = ids.freet_id
+    ;
+
+    testFreetVoting( agent, freet_id, direction, expected_votes, done );
+  });
+
+  it('returns 204 when downvoting a freet if not author logged in', (done)=>{
+    const direction       = 'down',
+          expected_votes  = -1,
+          agent           = not_author_agent,
+          freet_id        = ids.freet_id
+    ;
+
+    testFreetVoting( agent, freet_id, direction, expected_votes, done );
+  })
+
+  it('returns 404 when upvoting a freet that does not exist', (done)=>{
+    const agent     = not_author_agent,
+          freet_id  = 'some random freet id'
+    ;
+
+    agent
+    .post('/api/freet/' + freet_id + '/vote?direction=up')
+    .send()
+    .expect(404)
+    .end((err,res)=>{
+      if (err) return done(res);
+      done();
+    });
+  })
+
+  afterEach(()=>{
+    return deleteUserAndLogout( author_agent )
+          .then(()=>{
+            return deleteUserAndLogout( not_author_agent );
+          });
+  });
+
+});
+
+//-------------------------------------------------------
+//     END TESTS FOR POST/api/freet/:freet_id/upvote
+//-------------------------------------------------------
+
+
 //------------------------------------------------------
 //                HELPER METHODS
 //------------------------------------------------------
 
-const createUserAndLogin = function ( agent ) {
+const createUserAndLogin = function ( agent, name='name' ) {
   const credentials = {
-    name: 'name', 
+    name, 
     password: 'password'
   };
 
@@ -394,6 +519,7 @@ const createUser = function ( agent, credentials ) {
   return agent
   .post('/api/user')
   .send(credentials)
+  .expect(201)
   .then(( res )=>{
     return parseId( res.headers.location );
   })
@@ -598,3 +724,23 @@ const createUserFreet = function ( user, freet ) {
     });
   });
 }
+
+const testFreetVoting = 
+  ( agent, freet_id, direction, expected_votes, done )=>{
+  
+    agent
+    .post('/api/freet/' + freet_id + '/vote?direction=' + direction)
+    .send()
+    .expect(204)
+    .end((err,res)=>{
+      if (err) return done(res);
+      agent
+      .get('/api/freet/')
+      .query( {freet_id} )
+      .end((err,res)=>{
+        if (err) return done(res);
+        expect(res.body[0].votes).toBe( expected_votes );
+        done();
+      });
+    });  
+} 

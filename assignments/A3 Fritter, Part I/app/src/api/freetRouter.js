@@ -142,31 +142,38 @@ router.delete( '/', function ( req, res, next ) {
 
     
 /**
- * Upvote a tweet
- * @name POST/api/freet/:freet_id/upvote
+ * Upvote or downvote a freet.
+ *
+ * @name POST/api/freet/:freet_id/vote
  * @param {string} freet_id - freet identifier
- * @return {201} - the freet was successfully upvoted,
- *  a Location header with URL /api/freet/:id is also sent.
- * @error {401} - if not logged in
- * @error {403} - if the user is the author
- * @error {404} - there is no freet with freet_id
+ * @param {string} direction - a query parameter, one of:
+ *                             "up"   for upvote
+ *                             "down" for downvote
+ * @return {204} - the freet was successfully voted.
+ * @error  {401} - if not logged in
+ * @error  {403} - if the user is the author
+ * @error  {404} - there is no freet with freet_id
  */
-router.post( '/:freet_id/upvote', function ( req, res ) {
-  res.status(500).send({message: 'unimplemented'}).end();
-});
+router.post( '/:freet_id/vote', ( req, res, next ) => {
+  const user_id   = req.session.user_id;
+  const freet_id  = req.params.freet_id;
+  const direction = req.query.direction;
 
-/**
- * Downvote a freet
- * @name POST/api/freet/:freet_id/downvote
- * @param {string} freet_id - freet identifier
- * @return {201} - the freet was successfully downvoted,
- *  a Location header with URL /api/freet/:id is also sent.
- * @error {401} - if not logged in
- * @error {403} - if the user is the author
- * @error {404} - there is no freet with freet_id
- */
-router.post( '/:freet_id/downvote', function ( req, res ) {
-  res.status(500).send({message: 'unimplemented'}).end();
+  let is_upvote;
+  try {
+    is_upvote = isUpvote( direction );
+  } catch( err ) {
+    handleError( err, res, next );
+    return;
+  }
+  freetService.vote( user_id, freet_id, is_upvote )
+  .then(()=>{
+    res.status(204).end();
+  })
+  .catch((err)=>{
+    handleError( err, res, next );
+    return;
+  });
 });
 
 //------------------------------------------------------
@@ -179,9 +186,12 @@ router.post( '/:freet_id/downvote', function ( req, res ) {
 //--------------------------------------------------
 
 const handleError = function ( err, res, next ) {
+
   let res_status;
 
   if ( err.message.match( /MessageTooLong/ )) {
+    res_status = 400;
+  } else if ( err.message.match( /InvalidDirection/ )) {
     res_status = 400;
   } else if (err.message.match( /NotAuthorized/ )) {
     res_status = 403;
@@ -194,6 +204,20 @@ const handleError = function ( err, res, next ) {
   }
 
   res.status( res_status ).json( err ).end();
+
+}
+
+/**
+* @throws {InvalidDirection} - if direction is not 'up' or 'down'
+*/
+const isUpvote = function ( direction ) {
+  if ( direction == 'up' ) {
+    return true;
+  } else if ( direction == 'down' ) {
+    return false;
+  } else {
+    throw new Error('InvalidDirection: ' + direction);
+  }
 
 }
 

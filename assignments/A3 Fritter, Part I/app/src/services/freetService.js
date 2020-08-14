@@ -97,6 +97,40 @@ module.exports.search = function ( query={} ) {
 
 }
 
+/**
+* Upvote or downvote a freet.
+* @param {string} freet_id - the freet_id
+* @param {boolean} is_upvote - if true  is an upvote
+*                            - if false is a  downvote
+* @throws {NotAuthorized}      - if the user is the author
+* @throws {FreetNotFound} - if there is no freet with freet_id
+*/
+module.exports.vote = function ( user_id, freet_id, is_upvote ) {
+  return new Promise((resolve,reject)=>{
+    freetModel.get( freet_id )
+    .then(( freet )=>{
+      if ( user_id === freet.author_id ) {
+        reject( new Error('NotAuthorized') );
+        return;
+      } else {
+        const new_freet = {};
+        Object.assign( new_freet, freet );
+
+        const delta = getVoteDelta( is_upvote );
+        new_freet.votes += delta;
+
+        return freetModel.edit( new_freet );
+      }
+    })
+    .then(()=>{
+      resolve();
+    })
+    .catch(( err )=>{
+      reject( err );
+    }) 
+  });
+}
+
 
 //---------------------------------------------------------
 //                PRIVATE FUNCTIONS
@@ -124,5 +158,12 @@ const modifyFreet = function ( user_id, freet_id, fn ) {
   });
 }
 
+const getVoteDelta = function ( is_upvote ) {
+  if ( is_upvote ) {
+    return 1;
+  } else {
+    return -1;
+  }
+}
 
 
