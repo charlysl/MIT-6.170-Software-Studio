@@ -63,19 +63,19 @@ router.all( '*', routerUtils.checkAuthenticated );/*, (req,res,next)=>{
   next();
 });*/
  
- /**
-  * Create a new freet.
-  *
-  * The user id is the author, and has 0 votes.
-  *
-  * @name POST/api/freet
-  * @param {string} message - text message, 140 characters 
-  * long or less
-  * @return {201} {string} - freet_id (and Location header 
-  * with /api/freet/:id URL to freet ) 
-  * @error  {400} - if the message is too long
-  * @error  {401} - if not logged in
-  */
+/**
+* Create a new freet.
+*
+* The user id is the author, and has 0 votes.
+*
+* @name POST/api/freet
+* @param {string} message - text message, 140 characters 
+* long or less
+* @return {201} {string} - freet_id (and Location header 
+* with /api/freet/:id URL to freet ) 
+* @error  {400} - if the message is too long
+* @error  {401} - if not logged in
+*/
 router.post( '/', function ( req, res, next ) {
   const author_id = req.session.user_id;
   const message = req.body.message;
@@ -90,21 +90,21 @@ router.post( '/', function ( req, res, next ) {
   });
 });
   
-  /**
-   * Edit a freet.
-   *
-   * A freet with the given id must already exist. 
-   *
-   * @name PUT/api/freet/:freet_id
-   * @param {string} freet_id - freet identifier
-   * @param {string} message - text message, 140 characters 
-   *  long or less
-   * @return {204} - the freet was successfully edited
-   * @error {400} - if the message is too long
-   * @error {401} - if not logged in
-   * @error {403} - if the user is not the author
-   * @error {404} - if there is no freet with freet_id
-   */
+/**
+ * Edit a freet.
+ *
+ * A freet with the given id must already exist. 
+ *
+ * @name PUT/api/freet/:freet_id
+ * @param {string} freet_id - freet identifier
+ * @param {string} message - text message, 140 characters 
+ *  long or less
+ * @return {204} - the freet was successfully edited
+ * @error {400} - if the message is too long
+ * @error {401} - if not logged in
+ * @error {403} - if the user is not the author
+ * @error {404} - if there is no freet with freet_id
+ */
 router.put( '/:freet_id', function ( req, res, next ) {
   const user_id = req.session.user_id;
   let freet = req.body;
@@ -157,9 +157,11 @@ router.delete( '/:freet_id', function ( req, res, next ) {
  * @error  {404} - there is no freet with freet_id
  */
 router.post( '/:freet_id/vote', ( req, res, next ) => {
-  const user_id   = req.session.user_id;
-  const freet_id  = req.params.freet_id;
-  const direction = req.query.direction;
+  const 
+    user_id   = req.session.user_id,
+    freet_id  = req.params.freet_id,
+    direction = req.body.direction
+  ;
 
   let is_upvote;
   try {

@@ -428,8 +428,8 @@ describe('POST/api/freet/:freet_id/vote', ()=>{
 
 
     agent
-    .post('/api/freet/' + freet_id + '/vote?direction=up')
-    .send()
+    .post('/api/freet/' + freet_id + '/vote')
+    .send({direction: 'up'})
     .expect(401)
     .end((err,res)=>{
       if (err) return done(res);
@@ -443,8 +443,8 @@ describe('POST/api/freet/:freet_id/vote', ()=>{
     ;
 
     agent
-    .post('/api/freet/' + freet_id + '/vote?direction=up')
-    .send()
+    .post('/api/freet/' + freet_id + '/vote')
+    .send({direction: 'up'})
     .expect(403)
     .end((err,res)=>{
       if (err) return done(res);
@@ -478,8 +478,8 @@ describe('POST/api/freet/:freet_id/vote', ()=>{
     ;
 
     agent
-    .post('/api/freet/' + freet_id + '/vote?direction=up')
-    .send()
+    .post('/api/freet/' + freet_id + '/vote')
+    .send({direction: 'up'})
     .expect(404)
     .end((err,res)=>{
       if (err) return done(res);
@@ -740,8 +740,8 @@ const testFreetVoting =
   ( agent, freet_id, direction, expected_votes, done )=>{
   
     agent
-    .post('/api/freet/' + freet_id + '/vote?direction=' + direction)
-    .send()
+    .post('/api/freet/' + freet_id + '/vote')
+    .send({direction})
     .expect(204)
     .end((err,res)=>{
       if (err) return done(res);
