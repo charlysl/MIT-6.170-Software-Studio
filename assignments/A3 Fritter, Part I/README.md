@@ -42,7 +42,7 @@ i.e. freet and user account editing and deletion.
 
 For all requests that failed because they were not allowed. 
 
-i.e. attempting to create or edit a user account with a duplicate username, a freet author attempting to upvote one of this tweets.
+i.e. attempting to create or edit a user account with a duplicate username, a freet author attempting to upvote one of his freets.
 
 It should be noted that, by design, it is imposible for a user to edit another user's account or freets just by tampering with the request, would have to sign in as the other user.
 
@@ -83,9 +83,9 @@ Same as above applies.
 
 **Downvote**:   POST/api/freet/:freet_id/vote
 
-I chose POST instead of PUT because it voting is an unsafe but not idempotent operation. This is so because there is no requirement to prevent double voting, in which case voting would be idempotent, you can only upvote or downvote once in a row. However, if double voting by the same user was prevented, then, maybe, PUT would have been more appropriate.
+I chose POST instead of PUT because voting is an unsafe but not idempotent operation. This is so because there is no requirement to prevent double voting, in which case voting would be idempotent, you can only upvote or downvote once in a row. However, if double voting by the same user was prevented, then, maybe, PUT would have been more appropriate.
 
-So, if PUT, what would the right URL be? In this case, the resource would be just the freet, without the 'vote' bit: 
+So, if PUT, what would the right URL be? In this case, the resource would be just the freet, without the 'vote' bit; it would, essentially, be like editing the freet; in fact, votes are a freet property: 
 
 PUT/api/freet/:freet_id {vote=up|down}
 
@@ -126,7 +126,7 @@ I decided that the requests should be as follows:
 
 The reason is that it seems to me that the resource is the user session, which is created by a login, and deleted by a logout.
 
-However, I admit that this decision might be disputable. I am aware that usually this request are '/login' and 'logout'; given that one of the main goals of REST is to be easy to understand for other developers, I might have broken a convention.
+However, I admit that this decision might be disputable. I am aware that usually these requests are '/login' and 'logout'; given that one of the main goals of REST is to be easy to understand for other developers, I might have broken a convention.
 
 The 'login' and 'logout' suffixes are unnecessary if one follows REST principles strictly, but they serve to clarify the purpose; maybe this a bit of a smell, though, as pointed out above.
 
