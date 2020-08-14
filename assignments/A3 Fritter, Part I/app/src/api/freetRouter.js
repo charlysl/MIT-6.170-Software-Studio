@@ -95,7 +95,7 @@ router.post( '/', function ( req, res, next ) {
    *
    * A freet with the given id must already exist. 
    *
-   * @name PUT/api/freet
+   * @name PUT/api/freet/:freet_id
    * @param {string} freet_id - freet identifier
    * @param {string} message - text message, 140 characters 
    *  long or less
@@ -105,9 +105,11 @@ router.post( '/', function ( req, res, next ) {
    * @error {403} - if the user is not the author
    * @error {404} - if there is no freet with freet_id
    */
-router.put( '/', function ( req, res, next ) {
-  const freet = req.body;
+router.put( '/:freet_id', function ( req, res, next ) {
   const user_id = req.session.user_id;
+  let freet = req.body;
+
+  freet.freet_id = req.params.freet_id;
 
   freetService.edit( user_id, freet )
   .then(()=>{
@@ -120,16 +122,16 @@ router.put( '/', function ( req, res, next ) {
    
  /**
   * Delete a freet
-  * @name DELETE/api/freet
+  * @name DELETE/api/freet/:freet_id
   * @param {string} freet_id - freet identifier
   * @return {204}  - the freet was deleted
   * @error  {401}  - if not logged in
   * @error  {403}  - if the user is not the author
   * @error  {404}  - if there is no freet_id freet
   */
-router.delete( '/', function ( req, res, next ) {
+router.delete( '/:freet_id', function ( req, res, next ) {
   const user_id = req.session.user_id;
-  const freet_id = req.body.freet_id;
+  const freet_id = req.params.freet_id;
 
   freetService.delete( user_id, freet_id )
   .then((resolve,reject)=>{

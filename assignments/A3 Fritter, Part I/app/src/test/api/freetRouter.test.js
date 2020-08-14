@@ -77,7 +77,7 @@ describe('/POST/api/freet', ()=>{
 });
 
 /**
-* Testing Strategy for DELETE/api/freet
+* Testing Strategy for DELETE/api/freet/:freet_id
 *
 * Partition input as follows:
 *
@@ -101,35 +101,38 @@ describe('/POST/api/freet', ()=>{
 * Observer: DELETE/api/freet -> 404
 */
 
-describe('DELETE/api/freet', ()=>{
+describe('DELETE/api/freet/:freet_id', ()=>{
 
   const agent = supertest.agent(app); // a logged in session
 
-  let ids = {};
-  let fields = {};
+  let 
+    ids     = {},
+    fields  = {},
+    freet_id
+  ;
 
   beforeEach(()=>{
     return createUserLoginAndFreet( agent, ids )
     .then(()=>{
-      fields.freet_id = ids.freet_id;
+      freet_id = ids.freet_id;
     });
   });
 
   it('throws 401 when deleting a freet without logging in', (done)=>{
-    testModifyFreetWithoutLoggingIn( agent, 'delete', fields, done );
+    testModifyFreetWithoutLoggingIn( agent, 'delete', freet_id, fields, done );
   });
 
   it('returns 204 when the author deletes a freet that exists', (done)=>{
-    testModifyFreetThatExists( agent, 'delete', fields, done )
+    testModifyFreetThatExists( agent, 'delete', freet_id, fields, done )
   })
 
   it('returns 403 when not the author deletes a freet that exists', (done)=>{
-    testModifyFreetNotAuthor( agent, 'delete', fields, done );
+    testModifyFreetNotAuthor( agent, 'delete', freet_id, fields, done );
   })
 
   it('returns 404 when the author deletes a non-existing freet', (done)=>{
-    fields.freet_id = 'some random freet id';
-    testModifyNonExistingFreet( agent, 'delete', fields, done );
+    freet_id = 'some random freet id';
+    testModifyNonExistingFreet( agent, 'delete', freet_id, fields, done );
   });
 
   afterEach(()=>{
@@ -143,7 +146,7 @@ describe('DELETE/api/freet', ()=>{
 //-------------------------------------------------------
 
 /**
-* Testing Strategy for PUT/api/freet
+* Testing Strategy for PUT/api/freet:freet_id
 *
 * Partition input as follows:
 *
@@ -172,17 +175,18 @@ describe('DELETE/api/freet', ()=>{
 * Observer: GET/api/freet
 */
 
-describe('PUT/api/freet', ()=>{
+describe('PUT/api/freet/:freet_id', ()=>{
 
   const agent = supertest.agent(app); // a logged in session
 
-  let ids = {};
-  let fields = {};
+  let ids     = {},
+      fields  = {},
+      freet_id;
 
   beforeEach(()=>{
     return createUserLoginAndFreet( agent, ids )
     .then(()=>{
-      fields.freet_id = ids.freet_id;
+      freet_id = ids.freet_id;
     });
   });
 
@@ -190,21 +194,21 @@ describe('PUT/api/freet', ()=>{
       + ' with a message of length 0', (done)=>{
 
     fields.message = '';
-    testModifyFreetThatExists( agent, 'put', fields, done );
+    testModifyFreetThatExists( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 204 when the author edits a freet that exists'
       + ' with a message of 0 < length < 140', (done)=>{
 
     fields.message = 'a message';
-    testModifyFreetThatExists( agent, 'put', fields, done );
+    testModifyFreetThatExists( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 204 when the author edits a freet that exists'
       + ' with a message of length 140', (done)=>{
 
     fields.message = createMessageOfLength( 140 );
-    testModifyFreetThatExists( agent, 'put', fields, done );
+    testModifyFreetThatExists( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 204 when the author edits a freet that exists'
@@ -213,7 +217,7 @@ describe('PUT/api/freet', ()=>{
     fields.message = createMessageOfLength( 141 );
 
     return agent
-      .put('/api/freet')
+      .put('/api/freet/' + freet_id )
       .send(fields)
       .expect(400)
       .end((err,res)=>{
@@ -223,16 +227,16 @@ describe('PUT/api/freet', ()=>{
   });
 
   it('throws 401 when editing a freet without logging in', (done)=>{
-    testModifyFreetWithoutLoggingIn( agent, 'put', fields, done );
+    testModifyFreetWithoutLoggingIn( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 403 when not the author edits a freet that exists', (done)=>{
-    testModifyFreetNotAuthor( agent, 'put', fields, done );
+    testModifyFreetNotAuthor( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 404 when the author edits a non-existing freet', (done)=>{
-    fields.freet_id = 'some random freet id';
-    testModifyNonExistingFreet( agent, 'put', fields, done );
+    freet_id = 'some random freet id';
+    testModifyNonExistingFreet( agent, 'put', freet_id, fields, done );
   });
 
   afterEach(()=>{
@@ -561,30 +565,35 @@ const testPostFreet = function ( agent, message, done ) {
   });
 }
 
-const testModifyFreetWithoutLoggingIn = function ( agent, method, fields, done ) {
-  return supertest(app) // use a new session, that isn't logged in
-  [ method ]('/api/freet')
-  .send(fields)
-  .expect(401)
-  .end((err,res)=>{
-    if (err) done(err);
-    done();
-  });
+const testModifyFreetWithoutLoggingIn 
+  = function ( agent, method, freet_id, fields, done ) {
+
+    return supertest(app) // use a new session, that isn't logged in
+    [ method ]('/api/freet/' + freet_id )
+    .send(fields)
+    .expect(401)
+    .end((err,res)=>{
+      if (err) done(err);
+      done();
+    });
 }
 
-const testModifyFreetThatExists = function ( agent, method, fields, done ) {
-  return agent
-  [ method ]('/api/freet')
-  .send(fields)
-  .expect(204)
-  .end((err,res)=>{
-    if (err) done(err);
-    done();
-  });
+const testModifyFreetThatExists 
+  = function ( agent, method, freet_id, fields, done ) {
+    return agent
+    [ method ]('/api/freet/' + freet_id )
+    .send(fields)
+    .expect(204)
+    .end((err,res)=>{
+      if (err) done(err);
+      done();
+    });
 }
 
 
-const testModifyFreetNotAuthor = function ( agent, method, fields, done ) {
+const testModifyFreetNotAuthor 
+  = function ( agent, method, freet_id, fields, done ) {
+
   const agent2 = supertest.agent(app) // log in as someone else
   const credentials = {
     name:     'someone_else',
@@ -601,7 +610,7 @@ const testModifyFreetNotAuthor = function ( agent, method, fields, done ) {
   })
   .then(()=>{
     return agent2
-    [ method ]('/api/freet')
+    [ method ]('/api/freet/' + freet_id )
     .send(fields)
     .expect(403)
   })
@@ -613,15 +622,17 @@ const testModifyFreetNotAuthor = function ( agent, method, fields, done ) {
   });
 }
 
-const testModifyNonExistingFreet = function ( agent, method, fields, done ) {
-  return agent
-  .delete('/api/freet')
-  .send(fields)
-  .expect(404)
-  .end((err,res)=>{
-    if (err) done(err);
-    done();
-  });   
+const testModifyNonExistingFreet 
+  = function ( agent, method, freet_id, fields, done ) {
+
+    return agent
+    .delete('/api/freet/' + freet_id )
+    .send(fields)
+    .expect(404)
+    .end((err,res)=>{
+      if (err) done(err);
+      done();
+    });   
 }
 
 const createMessageOfLength = function ( length ) {
