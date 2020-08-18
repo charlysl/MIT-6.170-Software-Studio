@@ -19,7 +19,12 @@ const freetService = require('../services/freetService');
 * Get all freets
 * @name GET/api/freet
 * @return {200} - if there are any freets, a json array with
-* all freets.
+* all freets;
+* The freet object must include at least the following fields:
+* - freet_id  : the freet identifier
+* - message   : the message
+* - votes     : the vote count
+* - author    : the author's name
 * @return {204} - if there are no freets.
 */
 router.get( '/', function ( req, res, next ) {
@@ -190,6 +195,7 @@ router.post( '/:freet_id/vote', ( req, res, next ) => {
 //--------------------------------------------------
 
 const handleError = function ( err, res, next ) {
+  console.log(err);
 
   let res_status;
 
