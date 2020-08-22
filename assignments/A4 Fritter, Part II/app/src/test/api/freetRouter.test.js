@@ -305,7 +305,6 @@ describe('GET/api/freet', ()=>{
       expect(res.body.length).toBe(expected_freet_list.length);
 
       res.body.forEach(( actual_freet )=>{
-        console.log(actual_freet);
         expect(
           expected_freet_list.some(( expected_freet )=>{
             return      actual_freet.freet_id === expected_freet.freet_id
@@ -703,7 +702,8 @@ const createUserFreets = function( user ) {
     const freet_idx   = i + j - 1,
           freet       = {
             author_id:  user.user_id,
-            message:    'message'+ freet_idx
+            message:    'message'+ freet_idx,
+            author:     user.credentials.name
           };
 
     promises.push(

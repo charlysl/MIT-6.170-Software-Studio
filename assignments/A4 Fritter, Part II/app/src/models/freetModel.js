@@ -6,6 +6,8 @@
 
 const uuid = require('UUID');
 
+const userModel = require('./userModel');
+
 const freetMap            = new Map(),  // the representation
       max_message_length  = 140,
       editable_properties = ['message', 'votes'];
@@ -184,7 +186,7 @@ module.exports.edit = function( freet ) {
 * Get a freet.
 *
 * @param {string} freet_id - the freet identifier
-* @return {Object} - the freet object
+* @return {Object} - the freet object,
 * @throws FreetNotFound - if there is no freet with given identifier
 */
 module.exports.get = function( freet_id ) {
@@ -208,6 +210,17 @@ module.exports.search = function ( query={} ) {
   return new Promise((resolve,reject)=>{
     const freet_list = Array.from( freetMap.values() ).filter(( freet )=>{
       return doesQueryMatchFreet( query, freet );
+    })
+    .map(( freet )=>{
+       // this is a bit of a hack, because I didn't
+       // ADD the AUTHOR NAME to each freet in the 
+       // results; it is important to note that the
+       // author name must not be stored with the 
+       // freet, given that the user can change his name
+      const new_freet = Object.assign( {}, freet );
+      new_freet.author = userModel.getNameByUserId( freet.author_id );
+      // no need to freeze new_freet, given that it is not aliased
+      return new_freet;
     });
     resolve( freet_list );
   });

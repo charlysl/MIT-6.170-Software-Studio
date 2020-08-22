@@ -198,6 +198,10 @@ module.exports.remove = function( user_id ) {
   });
 }
 
+module.exports.getNameByUserId = function ( user_id ) {
+  return userMap[ user_id ].name;
+}
+
 const getUserByName = function( name ) {
   for (const user_id in userMap) {
     const user = userMap[ user_id ];
