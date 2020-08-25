@@ -25,32 +25,53 @@ class Freet extends React.Component {
     return pairs.join('&');
   }
 
-  render () {
-  
-    const freet = this.props.freet;
+  isAuthorLoggedIn () {
+    return this.props.username === this.props.freet.author;
+  }
 
-    let mutatorButtons;
-    if (this.props.username === freet.author) {
-      const editLink = "/editfreet";//?" + this.freetToQuery();
-      mutatorButtons = (
-        <React.Fragment>
-          <Link to={editLink}>Edit</Link>
-          <button>Delete</button>
-        </React.Fragment>
-      )
-    }
+  isNonAuthorLoggedIn () {
+    return this.props.username 
+            && (this.props.username != this.props.freet.author);
+  }
 
-    let votingButtons;
-    if (this.props.username != freet.author) {
-      votingButtons = (
+  getEditAndDeleteControls () {
+    const freet     = this.props.freet,
+
+          editUrl   = "/freet/edit/" + freet.freet_id 
+                      + '?' + this.freetToQuery(),
+
+          deleteUrl = "/freet/delete/" + freet.freet_id
+    ;
+
+    return (
+          <React.Fragment>
+            <Link to={editUrl}>Edit</Link>
+            <Link to={deleteUrl}>Delete</Link>
+          </React.Fragment>
+    )
+  }
+
+  getVotingControls () {
+    return (
         <React.Fragment>
           <button onClick={this.onUpvote.bind(this)}>Upvote</button>
           <button onClick={this.onDownvote.bind(this)}>Downvote</button>
         </React.Fragment>
-      )
-    }
+    )
+  }
 
-   return (
+  render () {
+  
+    const mutatorButtons =  this.isAuthorLoggedIn()       ?
+                            this.getEditAndDeleteControls() :
+                            null;
+
+    const votingButtons  = this.isNonAuthorLoggedIn() ?
+                           this.getVotingControls()   :
+                           null;
+    const freet = this.props.freet;
+
+    return (
       <div>
         <p>{freet.author}</p>
         <p>{freet.message}</p>

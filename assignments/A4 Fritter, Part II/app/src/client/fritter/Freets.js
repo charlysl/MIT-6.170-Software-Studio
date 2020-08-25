@@ -4,13 +4,18 @@ import Freet from './Freet.js';
 
 
 const Freets = function (props) {
-  const freets = props.freets;
+  console.log('Freets', props);
 
-  let freetList = freets.map(( freet )=>{
-    return <Freet freet={freet} username={props.username} />
-  });
+  return  props.freets ? 
+          getFreetList( props ) : 
+          null
+  ;
+}
 
-  return freetList;
+function getFreetList( props ) {
+  return props.freets.map(( freet )=>{
+    return <Freet freet={freet} username={props.username} />  
+  })                                                          
 }
 
 export default Freets;

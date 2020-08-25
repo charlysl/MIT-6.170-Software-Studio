@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import freetAPI from '../api/freetAPI';
 
 import MessageInput from '../fritter/MessageInput';
 
 
-class NewFreetDialog extends React.Component {
+class FreetCreate extends React.Component {
 
   constructor( props ) {
     super(props);
@@ -30,7 +31,7 @@ class NewFreetDialog extends React.Component {
     return (
       <div>
         <MessageInput onChange={this.onChange.bind(this)}/>
-        <button>Cancel</button>
+        <Link to='/'>Cancel</Link>
         <button onClick={this.onClick.bind(this)}>
           Apply
         </button>
@@ -39,4 +40,4 @@ class NewFreetDialog extends React.Component {
   }
 }
 
-export default NewFreetDialog;
+export default FreetCreate;

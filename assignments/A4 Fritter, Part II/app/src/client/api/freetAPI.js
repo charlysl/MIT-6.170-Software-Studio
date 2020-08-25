@@ -9,10 +9,37 @@ const create = async function ( fields ) {
   try {
     await axios.post( '/api/freet', fields );
   } catch (err) {
-      throw new Error('Caught unexpected exception: ' + err.response);
+    handleError( err );
   }
 }
 
+/**
+* Request Fritter server to create a Freet.
+*
+* @param {string} fields.message - the message, must be at most 140 characters.
+*/
+const remove = async function ( fields ) {
+  try {
+    await axios.delete( '/api/freet/' + fields.freet_id );
+  } catch (err) {
+    handleError( err );
+  }
+}
+
+/**
+* Request Fritter server to edit a Freet.
+*
+* @param {string} fields.freet_id - the freet id
+* @param {string} fields.message  - the message, must be at most 140 characters
+*/
+const edit = async function ( fields ) {
+  const message = fields.message;
+  try {
+    await axios.put( '/api/freet/' + fields.freet_id, { message } );
+  } catch (err) {
+    handleError( err );
+  }
+}
 
 /**
 * Request Fritter server to search for Freets.
@@ -28,7 +55,7 @@ const search = async function ( author ) {
     const res = await axios.get( '/api/freet' + query );
     return res.data;
   } catch (err) {
-      throw new Error('Caught unexpected exception: ' + err.response);
+    handleError( err );
   }
 }
 
@@ -54,7 +81,7 @@ const vote = async function ( freet_id, direction ) {
   try {
     await axios.post( '/api/freet/' + freet_id + '/vote', {direction} );
   } catch (err) {
-      throw new Error('Caught unexpected exception: ' + err.response);
+    handleError( err );
   }
 }
 
@@ -68,4 +95,8 @@ const buildSearchQuery = function ( author ) {
   return query;
 }
 
-export default { create, search, upvote, downvote };
+function handleError ( err ) {
+  throw new Error('Caught unexpected exception: ' + err.response);
+}
+
+export default { create, remove, edit, search, upvote, downvote };

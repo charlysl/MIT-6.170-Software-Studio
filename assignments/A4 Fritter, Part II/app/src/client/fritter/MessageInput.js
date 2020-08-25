@@ -9,7 +9,8 @@ const MessageInput = function (props) {
   return (
     <input  
       type        = "text"            
-      name        = "message" 
+      name        = "message"
+      value       = {props.value}
       placeholder = {placeholder}     
       maxlength   = {maxFreetLength} 
       onChange    = {props.onChange}/>      

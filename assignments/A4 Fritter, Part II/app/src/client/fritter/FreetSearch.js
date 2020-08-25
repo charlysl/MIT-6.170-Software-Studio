@@ -21,7 +21,7 @@ const FreetSearch = function ( props ) {
       <button onClick={(e)=>onClick(e, props.onFreets)}>Search</button>
       <label>
         Sort by votes
-        <input type="checkbox" name="sort" />
+        <input type="checkbox" name="sort" onClick={props.onSorted} />
       </label>
     </div>
   )

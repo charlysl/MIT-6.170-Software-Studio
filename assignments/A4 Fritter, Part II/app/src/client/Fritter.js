@@ -16,12 +16,15 @@ import UserDeleteConfirmation from './user/UserDeleteConfirmation';
 import UserDelete from './user/UserDelete';
 import UserEditName from './user/UserEditName';
 import UserDoneEditName from './user/UserDoneEditName';
-
+import UserEditPassword from './user/UserEditPassword';
+import UserDoneEditPassword from './user/UserDoneEditPassword';
 
 import Login from './session/Login';
 import Logout from './session/Logout';
 
-import EditFreetDialog from './fritter/EditFreetDialog';
+import FreetCreate from './fritter/FreetCreate';
+import FreetEdit from './fritter/FreetEdit';
+import FreetDelete from './fritter/FreetDelete';
 
 class Fritter extends React.Component {
 
@@ -63,6 +66,9 @@ class Fritter extends React.Component {
           <Route path='/user/done-edit-name'>
             <UserDoneEditName username={this.state.username} />
           </Route>
+          <Route  path='/user/edit-password' component={UserEditPassword} />
+          <Route  path='/user/done-edit-password' 
+                  component={UserDoneEditPassword} />
 
           <Route path='/session/login'>
             <Login onLogin={this.onUsernameChanged.bind(this)} />
@@ -71,6 +77,9 @@ class Fritter extends React.Component {
             <Logout onLogout={this.onLogout.bind(this)} />
           </Route>
 
+          <Route path='/freet/create' component={FreetCreate} />
+          <Route path='/freet/edit/:freet_id' component={FreetEdit} />
+          <Route path='/freet/delete/:freet_id' component={FreetDelete} />
 
           <Route path='/'>
             <Home username={this.state.username} />

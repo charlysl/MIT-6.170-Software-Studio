@@ -104,7 +104,7 @@ var global = __webpack_require__(2);
 var core = __webpack_require__(8);
 var hide = __webpack_require__(17);
 var redefine = __webpack_require__(12);
-var ctx = __webpack_require__(20);
+var ctx = __webpack_require__(21);
 var PROTOTYPE = 'prototype';
 
 var $export = function (type, name, source) {
@@ -212,7 +212,7 @@ $exports.store = store;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
-var toInteger = __webpack_require__(22);
+var toInteger = __webpack_require__(23);
 var min = Math.min;
 module.exports = function (it) {
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -264,7 +264,7 @@ exports.f = __webpack_require__(9) ? Object.defineProperty : function defineProp
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.13 ToObject(argument)
-var defined = __webpack_require__(27);
+var defined = __webpack_require__(28);
 module.exports = function (it) {
   return Object(defined(it));
 };
@@ -313,7 +313,7 @@ __webpack_require__(8).inspectSource = function (it) {
 
 var $export = __webpack_require__(1);
 var fails = __webpack_require__(3);
-var defined = __webpack_require__(27);
+var defined = __webpack_require__(28);
 var quot = /"/g;
 // B.2.3.2.1 CreateHTML(string, tag, attribute, value)
 var createHTML = function (string, tag, attribute, value) {
@@ -732,7 +732,7 @@ module.exports = __webpack_require__(9) ? function (object, key, value) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
 var IObject = __webpack_require__(48);
-var defined = __webpack_require__(27);
+var defined = __webpack_require__(28);
 module.exports = function (it) {
   return IObject(defined(it));
 };
@@ -758,8 +758,14 @@ module.exports = function (method, arg) {
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(337);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // optional / simple context binding
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 module.exports = function (fn, that, length) {
   aFunction(fn);
   if (that === undefined) return fn;
@@ -781,7 +787,7 @@ module.exports = function (fn, that, length) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = function (it) {
@@ -791,7 +797,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 // 7.1.4 ToInteger
@@ -803,7 +809,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pIE = __webpack_require__(49);
@@ -825,7 +831,7 @@ exports.f = __webpack_require__(9) ? gOPD : function getOwnPropertyDescriptor(O,
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // most Object methods by ES6 should accept primitives
@@ -841,7 +847,7 @@ module.exports = function (KEY, exec) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 0 -> Array#forEach
@@ -851,7 +857,7 @@ module.exports = function (KEY, exec) {
 // 4 -> Array#every
 // 5 -> Array#find
 // 6 -> Array#findIndex
-var ctx = __webpack_require__(20);
+var ctx = __webpack_require__(21);
 var IObject = __webpack_require__(48);
 var toObject = __webpack_require__(11);
 var toLength = __webpack_require__(7);
@@ -891,7 +897,7 @@ module.exports = function (TYPE, $create) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -902,7 +908,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 // 7.2.1 RequireObjectCoercible(argument)
@@ -913,7 +919,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -925,12 +931,12 @@ if (__webpack_require__(9)) {
   var $export = __webpack_require__(1);
   var $typed = __webpack_require__(64);
   var $buffer = __webpack_require__(90);
-  var ctx = __webpack_require__(20);
+  var ctx = __webpack_require__(21);
   var anInstance = __webpack_require__(46);
   var propertyDesc = __webpack_require__(32);
   var hide = __webpack_require__(17);
   var redefineAll = __webpack_require__(47);
-  var toInteger = __webpack_require__(22);
+  var toInteger = __webpack_require__(23);
   var toLength = __webpack_require__(7);
   var toIndex = __webpack_require__(123);
   var toAbsoluteIndex = __webpack_require__(36);
@@ -946,7 +952,7 @@ if (__webpack_require__(9)) {
   var getIterFn = __webpack_require__(84);
   var uid = __webpack_require__(33);
   var wks = __webpack_require__(6);
-  var createArrayMethod = __webpack_require__(25);
+  var createArrayMethod = __webpack_require__(26);
   var createArrayIncludes = __webpack_require__(54);
   var speciesConstructor = __webpack_require__(51);
   var ArrayIterators = __webpack_require__(86);
@@ -956,7 +962,7 @@ if (__webpack_require__(9)) {
   var arrayFill = __webpack_require__(85);
   var arrayCopyWithin = __webpack_require__(114);
   var $DP = __webpack_require__(10);
-  var $GOPD = __webpack_require__(23);
+  var $GOPD = __webpack_require__(24);
   var dP = $DP.f;
   var gOPD = $GOPD.f;
   var RangeError = global.RangeError;
@@ -1400,12 +1406,6 @@ if (__webpack_require__(9)) {
 
 
 /***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(337);
-
-/***/ }),
 /* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1531,7 +1531,7 @@ module.exports = Object.keys || function keys(O) {
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(22);
+var toInteger = __webpack_require__(23);
 var max = Math.max;
 var min = Math.min;
 module.exports = function (index, length) {
@@ -1661,7 +1661,7 @@ module.exports = function (it, tag, stat) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(1);
-var defined = __webpack_require__(27);
+var defined = __webpack_require__(28);
 var fails = __webpack_require__(3);
 var spaces = __webpack_require__(72);
 var space = '[' + spaces + ']';
@@ -1746,7 +1746,7 @@ module.exports = function (target, src, safe) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(26);
+var cof = __webpack_require__(27);
 // eslint-disable-next-line no-prototype-builtins
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
@@ -1765,7 +1765,7 @@ exports.f = {}.propertyIsEnumerable;
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(26);
+var cof = __webpack_require__(27);
 var TAG = __webpack_require__(6)('toStringTag');
 // ES3 wrong here
 var ARG = cof(function () { return arguments; }()) == 'Arguments';
@@ -1795,7 +1795,7 @@ module.exports = function (it) {
 
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject = __webpack_require__(4);
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 var SPECIES = __webpack_require__(6)('species');
 module.exports = function (O, D) {
   var C = anObject(O).constructor;
@@ -1881,7 +1881,7 @@ exports.f = Object.getOwnPropertySymbols;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(26);
+var cof = __webpack_require__(27);
 module.exports = Array.isArray || function isArray(arg) {
   return cof(arg) == 'Array';
 };
@@ -1973,7 +1973,7 @@ __webpack_require__(116);
 var redefine = __webpack_require__(12);
 var hide = __webpack_require__(17);
 var fails = __webpack_require__(3);
-var defined = __webpack_require__(27);
+var defined = __webpack_require__(28);
 var wks = __webpack_require__(6);
 var regexpExec = __webpack_require__(87);
 
@@ -2070,7 +2070,7 @@ module.exports = function (KEY, length, exec) {
 /* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx = __webpack_require__(20);
+var ctx = __webpack_require__(21);
 var call = __webpack_require__(111);
 var isArrayIter = __webpack_require__(82);
 var anObject = __webpack_require__(4);
@@ -2299,7 +2299,7 @@ module.exports = {
   set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
     function (test, buggy, set) {
       try {
-        set = __webpack_require__(20)(Function.call, __webpack_require__(23).f(Object.prototype, '__proto__').set, 2);
+        set = __webpack_require__(21)(Function.call, __webpack_require__(24).f(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch (e) { buggy = true; }
@@ -2343,8 +2343,8 @@ module.exports = function (that, target, C) {
 
 "use strict";
 
-var toInteger = __webpack_require__(22);
-var defined = __webpack_require__(27);
+var toInteger = __webpack_require__(23);
+var defined = __webpack_require__(28);
 
 module.exports = function repeat(count) {
   var str = String(defined(this));
@@ -2387,8 +2387,8 @@ module.exports = (!$expm1
 /* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(22);
-var defined = __webpack_require__(27);
+var toInteger = __webpack_require__(23);
+var defined = __webpack_require__(28);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function (TO_STRING) {
@@ -2488,7 +2488,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 
 // helper for String#{startsWith, endsWith, includes}
 var isRegExp = __webpack_require__(80);
-var defined = __webpack_require__(27);
+var defined = __webpack_require__(28);
 
 module.exports = function (that, searchString, NAME) {
   if (isRegExp(searchString)) throw TypeError('String#' + NAME + " doesn't accept regex!");
@@ -2502,7 +2502,7 @@ module.exports = function (that, searchString, NAME) {
 
 // 7.2.8 IsRegExp(argument)
 var isObject = __webpack_require__(5);
-var cof = __webpack_require__(26);
+var cof = __webpack_require__(27);
 var MATCH = __webpack_require__(6)('match');
 module.exports = function (it) {
   var isRegExp;
@@ -2718,7 +2718,7 @@ module.exports = function (S, index, unicode) {
 /* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx = __webpack_require__(20);
+var ctx = __webpack_require__(21);
 var invoke = __webpack_require__(104);
 var html = __webpack_require__(70);
 var cel = __webpack_require__(66);
@@ -2761,7 +2761,7 @@ if (!setTask || !clearTask) {
     delete queue[id];
   };
   // Node.js 0.8-
-  if (__webpack_require__(26)(process) == 'process') {
+  if (__webpack_require__(27)(process) == 'process') {
     defer = function (id) {
       process.nextTick(ctx(run, id, 1));
     };
@@ -2818,7 +2818,7 @@ var hide = __webpack_require__(17);
 var redefineAll = __webpack_require__(47);
 var fails = __webpack_require__(3);
 var anInstance = __webpack_require__(46);
-var toInteger = __webpack_require__(22);
+var toInteger = __webpack_require__(23);
 var toLength = __webpack_require__(7);
 var toIndex = __webpack_require__(123);
 var gOPN = __webpack_require__(38).f;
@@ -3890,7 +3890,7 @@ module.exports = Object.is || function is(x, y) {
 
 "use strict";
 
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 var isObject = __webpack_require__(5);
 var invoke = __webpack_require__(104);
 var arraySlice = [].slice;
@@ -3971,7 +3971,7 @@ module.exports = 1 / $parseFloat(__webpack_require__(72) + '-0') !== -Infinity ?
 /* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cof = __webpack_require__(26);
+var cof = __webpack_require__(27);
 module.exports = function (it, msg) {
   if (typeof it != 'number' && cof(it) != 'Number') throw TypeError(msg);
   return +it;
@@ -4054,7 +4054,7 @@ module.exports = function (original, length) {
 /* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 var toObject = __webpack_require__(11);
 var IObject = __webpack_require__(48);
 var toLength = __webpack_require__(7);
@@ -4161,11 +4161,11 @@ if (__webpack_require__(9) && /./g.flags != 'g') __webpack_require__(10).f(RegEx
 
 var LIBRARY = __webpack_require__(34);
 var global = __webpack_require__(2);
-var ctx = __webpack_require__(20);
+var ctx = __webpack_require__(21);
 var classof = __webpack_require__(50);
 var $export = __webpack_require__(1);
 var isObject = __webpack_require__(5);
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 var anInstance = __webpack_require__(46);
 var forOf = __webpack_require__(61);
 var speciesConstructor = __webpack_require__(51);
@@ -4453,7 +4453,7 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(57)(function
 "use strict";
 
 // 25.4.1.5 NewPromiseCapability(C)
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 
 function PromiseCapability(C) {
   var resolve, reject;
@@ -4498,7 +4498,7 @@ module.exports = function (C, x) {
 var dP = __webpack_require__(10).f;
 var create = __webpack_require__(37);
 var redefineAll = __webpack_require__(47);
-var ctx = __webpack_require__(20);
+var ctx = __webpack_require__(21);
 var anInstance = __webpack_require__(46);
 var forOf = __webpack_require__(61);
 var $iterDefine = __webpack_require__(78);
@@ -4652,7 +4652,7 @@ var anObject = __webpack_require__(4);
 var isObject = __webpack_require__(5);
 var anInstance = __webpack_require__(46);
 var forOf = __webpack_require__(61);
-var createArrayMethod = __webpack_require__(25);
+var createArrayMethod = __webpack_require__(26);
 var $has = __webpack_require__(16);
 var validate = __webpack_require__(41);
 var arrayFind = createArrayMethod(5);
@@ -4737,7 +4737,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://tc39.github.io/ecma262/#sec-toindex
-var toInteger = __webpack_require__(22);
+var toInteger = __webpack_require__(23);
 var toLength = __webpack_require__(7);
 module.exports = function (it) {
   if (it === undefined) return 0;
@@ -4771,7 +4771,7 @@ module.exports = Reflect && Reflect.ownKeys || function ownKeys(it) {
 // https://github.com/tc39/proposal-string-pad-start-end
 var toLength = __webpack_require__(7);
 var repeat = __webpack_require__(74);
-var defined = __webpack_require__(27);
+var defined = __webpack_require__(28);
 
 module.exports = function (that, maxLength, fillString, left) {
   var S = String(defined(that));
@@ -5875,7 +5875,7 @@ var toPrimitive = __webpack_require__(30);
 var createDesc = __webpack_require__(32);
 var _create = __webpack_require__(37);
 var gOPNExt = __webpack_require__(100);
-var $GOPD = __webpack_require__(23);
+var $GOPD = __webpack_require__(24);
 var $GOPS = __webpack_require__(55);
 var $DP = __webpack_require__(10);
 var $keys = __webpack_require__(35);
@@ -6159,9 +6159,9 @@ $export($export.S + $export.F * !__webpack_require__(9), 'Object', { definePrope
 
 // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
 var toIObject = __webpack_require__(18);
-var $getOwnPropertyDescriptor = __webpack_require__(23).f;
+var $getOwnPropertyDescriptor = __webpack_require__(24).f;
 
-__webpack_require__(24)('getOwnPropertyDescriptor', function () {
+__webpack_require__(25)('getOwnPropertyDescriptor', function () {
   return function getOwnPropertyDescriptor(it, key) {
     return $getOwnPropertyDescriptor(toIObject(it), key);
   };
@@ -6176,7 +6176,7 @@ __webpack_require__(24)('getOwnPropertyDescriptor', function () {
 var toObject = __webpack_require__(11);
 var $getPrototypeOf = __webpack_require__(39);
 
-__webpack_require__(24)('getPrototypeOf', function () {
+__webpack_require__(25)('getPrototypeOf', function () {
   return function getPrototypeOf(it) {
     return $getPrototypeOf(toObject(it));
   };
@@ -6191,7 +6191,7 @@ __webpack_require__(24)('getPrototypeOf', function () {
 var toObject = __webpack_require__(11);
 var $keys = __webpack_require__(35);
 
-__webpack_require__(24)('keys', function () {
+__webpack_require__(25)('keys', function () {
   return function keys(it) {
     return $keys(toObject(it));
   };
@@ -6203,7 +6203,7 @@ __webpack_require__(24)('keys', function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 Object.getOwnPropertyNames(O)
-__webpack_require__(24)('getOwnPropertyNames', function () {
+__webpack_require__(25)('getOwnPropertyNames', function () {
   return __webpack_require__(100).f;
 });
 
@@ -6216,7 +6216,7 @@ __webpack_require__(24)('getOwnPropertyNames', function () {
 var isObject = __webpack_require__(5);
 var meta = __webpack_require__(31).onFreeze;
 
-__webpack_require__(24)('freeze', function ($freeze) {
+__webpack_require__(25)('freeze', function ($freeze) {
   return function freeze(it) {
     return $freeze && isObject(it) ? $freeze(meta(it)) : it;
   };
@@ -6231,7 +6231,7 @@ __webpack_require__(24)('freeze', function ($freeze) {
 var isObject = __webpack_require__(5);
 var meta = __webpack_require__(31).onFreeze;
 
-__webpack_require__(24)('seal', function ($seal) {
+__webpack_require__(25)('seal', function ($seal) {
   return function seal(it) {
     return $seal && isObject(it) ? $seal(meta(it)) : it;
   };
@@ -6246,7 +6246,7 @@ __webpack_require__(24)('seal', function ($seal) {
 var isObject = __webpack_require__(5);
 var meta = __webpack_require__(31).onFreeze;
 
-__webpack_require__(24)('preventExtensions', function ($preventExtensions) {
+__webpack_require__(25)('preventExtensions', function ($preventExtensions) {
   return function preventExtensions(it) {
     return $preventExtensions && isObject(it) ? $preventExtensions(meta(it)) : it;
   };
@@ -6260,7 +6260,7 @@ __webpack_require__(24)('preventExtensions', function ($preventExtensions) {
 // 19.1.2.12 Object.isFrozen(O)
 var isObject = __webpack_require__(5);
 
-__webpack_require__(24)('isFrozen', function ($isFrozen) {
+__webpack_require__(25)('isFrozen', function ($isFrozen) {
   return function isFrozen(it) {
     return isObject(it) ? $isFrozen ? $isFrozen(it) : false : true;
   };
@@ -6274,7 +6274,7 @@ __webpack_require__(24)('isFrozen', function ($isFrozen) {
 // 19.1.2.13 Object.isSealed(O)
 var isObject = __webpack_require__(5);
 
-__webpack_require__(24)('isSealed', function ($isSealed) {
+__webpack_require__(25)('isSealed', function ($isSealed) {
   return function isSealed(it) {
     return isObject(it) ? $isSealed ? $isSealed(it) : false : true;
   };
@@ -6288,7 +6288,7 @@ __webpack_require__(24)('isSealed', function ($isSealed) {
 // 19.1.2.11 Object.isExtensible(O)
 var isObject = __webpack_require__(5);
 
-__webpack_require__(24)('isExtensible', function ($isExtensible) {
+__webpack_require__(25)('isExtensible', function ($isExtensible) {
   return function isExtensible(it) {
     return isObject(it) ? $isExtensible ? $isExtensible(it) : true : false;
   };
@@ -6420,12 +6420,12 @@ $export($export.G + $export.F * (parseFloat != $parseFloat), { parseFloat: $pars
 
 var global = __webpack_require__(2);
 var has = __webpack_require__(16);
-var cof = __webpack_require__(26);
+var cof = __webpack_require__(27);
 var inheritIfRequired = __webpack_require__(73);
 var toPrimitive = __webpack_require__(30);
 var fails = __webpack_require__(3);
 var gOPN = __webpack_require__(38).f;
-var gOPD = __webpack_require__(23).f;
+var gOPD = __webpack_require__(24).f;
 var dP = __webpack_require__(10).f;
 var $trim = __webpack_require__(43).trim;
 var NUMBER = 'Number';
@@ -6495,7 +6495,7 @@ if (!$Number(' 0o1') || !$Number('0b1') || $Number('+0x1')) {
 "use strict";
 
 var $export = __webpack_require__(1);
-var toInteger = __webpack_require__(22);
+var toInteger = __webpack_require__(23);
 var aNumberValue = __webpack_require__(107);
 var repeat = __webpack_require__(74);
 var $toFixed = 1.0.toFixed;
@@ -7557,7 +7557,7 @@ $export($export.S, 'Array', { isArray: __webpack_require__(56) });
 
 "use strict";
 
-var ctx = __webpack_require__(20);
+var ctx = __webpack_require__(21);
 var $export = __webpack_require__(1);
 var toObject = __webpack_require__(11);
 var call = __webpack_require__(111);
@@ -7648,7 +7648,7 @@ $export($export.P + $export.F * (__webpack_require__(48) != Object || !__webpack
 
 var $export = __webpack_require__(1);
 var html = __webpack_require__(70);
-var cof = __webpack_require__(26);
+var cof = __webpack_require__(27);
 var toAbsoluteIndex = __webpack_require__(36);
 var toLength = __webpack_require__(7);
 var arraySlice = [].slice;
@@ -7682,7 +7682,7 @@ $export($export.P + $export.F * __webpack_require__(3)(function () {
 "use strict";
 
 var $export = __webpack_require__(1);
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 var toObject = __webpack_require__(11);
 var fails = __webpack_require__(3);
 var $sort = [].sort;
@@ -7712,7 +7712,7 @@ $export($export.P + $export.F * (fails(function () {
 "use strict";
 
 var $export = __webpack_require__(1);
-var $forEach = __webpack_require__(25)(0);
+var $forEach = __webpack_require__(26)(0);
 var STRICT = __webpack_require__(19)([].forEach, true);
 
 $export($export.P + $export.F * !STRICT, 'Array', {
@@ -7752,7 +7752,7 @@ module.exports = function (original) {
 "use strict";
 
 var $export = __webpack_require__(1);
-var $map = __webpack_require__(25)(1);
+var $map = __webpack_require__(26)(1);
 
 $export($export.P + $export.F * !__webpack_require__(19)([].map, true), 'Array', {
   // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])
@@ -7769,7 +7769,7 @@ $export($export.P + $export.F * !__webpack_require__(19)([].map, true), 'Array',
 "use strict";
 
 var $export = __webpack_require__(1);
-var $filter = __webpack_require__(25)(2);
+var $filter = __webpack_require__(26)(2);
 
 $export($export.P + $export.F * !__webpack_require__(19)([].filter, true), 'Array', {
   // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])
@@ -7786,7 +7786,7 @@ $export($export.P + $export.F * !__webpack_require__(19)([].filter, true), 'Arra
 "use strict";
 
 var $export = __webpack_require__(1);
-var $some = __webpack_require__(25)(3);
+var $some = __webpack_require__(26)(3);
 
 $export($export.P + $export.F * !__webpack_require__(19)([].some, true), 'Array', {
   // 22.1.3.23 / 15.4.4.17 Array.prototype.some(callbackfn [, thisArg])
@@ -7803,7 +7803,7 @@ $export($export.P + $export.F * !__webpack_require__(19)([].some, true), 'Array'
 "use strict";
 
 var $export = __webpack_require__(1);
-var $every = __webpack_require__(25)(4);
+var $every = __webpack_require__(26)(4);
 
 $export($export.P + $export.F * !__webpack_require__(19)([].every, true), 'Array', {
   // 22.1.3.5 / 15.4.4.16 Array.prototype.every(callbackfn [, thisArg])
@@ -7877,7 +7877,7 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(19)($nati
 
 var $export = __webpack_require__(1);
 var toIObject = __webpack_require__(18);
-var toInteger = __webpack_require__(22);
+var toInteger = __webpack_require__(23);
 var toLength = __webpack_require__(7);
 var $native = [].lastIndexOf;
 var NEGATIVE_ZERO = !!$native && 1 / [1].lastIndexOf(1, -0) < 0;
@@ -7930,7 +7930,7 @@ __webpack_require__(40)('fill');
 
 // 22.1.3.8 Array.prototype.find(predicate, thisArg = undefined)
 var $export = __webpack_require__(1);
-var $find = __webpack_require__(25)(5);
+var $find = __webpack_require__(26)(5);
 var KEY = 'find';
 var forced = true;
 // Shouldn't skip holes
@@ -7951,7 +7951,7 @@ __webpack_require__(40)(KEY);
 
 // 22.1.3.9 Array.prototype.findIndex(predicate, thisArg = undefined)
 var $export = __webpack_require__(1);
-var $find = __webpack_require__(25)(6);
+var $find = __webpack_require__(26)(6);
 var KEY = 'findIndex';
 var forced = true;
 // Shouldn't skip holes
@@ -8109,7 +8109,7 @@ __webpack_require__(60)('match', 1, function (defined, MATCH, $match, maybeCallN
 var anObject = __webpack_require__(4);
 var toObject = __webpack_require__(11);
 var toLength = __webpack_require__(7);
-var toInteger = __webpack_require__(22);
+var toInteger = __webpack_require__(23);
 var advanceStringIndex = __webpack_require__(88);
 var regExpExec = __webpack_require__(59);
 var max = Math.max;
@@ -8412,7 +8412,7 @@ var macrotask = __webpack_require__(89).set;
 var Observer = global.MutationObserver || global.WebKitMutationObserver;
 var process = global.process;
 var Promise = global.Promise;
-var isNode = __webpack_require__(26)(process) == 'process';
+var isNode = __webpack_require__(27)(process) == 'process';
 
 module.exports = function () {
   var head, last, notify;
@@ -8545,7 +8545,7 @@ module.exports = __webpack_require__(63)(SET, function (get) {
 "use strict";
 
 var global = __webpack_require__(2);
-var each = __webpack_require__(25)(0);
+var each = __webpack_require__(26)(0);
 var redefine = __webpack_require__(12);
 var meta = __webpack_require__(31);
 var assign = __webpack_require__(101);
@@ -8693,7 +8693,7 @@ $export($export.G + $export.W + $export.F * !__webpack_require__(64).ABV, {
 /* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28)('Int8', 1, function (init) {
+__webpack_require__(29)('Int8', 1, function (init) {
   return function Int8Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8704,7 +8704,7 @@ __webpack_require__(28)('Int8', 1, function (init) {
 /* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28)('Uint8', 1, function (init) {
+__webpack_require__(29)('Uint8', 1, function (init) {
   return function Uint8Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8715,7 +8715,7 @@ __webpack_require__(28)('Uint8', 1, function (init) {
 /* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28)('Uint8', 1, function (init) {
+__webpack_require__(29)('Uint8', 1, function (init) {
   return function Uint8ClampedArray(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8726,7 +8726,7 @@ __webpack_require__(28)('Uint8', 1, function (init) {
 /* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28)('Int16', 2, function (init) {
+__webpack_require__(29)('Int16', 2, function (init) {
   return function Int16Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8737,7 +8737,7 @@ __webpack_require__(28)('Int16', 2, function (init) {
 /* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28)('Uint16', 2, function (init) {
+__webpack_require__(29)('Uint16', 2, function (init) {
   return function Uint16Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8748,7 +8748,7 @@ __webpack_require__(28)('Uint16', 2, function (init) {
 /* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28)('Int32', 4, function (init) {
+__webpack_require__(29)('Int32', 4, function (init) {
   return function Int32Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8759,7 +8759,7 @@ __webpack_require__(28)('Int32', 4, function (init) {
 /* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28)('Uint32', 4, function (init) {
+__webpack_require__(29)('Uint32', 4, function (init) {
   return function Uint32Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8770,7 +8770,7 @@ __webpack_require__(28)('Uint32', 4, function (init) {
 /* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28)('Float32', 4, function (init) {
+__webpack_require__(29)('Float32', 4, function (init) {
   return function Float32Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8781,7 +8781,7 @@ __webpack_require__(28)('Float32', 4, function (init) {
 /* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28)('Float64', 8, function (init) {
+__webpack_require__(29)('Float64', 8, function (init) {
   return function Float64Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8794,7 +8794,7 @@ __webpack_require__(28)('Float64', 8, function (init) {
 
 // 26.1.1 Reflect.apply(target, thisArgument, argumentsList)
 var $export = __webpack_require__(1);
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 var anObject = __webpack_require__(4);
 var rApply = (__webpack_require__(2).Reflect || {}).apply;
 var fApply = Function.apply;
@@ -8817,7 +8817,7 @@ $export($export.S + $export.F * !__webpack_require__(3)(function () {
 // 26.1.2 Reflect.construct(target, argumentsList [, newTarget])
 var $export = __webpack_require__(1);
 var create = __webpack_require__(37);
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 var anObject = __webpack_require__(4);
 var isObject = __webpack_require__(5);
 var fails = __webpack_require__(3);
@@ -8898,7 +8898,7 @@ $export($export.S + $export.F * __webpack_require__(3)(function () {
 
 // 26.1.4 Reflect.deleteProperty(target, propertyKey)
 var $export = __webpack_require__(1);
-var gOPD = __webpack_require__(23).f;
+var gOPD = __webpack_require__(24).f;
 var anObject = __webpack_require__(4);
 
 $export($export.S, 'Reflect', {
@@ -8947,7 +8947,7 @@ $export($export.S, 'Reflect', {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.6 Reflect.get(target, propertyKey [, receiver])
-var gOPD = __webpack_require__(23);
+var gOPD = __webpack_require__(24);
 var getPrototypeOf = __webpack_require__(39);
 var has = __webpack_require__(16);
 var $export = __webpack_require__(1);
@@ -8974,7 +8974,7 @@ $export($export.S, 'Reflect', { get: get });
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)
-var gOPD = __webpack_require__(23);
+var gOPD = __webpack_require__(24);
 var $export = __webpack_require__(1);
 var anObject = __webpack_require__(4);
 
@@ -9070,7 +9070,7 @@ $export($export.S, 'Reflect', {
 
 // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
 var dP = __webpack_require__(10);
-var gOPD = __webpack_require__(23);
+var gOPD = __webpack_require__(24);
 var getPrototypeOf = __webpack_require__(39);
 var has = __webpack_require__(16);
 var $export = __webpack_require__(1);
@@ -9170,7 +9170,7 @@ var $export = __webpack_require__(1);
 var flattenIntoArray = __webpack_require__(291);
 var toObject = __webpack_require__(11);
 var toLength = __webpack_require__(7);
-var aFunction = __webpack_require__(21);
+var aFunction = __webpack_require__(22);
 var arraySpeciesCreate = __webpack_require__(112);
 
 $export($export.P, 'Array', {
@@ -9198,7 +9198,7 @@ __webpack_require__(40)('flatMap');
 var isArray = __webpack_require__(56);
 var isObject = __webpack_require__(5);
 var toLength = __webpack_require__(7);
-var ctx = __webpack_require__(20);
+var ctx = __webpack_require__(21);
 var IS_CONCAT_SPREADABLE = __webpack_require__(6)('isConcatSpreadable');
 
 function flattenIntoArray(target, original, source, sourceLen, start, depth, mapper, thisArg) {
@@ -9367,7 +9367,7 @@ module.exports = __webpack_require__(8).Object.getOwnPropertyDescriptors;
 var $export = __webpack_require__(1);
 var ownKeys = __webpack_require__(124);
 var toIObject = __webpack_require__(18);
-var gOPD = __webpack_require__(23);
+var gOPD = __webpack_require__(24);
 var createProperty = __webpack_require__(83);
 
 $export($export.S, 'Object', {
@@ -14209,7 +14209,7 @@ function Navigation(props) {
 
 /* harmony default export */ var navigation_Navigation = (Navigation);
 // EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__(29);
+var axios = __webpack_require__(20);
 var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
 // CONCATENATED MODULE: ./src/client/api/freetAPI.js
@@ -14241,7 +14241,7 @@ var create = /*#__PURE__*/function () {
           case 5:
             _context.prev = 5;
             _context.t0 = _context["catch"](0);
-            throw new Error('Caught unexpected exception: ' + _context.t0.response);
+            handleError(_context.t0);
 
           case 8:
           case "end":
@@ -14256,6 +14256,87 @@ var create = /*#__PURE__*/function () {
   };
 }();
 /**
+* Request Fritter server to create a Freet.
+*
+* @param {string} fields.message - the message, must be at most 140 characters.
+*/
+
+
+var remove = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(fields) {
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return axios_default.a["delete"]('/api/freet/' + fields.freet_id);
+
+          case 3:
+            _context2.next = 8;
+            break;
+
+          case 5:
+            _context2.prev = 5;
+            _context2.t0 = _context2["catch"](0);
+            handleError(_context2.t0);
+
+          case 8:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 5]]);
+  }));
+
+  return function remove(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+/**
+* Request Fritter server to edit a Freet.
+*
+* @param {string} fields.freet_id - the freet id
+* @param {string} fields.message  - the message, must be at most 140 characters
+*/
+
+
+var edit = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(fields) {
+    var message;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            message = fields.message;
+            _context3.prev = 1;
+            _context3.next = 4;
+            return axios_default.a.put('/api/freet/' + fields.freet_id, {
+              message: message
+            });
+
+          case 4:
+            _context3.next = 9;
+            break;
+
+          case 6:
+            _context3.prev = 6;
+            _context3.t0 = _context3["catch"](1);
+            handleError(_context3.t0);
+
+          case 9:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[1, 6]]);
+  }));
+
+  return function edit(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+/**
 * Request Fritter server to search for Freets.
 *
 * @param {string} author - the author's name (optional)
@@ -14264,36 +14345,36 @@ var create = /*#__PURE__*/function () {
 
 
 var search = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(author) {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(author) {
     var query, res;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
             query = buildSearchQuery(author);
-            _context2.prev = 1;
-            _context2.next = 4;
+            _context4.prev = 1;
+            _context4.next = 4;
             return axios_default.a.get('/api/freet' + query);
 
           case 4:
-            res = _context2.sent;
-            return _context2.abrupt("return", res.data);
+            res = _context4.sent;
+            return _context4.abrupt("return", res.data);
 
           case 8:
-            _context2.prev = 8;
-            _context2.t0 = _context2["catch"](1);
-            throw new Error('Caught unexpected exception: ' + _context2.t0.response);
+            _context4.prev = 8;
+            _context4.t0 = _context4["catch"](1);
+            handleError(_context4.t0);
 
           case 11:
           case "end":
-            return _context2.stop();
+            return _context4.stop();
         }
       }
-    }, _callee2, null, [[1, 8]]);
+    }, _callee4, null, [[1, 8]]);
   }));
 
-  return function search(_x2) {
-    return _ref2.apply(this, arguments);
+  return function search(_x4) {
+    return _ref4.apply(this, arguments);
   };
 }();
 /**
@@ -14304,23 +14385,23 @@ var search = /*#__PURE__*/function () {
 
 
 var upvote = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(freet_id) {
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(freet_id) {
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
             vote(freet_id, 'up');
 
           case 1:
           case "end":
-            return _context3.stop();
+            return _context5.stop();
         }
       }
-    }, _callee3);
+    }, _callee5);
   }));
 
-  return function upvote(_x3) {
-    return _ref3.apply(this, arguments);
+  return function upvote(_x5) {
+    return _ref5.apply(this, arguments);
   };
 }();
 /**
@@ -14331,57 +14412,57 @@ var upvote = /*#__PURE__*/function () {
 
 
 var downvote = /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(freet_id) {
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(freet_id) {
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             vote(freet_id, 'down');
 
           case 1:
           case "end":
-            return _context4.stop();
+            return _context6.stop();
         }
       }
-    }, _callee4);
+    }, _callee6);
   }));
 
-  return function downvote(_x4) {
-    return _ref4.apply(this, arguments);
+  return function downvote(_x6) {
+    return _ref6.apply(this, arguments);
   };
 }();
 
 var vote = /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(freet_id, direction) {
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+  var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(freet_id, direction) {
+    return regeneratorRuntime.wrap(function _callee7$(_context7) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context7.prev = _context7.next) {
           case 0:
-            _context5.prev = 0;
-            _context5.next = 3;
+            _context7.prev = 0;
+            _context7.next = 3;
             return axios_default.a.post('/api/freet/' + freet_id + '/vote', {
               direction: direction
             });
 
           case 3:
-            _context5.next = 8;
+            _context7.next = 8;
             break;
 
           case 5:
-            _context5.prev = 5;
-            _context5.t0 = _context5["catch"](0);
-            throw new Error('Caught unexpected exception: ' + _context5.t0.response);
+            _context7.prev = 5;
+            _context7.t0 = _context7["catch"](0);
+            handleError(_context7.t0);
 
           case 8:
           case "end":
-            return _context5.stop();
+            return _context7.stop();
         }
       }
-    }, _callee5, null, [[0, 5]]);
+    }, _callee7, null, [[0, 5]]);
   }));
 
-  return function vote(_x5, _x6) {
-    return _ref5.apply(this, arguments);
+  return function vote(_x7, _x8) {
+    return _ref7.apply(this, arguments);
   };
 }();
 
@@ -14397,8 +14478,14 @@ var buildSearchQuery = function buildSearchQuery(author) {
   return query;
 };
 
+function handleError(err) {
+  throw new Error('Caught unexpected exception: ' + err.response);
+}
+
 /* harmony default export */ var freetAPI = ({
   create: create,
+  remove: remove,
+  edit: edit,
   search: search,
   upvote: upvote,
   downvote: downvote
@@ -14456,129 +14543,12 @@ var FreetSearch_FreetSearch = function FreetSearch(props) {
     }
   }, "Search"), /*#__PURE__*/react_default.a.createElement("label", null, "Sort by votes", /*#__PURE__*/react_default.a.createElement("input", {
     type: "checkbox",
-    name: "sort"
+    name: "sort",
+    onClick: props.onSorted
   })));
 };
 
 /* harmony default export */ var fritter_FreetSearch = (FreetSearch_FreetSearch);
-// CONCATENATED MODULE: ./src/client/common/FritterConfig.js
-var minCredentialsLength = 1,
-    maxFreetLength = 140;
-
-// CONCATENATED MODULE: ./src/client/fritter/MessageInput.js
-
-
-
-var MessageInput_MessageInput = function MessageInput(props) {
-  var placeholder = "Enter message (at most " + /* Cannot get final name for export "default" in "./src/client/common/FritterConfig.js" (known exports: minCredentialsLength maxFreetLength, known reexports: ) */ undefined + " characters";
-  return /*#__PURE__*/react_default.a.createElement("input", {
-    type: "text",
-    name: "message",
-    placeholder: placeholder,
-    maxlength: /* Cannot get final name for export "default" in "./src/client/common/FritterConfig.js" (known exports: minCredentialsLength maxFreetLength, known reexports: ) */ undefined,
-    onChange: props.onChange
-  });
-};
-
-/* harmony default export */ var fritter_MessageInput = (MessageInput_MessageInput);
-// CONCATENATED MODULE: ./src/client/fritter/NewFreetDialog.js
-function NewFreetDialog_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { NewFreetDialog_typeof = function _typeof(obj) { return typeof obj; }; } else { NewFreetDialog_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return NewFreetDialog_typeof(obj); }
-
-function NewFreetDialog_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function NewFreetDialog_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { NewFreetDialog_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { NewFreetDialog_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function NewFreetDialog_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function NewFreetDialog_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) NewFreetDialog_setPrototypeOf(subClass, superClass); }
-
-function NewFreetDialog_setPrototypeOf(o, p) { NewFreetDialog_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return NewFreetDialog_setPrototypeOf(o, p); }
-
-function NewFreetDialog_createSuper(Derived) { var hasNativeReflectConstruct = NewFreetDialog_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = NewFreetDialog_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = NewFreetDialog_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return NewFreetDialog_possibleConstructorReturn(this, result); }; }
-
-function NewFreetDialog_possibleConstructorReturn(self, call) { if (call && (NewFreetDialog_typeof(call) === "object" || typeof call === "function")) { return call; } return NewFreetDialog_assertThisInitialized(self); }
-
-function NewFreetDialog_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function NewFreetDialog_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function NewFreetDialog_getPrototypeOf(o) { NewFreetDialog_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return NewFreetDialog_getPrototypeOf(o); }
-
-
-
-
-
-var NewFreetDialog_NewFreetDialog = /*#__PURE__*/function (_React$Component) {
-  NewFreetDialog_inherits(NewFreetDialog, _React$Component);
-
-  var _super = NewFreetDialog_createSuper(NewFreetDialog);
-
-  function NewFreetDialog(props) {
-    var _this;
-
-    NewFreetDialog_classCallCheck(this, NewFreetDialog);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      message: ''
-    };
-    return _this;
-  }
-
-  _createClass(NewFreetDialog, [{
-    key: "onClick",
-    value: function () {
-      var _onClick = NewFreetDialog_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var fields;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                fields = this.state;
-                _context.next = 3;
-                return freetAPI.create(fields);
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function onClick() {
-        return _onClick.apply(this, arguments);
-      }
-
-      return onClick;
-    }()
-  }, {
-    key: "onChange",
-    value: function onChange() {
-      var message = event.target.value;
-      this.setState({
-        message: message
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(fritter_MessageInput, {
-        onChange: this.onChange.bind(this)
-      }), /*#__PURE__*/react_default.a.createElement("button", null, "Cancel"), /*#__PURE__*/react_default.a.createElement("button", {
-        onClick: this.onClick.bind(this)
-      }, "Apply"));
-    }
-  }]);
-
-  return NewFreetDialog;
-}(react_default.a.Component);
-
-/* harmony default export */ var fritter_NewFreetDialog = (NewFreetDialog_NewFreetDialog);
 // CONCATENATED MODULE: ./src/client/fritter/Freet.js
 function Freet_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Freet_typeof = function _typeof(obj) { return typeof obj; }; } else { Freet_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Freet_typeof(obj); }
 
@@ -14588,9 +14558,9 @@ function Freet_asyncToGenerator(fn) { return function () { var self = this, args
 
 function Freet_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function Freet_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function Freet_createClass(Constructor, protoProps, staticProps) { if (protoProps) Freet_defineProperties(Constructor.prototype, protoProps); if (staticProps) Freet_defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function Freet_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Freet_setPrototypeOf(subClass, superClass); }
 
@@ -14621,7 +14591,7 @@ var Freet_Freet = /*#__PURE__*/function (_React$Component) {
     return _super.apply(this, arguments);
   }
 
-  Freet_createClass(Freet, [{
+  _createClass(Freet, [{
     key: "onUpvote",
     value: function () {
       var _onUpvote = Freet_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -14688,29 +14658,42 @@ var Freet_Freet = /*#__PURE__*/function (_React$Component) {
       return pairs.join('&');
     }
   }, {
+    key: "isAuthorLoggedIn",
+    value: function isAuthorLoggedIn() {
+      return this.props.username === this.props.freet.author;
+    }
+  }, {
+    key: "isNonAuthorLoggedIn",
+    value: function isNonAuthorLoggedIn() {
+      return this.props.username && this.props.username != this.props.freet.author;
+    }
+  }, {
+    key: "getEditAndDeleteControls",
+    value: function getEditAndDeleteControls() {
+      var freet = this.props.freet,
+          editUrl = "/freet/edit/" + freet.freet_id + '?' + this.freetToQuery(),
+          deleteUrl = "/freet/delete/" + freet.freet_id;
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement(Link, {
+        to: editUrl
+      }, "Edit"), /*#__PURE__*/react_default.a.createElement(Link, {
+        to: deleteUrl
+      }, "Delete"));
+    }
+  }, {
+    key: "getVotingControls",
+    value: function getVotingControls() {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("button", {
+        onClick: this.onUpvote.bind(this)
+      }, "Upvote"), /*#__PURE__*/react_default.a.createElement("button", {
+        onClick: this.onDownvote.bind(this)
+      }, "Downvote"));
+    }
+  }, {
     key: "render",
     value: function render() {
+      var mutatorButtons = this.isAuthorLoggedIn() ? this.getEditAndDeleteControls() : null;
+      var votingButtons = this.isNonAuthorLoggedIn() ? this.getVotingControls() : null;
       var freet = this.props.freet;
-      var mutatorButtons;
-
-      if (this.props.username === freet.author) {
-        var editLink = "/editfreet"; //?" + this.freetToQuery();
-
-        mutatorButtons = /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement(Link, {
-          to: editLink
-        }, "Edit"), /*#__PURE__*/react_default.a.createElement("button", null, "Delete"));
-      }
-
-      var votingButtons;
-
-      if (this.props.username != freet.author) {
-        votingButtons = /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("button", {
-          onClick: this.onUpvote.bind(this)
-        }, "Upvote"), /*#__PURE__*/react_default.a.createElement("button", {
-          onClick: this.onDownvote.bind(this)
-        }, "Downvote"));
-      }
-
       return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("p", null, freet.author), /*#__PURE__*/react_default.a.createElement("p", null, freet.message), /*#__PURE__*/react_default.a.createElement("p", null, freet.votes), mutatorButtons, votingButtons);
     }
   }]);
@@ -14723,299 +14706,32 @@ var Freet_Freet = /*#__PURE__*/function (_React$Component) {
 
 
 
-var Freets_Freets = function Freets(props) {
-  var freets = props.freets;
-  var freetList = freets.map(function (freet) {
+var Freets = function Freets(props) {
+  console.log('Freets', props);
+  return props.freets ? getFreetList(props) : null;
+};
+
+function getFreetList(props) {
+  return props.freets.map(function (freet) {
     return /*#__PURE__*/react_default.a.createElement(fritter_Freet, {
       freet: freet,
       username: props.username
     });
   });
-  return freetList;
-};
+}
 
-/* harmony default export */ var fritter_Freets = (Freets_Freets);
-// CONCATENATED MODULE: ./src/client/api/sessionAPI.js
-function sessionAPI_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+/* harmony default export */ var fritter_Freets = (Freets);
+// CONCATENATED MODULE: ./src/client/fritter/FreetCreateStart.js
 
-function sessionAPI_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { sessionAPI_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { sessionAPI_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-/**
-* Request Fritter server to login a user.
-* @param {string} fields.name     - the user's name
-* @param {string} fields.password - the user's password
-* @throws {InvalidCredentials} - if the name and/or the password are invalid
-*/
+function FreetCreateStart() {
+  return /*#__PURE__*/react_default.a.createElement(Link, {
+    to: "/freet/create"
+  }, "Freet");
+}
 
-var login = /*#__PURE__*/function () {
-  var _ref = sessionAPI_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(fields) {
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.prev = 0;
-            _context.next = 3;
-            return axios_default.a.post('/api/session/login', fields);
-
-          case 3:
-            _context.next = 12;
-            break;
-
-          case 5:
-            _context.prev = 5;
-            _context.t0 = _context["catch"](0);
-            _context.t1 = _context.t0.response.status;
-            _context.next = _context.t1 === 403 ? 10 : 11;
-            break;
-
-          case 10:
-            throw new Error('InvalidCredentials');
-
-          case 11:
-            throw new Error('Caught unexpected exception: ' + _context.t0.response);
-
-          case 12:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, null, [[0, 5]]);
-  }));
-
-  return function login(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-/**
-* Request fritter server to logout a user
-*/
-
-
-var logout = /*#__PURE__*/function () {
-  var _ref2 = sessionAPI_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
-            return axios_default.a["delete"]('/api/session/logout');
-
-          case 3:
-            _context2.next = 8;
-            break;
-
-          case 5:
-            _context2.prev = 5;
-            _context2.t0 = _context2["catch"](0);
-            throw new Error('Caught unexpected exception: ' + _context2.t0.response);
-
-          case 8:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, null, [[0, 5]]);
-  }));
-
-  return function logout() {
-    return _ref2.apply(this, arguments);
-  };
-}();
-
-/* harmony default export */ var sessionAPI = ({
-  login: login,
-  logout: logout
-});
-// CONCATENATED MODULE: ./src/client/session/Logout.js
-function Logout_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Logout_typeof = function _typeof(obj) { return typeof obj; }; } else { Logout_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Logout_typeof(obj); }
-
-function Logout_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function Logout_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { Logout_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { Logout_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function Logout_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function Logout_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function Logout_createClass(Constructor, protoProps, staticProps) { if (protoProps) Logout_defineProperties(Constructor.prototype, protoProps); if (staticProps) Logout_defineProperties(Constructor, staticProps); return Constructor; }
-
-function Logout_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Logout_setPrototypeOf(subClass, superClass); }
-
-function Logout_setPrototypeOf(o, p) { Logout_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Logout_setPrototypeOf(o, p); }
-
-function Logout_createSuper(Derived) { var hasNativeReflectConstruct = Logout_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = Logout_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = Logout_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return Logout_possibleConstructorReturn(this, result); }; }
-
-function Logout_possibleConstructorReturn(self, call) { if (call && (Logout_typeof(call) === "object" || typeof call === "function")) { return call; } return Logout_assertThisInitialized(self); }
-
-function Logout_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function Logout_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function Logout_getPrototypeOf(o) { Logout_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Logout_getPrototypeOf(o); }
-
-
-
-
-
-var Logout_Logout = /*#__PURE__*/function (_React$Component) {
-  Logout_inherits(Logout, _React$Component);
-
-  var _super = Logout_createSuper(Logout);
-
-  function Logout() {
-    Logout_classCallCheck(this, Logout);
-
-    return _super.apply(this, arguments);
-  }
-
-  Logout_createClass(Logout, [{
-    key: "componentWillMount",
-    value: function () {
-      var _componentWillMount = Logout_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return sessionAPI.logout();
-
-              case 2:
-                this.props.onLogout();
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function componentWillMount() {
-        return _componentWillMount.apply(this, arguments);
-      }
-
-      return componentWillMount;
-    }()
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(Redirect, {
-        to: "/"
-      });
-    }
-  }]);
-
-  return Logout;
-}(react_default.a.Component);
-
-/* harmony default export */ var session_Logout = (Logout_Logout);
-// CONCATENATED MODULE: ./src/client/fritter/MutateFreetDialog.js
-function MutateFreetDialog_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { MutateFreetDialog_typeof = function _typeof(obj) { return typeof obj; }; } else { MutateFreetDialog_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return MutateFreetDialog_typeof(obj); }
-
-function MutateFreetDialog_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function MutateFreetDialog_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { MutateFreetDialog_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { MutateFreetDialog_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function MutateFreetDialog_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function MutateFreetDialog_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function MutateFreetDialog_createClass(Constructor, protoProps, staticProps) { if (protoProps) MutateFreetDialog_defineProperties(Constructor.prototype, protoProps); if (staticProps) MutateFreetDialog_defineProperties(Constructor, staticProps); return Constructor; }
-
-function MutateFreetDialog_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) MutateFreetDialog_setPrototypeOf(subClass, superClass); }
-
-function MutateFreetDialog_setPrototypeOf(o, p) { MutateFreetDialog_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return MutateFreetDialog_setPrototypeOf(o, p); }
-
-function MutateFreetDialog_createSuper(Derived) { var hasNativeReflectConstruct = MutateFreetDialog_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = MutateFreetDialog_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = MutateFreetDialog_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return MutateFreetDialog_possibleConstructorReturn(this, result); }; }
-
-function MutateFreetDialog_possibleConstructorReturn(self, call) { if (call && (MutateFreetDialog_typeof(call) === "object" || typeof call === "function")) { return call; } return MutateFreetDialog_assertThisInitialized(self); }
-
-function MutateFreetDialog_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function MutateFreetDialog_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function MutateFreetDialog_getPrototypeOf(o) { MutateFreetDialog_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return MutateFreetDialog_getPrototypeOf(o); }
-
-
-
-
-
-var MutateFreetDialog_MutateFreetDialog = /*#__PURE__*/function (_React$Component) {
-  MutateFreetDialog_inherits(MutateFreetDialog, _React$Component);
-
-  var _super = MutateFreetDialog_createSuper(MutateFreetDialog);
-
-  function MutateFreetDialog(props) {
-    var _this;
-
-    MutateFreetDialog_classCallCheck(this, MutateFreetDialog);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      freet: props.freet
-    };
-    return _this;
-  }
-
-  MutateFreetDialog_createClass(MutateFreetDialog, [{
-    key: "onClick",
-    value: function () {
-      var _onClick = MutateFreetDialog_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var fields;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                fields = this.state;
-                _context.next = 3;
-                return freetAPI[props.onApply](fields);
-
-              case 3:
-                return _context.abrupt("return", {});
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function onClick() {
-        return _onClick.apply(this, arguments);
-      }
-
-      return onClick;
-    }()
-  }, {
-    key: "onChange",
-    value: function onChange() {
-      var message = event.target.value;
-      this.setState(function (state) {
-        state.freet.message = message;
-        return state;
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("h2", null, "Edit Freet"), /*#__PURE__*/react_default.a.createElement(fritter_MessageInput, {
-        onChange: this.onChange.bind(this)
-      }), /*#__PURE__*/react_default.a.createElement("button", null, "Cancel"), /*#__PURE__*/react_default.a.createElement("button", {
-        onClick: this.onClick.bind(this)
-      }, "Apply"));
-    }
-  }]);
-
-  return MutateFreetDialog;
-}(react_default.a.Component);
-
-/* harmony default export */ var fritter_MutateFreetDialog = (MutateFreetDialog_MutateFreetDialog);
-// CONCATENATED MODULE: ./src/client/fritter/EditFreetDialog.js
-
-
+/* harmony default export */ var fritter_FreetCreateStart = (FreetCreateStart);
 // CONCATENATED MODULE: ./src/client/Home.js
 function Home_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Home_typeof = function _typeof(obj) { return typeof obj; }; } else { Home_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Home_typeof(obj); }
 
@@ -15045,8 +14761,6 @@ function Home_getPrototypeOf(o) { Home_getPrototypeOf = Object.setPrototypeOf ? 
 
 
 
-
-
 var Home_Home = /*#__PURE__*/function (_React$Component) {
   Home_inherits(Home, _React$Component);
 
@@ -15059,7 +14773,9 @@ var Home_Home = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      freets: []
+      freets: [],
+      sortedFreets: [],
+      isSorted: false
     };
     return _this;
   }
@@ -15067,24 +14783,39 @@ var Home_Home = /*#__PURE__*/function (_React$Component) {
   Home_createClass(Home, [{
     key: "onFreets",
     value: function onFreets(freets) {
+      this.setState(function (state) {
+        state.freets = freets;
+        state.sortedFreets = Array.from(state.freets);
+        state.sortedFreets.sort(function (freet1, freet2) {
+          return freet1.votes < freet2.votes;
+        });
+        return state;
+      });
+    }
+  }, {
+    key: "onSorted",
+    value: function onSorted(event) {
+      console.log('Home.onSorted', event);
+      var isSorted = event.target.checked;
       this.setState({
-        freets: freets
+        isSorted: isSorted
       });
     }
   }, {
     key: "render",
     value: function render() {
-      // <main>
-      //   <NewFreetDialog />
-      // </main>
+      console.log('Home', this.state);
+      var freetCreateStart = this.props.username ? /*#__PURE__*/react_default.a.createElement(fritter_FreetCreateStart, null) : null;
       return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("nav", null, /*#__PURE__*/react_default.a.createElement(navigation_Navigation, {
         username: this.props.username
       })), /*#__PURE__*/react_default.a.createElement("header", null, /*#__PURE__*/react_default.a.createElement(fritter_FreetSearch, {
-        onFreets: this.onFreets.bind(this)
-      }), /*#__PURE__*/react_default.a.createElement(fritter_Freets, {
-        freets: this.state.freets,
+        isSorted: this.state.isSorted,
+        onFreets: this.onFreets.bind(this),
+        onSorted: this.onSorted.bind(this)
+      })), /*#__PURE__*/react_default.a.createElement("main", null, /*#__PURE__*/react_default.a.createElement(fritter_Freets, {
+        freets: this.state.isSorted ? this.state.sortedFreets : this.state.freets,
         username: this.props.username
-      })));
+      }), freetCreateStart));
     }
   }]);
 
@@ -15130,7 +14861,7 @@ function _create() {
           case 5:
             _context.prev = 5;
             _context.t0 = _context["catch"](0);
-            handleError(_context.t0);
+            userAPI_handleError(_context.t0);
 
           case 8:
           case "end":
@@ -15142,7 +14873,7 @@ function _create() {
   return _create.apply(this, arguments);
 }
 
-function remove() {
+function userAPI_remove() {
   return _remove.apply(this, arguments);
 }
 /**
@@ -15170,7 +14901,7 @@ function _remove() {
           case 5:
             _context2.prev = 5;
             _context2.t0 = _context2["catch"](0);
-            handleError(_context2.t0);
+            userAPI_handleError(_context2.t0);
 
           case 8:
           case "end":
@@ -15182,7 +14913,7 @@ function _remove() {
   return _remove.apply(this, arguments);
 }
 
-function edit(_x2) {
+function userAPI_edit(_x2) {
   return _edit.apply(this, arguments);
 }
 
@@ -15203,7 +14934,7 @@ function _edit() {
           case 5:
             _context3.prev = 5;
             _context3.t0 = _context3["catch"](0);
-            handleError(_context3.t0);
+            userAPI_handleError(_context3.t0);
 
           case 8:
           case "end":
@@ -15215,7 +14946,7 @@ function _edit() {
   return _edit.apply(this, arguments);
 }
 
-function handleError(err) {
+function userAPI_handleError(err) {
   switch (err.response.status) {
     case 403:
       throw new Error('DuplicateUser');
@@ -15227,8 +14958,8 @@ function handleError(err) {
 
 /* harmony default export */ var userAPI = ({
   create: userAPI_create,
-  remove: remove,
-  edit: edit
+  remove: userAPI_remove,
+  edit: userAPI_edit
 });
 // CONCATENATED MODULE: ./src/client/common/ConfirmationDialog.js
 
@@ -15275,6 +15006,10 @@ function ConfirmationDialog(props) {
 
 ;
 /* harmony default export */ var common_ConfirmationDialog = (ConfirmationDialog);
+// CONCATENATED MODULE: ./src/client/common/FritterConfig.js
+var minCredentialsLength = 1,
+    maxFreetLength = 140;
+
 // CONCATENATED MODULE: ./src/client/common/NameInput.js
 /**
 *
@@ -15836,6 +15571,275 @@ function UserDoneEditName(props) {
 }
 
 /* harmony default export */ var user_UserDoneEditName = (UserDoneEditName);
+// CONCATENATED MODULE: ./src/client/user/UserEditPassword.js
+function UserEditPassword_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { UserEditPassword_typeof = function _typeof(obj) { return typeof obj; }; } else { UserEditPassword_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return UserEditPassword_typeof(obj); }
+
+function UserEditPassword_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function UserEditPassword_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function UserEditPassword_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { UserEditPassword_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { UserEditPassword_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function UserEditPassword_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function UserEditPassword_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function UserEditPassword_createClass(Constructor, protoProps, staticProps) { if (protoProps) UserEditPassword_defineProperties(Constructor.prototype, protoProps); if (staticProps) UserEditPassword_defineProperties(Constructor, staticProps); return Constructor; }
+
+function UserEditPassword_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) UserEditPassword_setPrototypeOf(subClass, superClass); }
+
+function UserEditPassword_setPrototypeOf(o, p) { UserEditPassword_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return UserEditPassword_setPrototypeOf(o, p); }
+
+function UserEditPassword_createSuper(Derived) { var hasNativeReflectConstruct = UserEditPassword_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = UserEditPassword_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = UserEditPassword_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return UserEditPassword_possibleConstructorReturn(this, result); }; }
+
+function UserEditPassword_possibleConstructorReturn(self, call) { if (call && (UserEditPassword_typeof(call) === "object" || typeof call === "function")) { return call; } return UserEditPassword_assertThisInitialized(self); }
+
+function UserEditPassword_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function UserEditPassword_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function UserEditPassword_getPrototypeOf(o) { UserEditPassword_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return UserEditPassword_getPrototypeOf(o); }
+
+
+
+
+
+
+
+/**
+* Edit user password React Component.
+*
+* Displays the following controls:
+* - password text input box
+* - cancel button
+* - apply button, which will invoke props.onApply when clicked.
+*
+* @param {string}   props.apply   - Apply button's label
+* @param {Function} props.onApply - Apply button's callback, 
+* which must be a Promise with signature:
+* - @param {string} fields.name     - the name that was entered
+* - @returns {Object}   object.name     - the name that will be displayed
+*                       object.error    - the error message to be displayed
+*/
+
+var UserEditPassword_UserEditPassword = /*#__PURE__*/function (_React$Component) {
+  UserEditPassword_inherits(UserEditPassword, _React$Component);
+
+  var _super = UserEditPassword_createSuper(UserEditPassword);
+
+  function UserEditPassword(props) {
+    var _this;
+
+    UserEditPassword_classCallCheck(this, UserEditPassword);
+
+    _this = _super.call(this, props);
+    var minlength = /* Cannot get final name for export "default" in "./src/client/common/FritterConfig.js" (known exports: minCredentialsLength maxFreetLength, known reexports: ) */ undefined;
+    _this.state = {
+      password: '',
+      error: '',
+      redirect: ''
+    };
+    _this.props.apply = 'Change';
+
+    _this.props.onApply = /*#__PURE__*/function () {
+      var _ref = UserEditPassword_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(state) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return userAPI.edit({
+                  password: state.password
+                });
+
+              case 3:
+                return _context.abrupt("return", {
+                  redirect: '/user/done-edit-password'
+                });
+
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context["catch"](0);
+                throw _context.t0;
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 6]]);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    return _this;
+  }
+
+  UserEditPassword_createClass(UserEditPassword, [{
+    key: "onChange",
+    value: function onChange(name, value) {
+      this.setState(UserEditPassword_defineProperty({}, name, value));
+    }
+  }, {
+    key: "onApply",
+    value: function () {
+      var _onApply = UserEditPassword_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        var state;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return this.props.onApply(this.state);
+
+              case 2:
+                state = _context2.sent;
+                this.setState(state);
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function onApply() {
+        return _onApply.apply(this, arguments);
+      }
+
+      return onApply;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      var redirect = this.state.redirect;
+      if (redirect) return /*#__PURE__*/react_default.a.createElement(Redirect, {
+        to: redirect
+      });
+      return /*#__PURE__*/react_default.a.createElement(common_ConfirmationDialog, {
+        apply: this.props.apply,
+        onApply: this.onApply.bind(this)
+      }, /*#__PURE__*/react_default.a.createElement(common_PasswordInput, {
+        password: this.state.password,
+        error: this.state.error,
+        onChange: this.onChange.bind(this)
+      }));
+    }
+  }]);
+
+  return UserEditPassword;
+}(react_default.a.Component);
+
+/* harmony default export */ var user_UserEditPassword = (UserEditPassword_UserEditPassword);
+// CONCATENATED MODULE: ./src/client/user/UserDoneEditPassword.js
+
+
+
+function UserDoneEditPassword(props) {
+  return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("p", null, "Changed user password."), /*#__PURE__*/react_default.a.createElement("ul", null, /*#__PURE__*/react_default.a.createElement("li", null, /*#__PURE__*/react_default.a.createElement(Link, {
+    to: "/"
+  }, "Continue"))));
+}
+
+/* harmony default export */ var user_UserDoneEditPassword = (UserDoneEditPassword);
+// CONCATENATED MODULE: ./src/client/api/sessionAPI.js
+function sessionAPI_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function sessionAPI_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { sessionAPI_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { sessionAPI_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/**
+* Request Fritter server to login a user.
+* @param {string} fields.name     - the user's name
+* @param {string} fields.password - the user's password
+* @throws {InvalidCredentials} - if the name and/or the password are invalid
+*/
+
+var login = /*#__PURE__*/function () {
+  var _ref = sessionAPI_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(fields) {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return axios_default.a.post('/api/session/login', fields);
+
+          case 3:
+            _context.next = 12;
+            break;
+
+          case 5:
+            _context.prev = 5;
+            _context.t0 = _context["catch"](0);
+            _context.t1 = _context.t0.response.status;
+            _context.next = _context.t1 === 403 ? 10 : 11;
+            break;
+
+          case 10:
+            throw new Error('InvalidCredentials');
+
+          case 11:
+            throw new Error('Caught unexpected exception: ' + _context.t0.response);
+
+          case 12:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 5]]);
+  }));
+
+  return function login(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+/**
+* Request fritter server to logout a user
+*/
+
+
+var logout = /*#__PURE__*/function () {
+  var _ref2 = sessionAPI_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return axios_default.a["delete"]('/api/session/logout');
+
+          case 3:
+            _context2.next = 8;
+            break;
+
+          case 5:
+            _context2.prev = 5;
+            _context2.t0 = _context2["catch"](0);
+            throw new Error('Caught unexpected exception: ' + _context2.t0.response);
+
+          case 8:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 5]]);
+  }));
+
+  return function logout() {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/* harmony default export */ var sessionAPI = ({
+  login: login,
+  logout: logout
+});
 // CONCATENATED MODULE: ./src/client/session/Login.js
 function Login_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -15901,6 +15905,412 @@ var Login_Login = function Login(props) {
 };
 
 /* harmony default export */ var session_Login = (Login_Login);
+// CONCATENATED MODULE: ./src/client/session/Logout.js
+function Logout_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Logout_typeof = function _typeof(obj) { return typeof obj; }; } else { Logout_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Logout_typeof(obj); }
+
+function Logout_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function Logout_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { Logout_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { Logout_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function Logout_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function Logout_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function Logout_createClass(Constructor, protoProps, staticProps) { if (protoProps) Logout_defineProperties(Constructor.prototype, protoProps); if (staticProps) Logout_defineProperties(Constructor, staticProps); return Constructor; }
+
+function Logout_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Logout_setPrototypeOf(subClass, superClass); }
+
+function Logout_setPrototypeOf(o, p) { Logout_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Logout_setPrototypeOf(o, p); }
+
+function Logout_createSuper(Derived) { var hasNativeReflectConstruct = Logout_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = Logout_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = Logout_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return Logout_possibleConstructorReturn(this, result); }; }
+
+function Logout_possibleConstructorReturn(self, call) { if (call && (Logout_typeof(call) === "object" || typeof call === "function")) { return call; } return Logout_assertThisInitialized(self); }
+
+function Logout_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function Logout_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function Logout_getPrototypeOf(o) { Logout_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Logout_getPrototypeOf(o); }
+
+
+
+
+
+var Logout_Logout = /*#__PURE__*/function (_React$Component) {
+  Logout_inherits(Logout, _React$Component);
+
+  var _super = Logout_createSuper(Logout);
+
+  function Logout() {
+    Logout_classCallCheck(this, Logout);
+
+    return _super.apply(this, arguments);
+  }
+
+  Logout_createClass(Logout, [{
+    key: "componentWillMount",
+    value: function () {
+      var _componentWillMount = Logout_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return sessionAPI.logout();
+
+              case 2:
+                this.props.onLogout();
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function componentWillMount() {
+        return _componentWillMount.apply(this, arguments);
+      }
+
+      return componentWillMount;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react_default.a.createElement(Redirect, {
+        to: "/"
+      });
+    }
+  }]);
+
+  return Logout;
+}(react_default.a.Component);
+
+/* harmony default export */ var session_Logout = (Logout_Logout);
+// CONCATENATED MODULE: ./src/client/fritter/MessageInput.js
+
+
+
+var MessageInput_MessageInput = function MessageInput(props) {
+  var placeholder = "Enter message (at most " + /* Cannot get final name for export "default" in "./src/client/common/FritterConfig.js" (known exports: minCredentialsLength maxFreetLength, known reexports: ) */ undefined + " characters";
+  return /*#__PURE__*/react_default.a.createElement("input", {
+    type: "text",
+    name: "message",
+    value: props.value,
+    placeholder: placeholder,
+    maxlength: /* Cannot get final name for export "default" in "./src/client/common/FritterConfig.js" (known exports: minCredentialsLength maxFreetLength, known reexports: ) */ undefined,
+    onChange: props.onChange
+  });
+};
+
+/* harmony default export */ var fritter_MessageInput = (MessageInput_MessageInput);
+// CONCATENATED MODULE: ./src/client/fritter/FreetCreate.js
+function FreetCreate_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { FreetCreate_typeof = function _typeof(obj) { return typeof obj; }; } else { FreetCreate_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return FreetCreate_typeof(obj); }
+
+function FreetCreate_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function FreetCreate_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { FreetCreate_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { FreetCreate_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function FreetCreate_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function FreetCreate_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function FreetCreate_createClass(Constructor, protoProps, staticProps) { if (protoProps) FreetCreate_defineProperties(Constructor.prototype, protoProps); if (staticProps) FreetCreate_defineProperties(Constructor, staticProps); return Constructor; }
+
+function FreetCreate_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) FreetCreate_setPrototypeOf(subClass, superClass); }
+
+function FreetCreate_setPrototypeOf(o, p) { FreetCreate_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return FreetCreate_setPrototypeOf(o, p); }
+
+function FreetCreate_createSuper(Derived) { var hasNativeReflectConstruct = FreetCreate_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = FreetCreate_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FreetCreate_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FreetCreate_possibleConstructorReturn(this, result); }; }
+
+function FreetCreate_possibleConstructorReturn(self, call) { if (call && (FreetCreate_typeof(call) === "object" || typeof call === "function")) { return call; } return FreetCreate_assertThisInitialized(self); }
+
+function FreetCreate_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function FreetCreate_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function FreetCreate_getPrototypeOf(o) { FreetCreate_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return FreetCreate_getPrototypeOf(o); }
+
+
+
+
+
+
+var FreetCreate_FreetCreate = /*#__PURE__*/function (_React$Component) {
+  FreetCreate_inherits(FreetCreate, _React$Component);
+
+  var _super = FreetCreate_createSuper(FreetCreate);
+
+  function FreetCreate(props) {
+    var _this;
+
+    FreetCreate_classCallCheck(this, FreetCreate);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      message: ''
+    };
+    return _this;
+  }
+
+  FreetCreate_createClass(FreetCreate, [{
+    key: "onClick",
+    value: function () {
+      var _onClick = FreetCreate_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var fields;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                fields = this.state;
+                _context.next = 3;
+                return freetAPI.create(fields);
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function onClick() {
+        return _onClick.apply(this, arguments);
+      }
+
+      return onClick;
+    }()
+  }, {
+    key: "onChange",
+    value: function onChange() {
+      var message = event.target.value;
+      this.setState({
+        message: message
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(fritter_MessageInput, {
+        onChange: this.onChange.bind(this)
+      }), /*#__PURE__*/react_default.a.createElement(Link, {
+        to: "/"
+      }, "Cancel"), /*#__PURE__*/react_default.a.createElement("button", {
+        onClick: this.onClick.bind(this)
+      }, "Apply"));
+    }
+  }]);
+
+  return FreetCreate;
+}(react_default.a.Component);
+
+/* harmony default export */ var fritter_FreetCreate = (FreetCreate_FreetCreate);
+// CONCATENATED MODULE: ./src/client/fritter/FreetEdit.js
+function FreetEdit_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { FreetEdit_typeof = function _typeof(obj) { return typeof obj; }; } else { FreetEdit_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return FreetEdit_typeof(obj); }
+
+function FreetEdit_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function FreetEdit_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { FreetEdit_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { FreetEdit_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function FreetEdit_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function FreetEdit_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function FreetEdit_createClass(Constructor, protoProps, staticProps) { if (protoProps) FreetEdit_defineProperties(Constructor.prototype, protoProps); if (staticProps) FreetEdit_defineProperties(Constructor, staticProps); return Constructor; }
+
+function FreetEdit_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) FreetEdit_setPrototypeOf(subClass, superClass); }
+
+function FreetEdit_setPrototypeOf(o, p) { FreetEdit_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return FreetEdit_setPrototypeOf(o, p); }
+
+function FreetEdit_createSuper(Derived) { var hasNativeReflectConstruct = FreetEdit_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = FreetEdit_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FreetEdit_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FreetEdit_possibleConstructorReturn(this, result); }; }
+
+function FreetEdit_possibleConstructorReturn(self, call) { if (call && (FreetEdit_typeof(call) === "object" || typeof call === "function")) { return call; } return FreetEdit_assertThisInitialized(self); }
+
+function FreetEdit_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function FreetEdit_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function FreetEdit_getPrototypeOf(o) { FreetEdit_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return FreetEdit_getPrototypeOf(o); }
+
+
+
+
+
+
+var FreetEdit_FreetEdit = /*#__PURE__*/function (_React$Component) {
+  FreetEdit_inherits(FreetEdit, _React$Component);
+
+  var _super = FreetEdit_createSuper(FreetEdit);
+
+  function FreetEdit(props) {
+    var _this;
+
+    FreetEdit_classCallCheck(this, FreetEdit);
+
+    _this = _super.call(this, props);
+    _this.freet_id = _this.props.match.params.freet_id;
+    _this.state = {
+      message: _this.getMessage()
+    };
+    console.log('FreetEdit', props, _this.freet_id, _this.state.message);
+    return _this;
+  }
+  /**
+  * Extracts the message from the url
+  */
+
+
+  FreetEdit_createClass(FreetEdit, [{
+    key: "getMessage",
+    value: function getMessage() {
+      var search = this.props.location.search;
+      return search.match(/message=([^&]+)/)[1];
+    }
+  }, {
+    key: "onClick",
+    value: function () {
+      var _onClick = FreetEdit_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var freet_id, message;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                freet_id = this.freet_id, message = this.state.message;
+                _context.next = 3;
+                return freetAPI.edit({
+                  freet_id: freet_id,
+                  message: message
+                });
+
+              case 3:
+                return _context.abrupt("return", {});
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function onClick() {
+        return _onClick.apply(this, arguments);
+      }
+
+      return onClick;
+    }()
+  }, {
+    key: "onChange",
+    value: function onChange(event) {
+      var message = event.target.value;
+      this.setState({
+        message: message
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(fritter_MessageInput, {
+        value: this.state.message,
+        onChange: this.onChange.bind(this)
+      }), /*#__PURE__*/react_default.a.createElement(Link, {
+        to: "/"
+      }, "Cancel"), /*#__PURE__*/react_default.a.createElement("button", {
+        onClick: this.onClick.bind(this)
+      }, "Apply"));
+    }
+  }]);
+
+  return FreetEdit;
+}(react_default.a.Component);
+
+/* harmony default export */ var fritter_FreetEdit = (FreetEdit_FreetEdit);
+// CONCATENATED MODULE: ./src/client/fritter/FreetDelete.js
+function FreetDelete_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { FreetDelete_typeof = function _typeof(obj) { return typeof obj; }; } else { FreetDelete_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return FreetDelete_typeof(obj); }
+
+function FreetDelete_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function FreetDelete_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { FreetDelete_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { FreetDelete_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function FreetDelete_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function FreetDelete_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function FreetDelete_createClass(Constructor, protoProps, staticProps) { if (protoProps) FreetDelete_defineProperties(Constructor.prototype, protoProps); if (staticProps) FreetDelete_defineProperties(Constructor, staticProps); return Constructor; }
+
+function FreetDelete_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) FreetDelete_setPrototypeOf(subClass, superClass); }
+
+function FreetDelete_setPrototypeOf(o, p) { FreetDelete_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return FreetDelete_setPrototypeOf(o, p); }
+
+function FreetDelete_createSuper(Derived) { var hasNativeReflectConstruct = FreetDelete_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = FreetDelete_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FreetDelete_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FreetDelete_possibleConstructorReturn(this, result); }; }
+
+function FreetDelete_possibleConstructorReturn(self, call) { if (call && (FreetDelete_typeof(call) === "object" || typeof call === "function")) { return call; } return FreetDelete_assertThisInitialized(self); }
+
+function FreetDelete_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function FreetDelete_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function FreetDelete_getPrototypeOf(o) { FreetDelete_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return FreetDelete_getPrototypeOf(o); }
+
+
+
+
+
+var FreetDelete_FreetDelete = /*#__PURE__*/function (_React$Component) {
+  FreetDelete_inherits(FreetDelete, _React$Component);
+
+  var _super = FreetDelete_createSuper(FreetDelete);
+
+  function FreetDelete() {
+    FreetDelete_classCallCheck(this, FreetDelete);
+
+    return _super.apply(this, arguments);
+  }
+
+  FreetDelete_createClass(FreetDelete, [{
+    key: "componentWillMount",
+    value: function () {
+      var _componentWillMount = FreetDelete_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var freet_id;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                freet_id = this.props.match.params.freet_id;
+                console.log('FreetDelete', this.props, freet_id);
+                _context.next = 4;
+                return freetAPI.remove({
+                  freet_id: freet_id
+                });
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function componentWillMount() {
+        return _componentWillMount.apply(this, arguments);
+      }
+
+      return componentWillMount;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react_default.a.createElement(Redirect, {
+        to: "/"
+      });
+    }
+  }]);
+
+  return FreetDelete;
+}(react_default.a.Component);
+
+/* harmony default export */ var fritter_FreetDelete = (FreetDelete_FreetDelete);
 // CONCATENATED MODULE: ./src/client/Fritter.js
 function Fritter_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Fritter_typeof = function _typeof(obj) { return typeof obj; }; } else { Fritter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Fritter_typeof(obj); }
 
@@ -15923,6 +16333,10 @@ function Fritter_assertThisInitialized(self) { if (self === void 0) { throw new 
 function Fritter_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function Fritter_getPrototypeOf(o) { Fritter_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Fritter_getPrototypeOf(o); }
+
+
+
+
 
 
 
@@ -15998,6 +16412,12 @@ var Fritter_Fritter = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react_default.a.createElement(user_UserDoneEditName, {
         username: this.state.username
       })), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+        path: "/user/edit-password",
+        component: user_UserEditPassword
+      }), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+        path: "/user/done-edit-password",
+        component: user_UserDoneEditPassword
+      }), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
         path: "/session/login"
       }, /*#__PURE__*/react_default.a.createElement(session_Login, {
         onLogin: this.onUsernameChanged.bind(this)
@@ -16006,6 +16426,15 @@ var Fritter_Fritter = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react_default.a.createElement(session_Logout, {
         onLogout: this.onLogout.bind(this)
       })), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+        path: "/freet/create",
+        component: fritter_FreetCreate
+      }), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+        path: "/freet/edit/:freet_id",
+        component: fritter_FreetEdit
+      }), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+        path: "/freet/delete/:freet_id",
+        component: fritter_FreetDelete
+      }), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
         path: "/"
       }, /*#__PURE__*/react_default.a.createElement(client_Home, {
         username: this.state.username

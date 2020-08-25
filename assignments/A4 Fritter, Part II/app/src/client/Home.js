@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Navigation from './navigation/Navigation';
+
 import FreetSearch from './fritter/FreetSearch';
-import NewFreetDialog from './fritter/NewFreetDialog';
 import Freets from './fritter/Freets';
-import Logout from './session/Logout';
-import EditFreetDialog from './fritter/EditFreetDialog';
+
+import FreetCreateStart from './fritter/FreetCreateStart';
 
 
 class Home extends React.Component {
@@ -15,28 +15,52 @@ class Home extends React.Component {
 
     this.state = {
       freets: [],
+      sortedFreets: [],
+      isSorted: false,
     };
 
   }
 
   onFreets ( freets ) {
-    this.setState( {freets} );
+    this.setState(( state ) => {
+      state.freets = freets;
+      state.sortedFreets = Array.from( state.freets );
+      state.sortedFreets.sort(( freet1, freet2 ) => {
+        return freet1.votes < freet2.votes;
+      });
+      return state;
+    });
+  }
+
+  onSorted ( event ) {
+    console.log('Home.onSorted', event);
+
+    const isSorted = event.target.checked;
+
+    this.setState({ isSorted });
   }
 
 
   render () {
+    console.log('Home', this.state);
 
-        // <main>
-        //   <NewFreetDialog />
-        // </main>
+    const freetCreateStart = this.props.username ? <FreetCreateStart /> : null;
 
     return (
       <React.Fragment>
         <nav><Navigation username={this.props.username}/></nav>
         <header>
-          <FreetSearch onFreets={this.onFreets.bind(this)} />
-          <Freets freets={this.state.freets} username={this.props.username}/>
+          <FreetSearch  isSorted={this.state.isSorted}
+                        onFreets={this.onFreets.bind(this)} 
+                        onSorted={this.onSorted.bind(this)}/>
         </header>
+        <main>
+          <Freets freets={this.state.isSorted ? 
+                          this.state.sortedFreets   : 
+                          this.state.freets} 
+                  username={this.props.username}/>
+          {freetCreateStart}
+        </main>
       </React.Fragment>
     )  
   }
