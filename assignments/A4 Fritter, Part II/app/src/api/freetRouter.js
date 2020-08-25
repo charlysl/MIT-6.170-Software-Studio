@@ -195,7 +195,7 @@ router.post( '/:freet_id/vote', ( req, res, next ) => {
 //--------------------------------------------------
 
 const handleError = function ( err, res, next ) {
-  console.log(err);
+  // console.log(err);
 
   let res_status;
 
