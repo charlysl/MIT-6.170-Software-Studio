@@ -6,7 +6,7 @@ import Fritter from './Fritter';
 // import Playpen from './Playpen';
 
 ReactDOM.render(
-    <Fritter />, 
+    <Fritter className='Fritter' />, 
     // <NewFreetDialog />, 
     // <Playpen />,
     document.getElementById('root'));

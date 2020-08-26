@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Navigation from './navigation/Navigation';
-
 import FreetSearch from './fritter/FreetSearch';
 import Freets from './fritter/Freets';
 
@@ -48,7 +46,6 @@ class Home extends React.Component {
 
     return (
       <React.Fragment>
-        <nav><Navigation username={this.props.username}/></nav>
         <header>
           <FreetSearch  isSorted={this.state.isSorted}
                         onFreets={this.onFreets.bind(this)} 

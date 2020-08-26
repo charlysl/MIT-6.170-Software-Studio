@@ -1,0 +1,11 @@
+.LoggedOutMenu {
+  display: flex;
+  justify-content: space-around;
+}
+
+.LoggedOutMenu a {
+  background-color: var(--twitter-color);
+  color: white;
+  padding: 7px;
+  border-radius: 17px;
+}

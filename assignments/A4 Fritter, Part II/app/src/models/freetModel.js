@@ -12,6 +12,8 @@ const freetMap            = new Map(),  // the representation
       max_message_length  = 140,
       editable_properties = ['message', 'votes'];
 
+mockPopulate();
+
 // Abstracion Function:
 //   The key is the freet id, which is unique for each freet
 //   The value represents the freet, which has properties:
@@ -260,4 +262,48 @@ const doesQueryMatchFreet = function ( query, freet ) {
     });
 
   return matching_key_list.length === query_keys.length;
+}
+
+
+/**
+* Populate with mock freets to ease development; may break some tests.
+*/
+function mockPopulate() {
+  console.warn('Mock populating freetMap');
+
+  const freets = [
+    {   
+      freet_id:   'f011f172-3c43-40ea-b6c6-1a29311d1d8c', 
+      author_id:  '5212f9a9-3b9e-4750-a78d-0ad643a3c353' 
+    },
+    { 
+      freet_id:   'e6d728f0-54fa-414c-b5a4-0561d5aef4fc', 
+      author_id:  '5212f9a9-3b9e-4750-a78d-0ad643a3c353' 
+    },
+    { 
+      freet_id:   'd3331ba7-845b-4069-a341-0a42d2d23ee2', 
+      author_id:  '63948624-649e-4e99-bdbe-36e3ee0f1046' 
+    },
+    { 
+      freet_id:   'ca5c0495-a145-439f-83b1-30832dc4d67d', 
+      author_id:  '63948624-649e-4e99-bdbe-36e3ee0f1046' 
+    },
+    { 
+      freet_id:   '09abaa41-deff-4937-b334-287fd0be54b8', 
+      author_id:  '63948624-649e-4e99-bdbe-36e3ee0f1046' 
+    },
+  ];
+
+  freetMap.set( '02ed23c0-9cfe-4a5d-bf06-d3ec254cf7ef', Object.freeze({
+    freet_id:   '02ed23c0-9cfe-4a5d-bf06-d3ec254cf7ef', 
+    author_id:  '16e91fef-a6e1-4459-9b00-f80a65e458fa',
+    votes: 0,
+    message: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }));
+
+  freets.forEach(( freet, idx ) => {
+    freet.votes = idx;
+    freet.message = 'message ' + idx;
+    freetMap.set( freet.freet_id, Object.freeze(freet) );
+  });
 }

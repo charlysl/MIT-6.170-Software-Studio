@@ -8,6 +8,9 @@ import {
         } from 'react-router-dom';
 import DebugRouter from './utils/DebugRouter';
 
+import Navigation from './navigation/Navigation';
+import LoggedInMenu  from './navigation/LoggedInMenu';
+
 import Home from './Home';
 
 import UserCreate from './user/UserCreate';
@@ -32,7 +35,8 @@ class Fritter extends React.Component {
     super(props);
 
     this.state = {
-      username: ''
+      username: '',
+      isMenuDisplayed: false,
     };
   }
 
@@ -42,7 +46,15 @@ class Fritter extends React.Component {
   }
 
   onLogout() {
-    this.setState( {username: ''});
+    this.setState( {username: '', isMenuDisplayed: false });
+  }
+
+  onMenu() {
+    console.log('onMenu', this.state.isMenuDisplayed);
+    this.setState(( state )=>{
+      // toggle menu
+      return { isMenuDisplayed: !state.isMenuDisplayed }
+    });
   }
 
           // <Route path='/user/create-success' component={NewUserSuccess}/>
@@ -51,7 +63,12 @@ class Fritter extends React.Component {
   render () {
     return (
       <DebugRouter>
+
+        <Navigation username={this.state.username} onMenu={this.onMenu.bind(this)} isMenuDisplayed={this.state.isMenuDisplayed} />
+
         <Switch>
+
+          <Route  path='/menu'  component={LoggedInMenu} />
 
           <Route  path='/user/create'      component={UserCreate}/>
           <Route  path='/user/done-create' component={UserDoneCreate}/>

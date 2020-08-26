@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './LoggedOutMenu.css';
+
 function LoggedOutMenu () {
   return (
-    <ul>
-      <li>
+    <div class="LoggedOutMenu">
         <Link to='/session/login'>Log In</Link>
-      </li>
-      <li>
         <Link to='/user/create'>Sign Up</Link>
-      </li>
-    </ul>
+    </div>
   );
 }
 

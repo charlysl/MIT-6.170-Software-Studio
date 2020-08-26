@@ -1,0 +1,25 @@
+.Freet {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Freet p {
+  margin: 5px;
+  word-break: break-all;
+}
+
+.Freet-message {
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--twitter-color);
+  border-radius: 3px;
+  padding: 5px;
+  width: 200px;
+}
+
+.Freet-controls {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

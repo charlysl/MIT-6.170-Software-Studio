@@ -2,29 +2,35 @@ import React from 'react';
 
 import freetAPI from '../api/freetAPI.js';
 
-const onClick = async function ( event, onFreets ) {
-  const author = event.target.author;
-  const freets = await freetAPI.search( author );
-  onFreets( freets );
-}
-
 /**
 * @param {Function} props.onFreets - callback to be invoked to notify
 * search results; has the following signature:
 * - @param {Array{Freet}} freets - the freets
 */
-const FreetSearch = function ( props ) {
+class FreetSearch extends React.Component {
 
-  return (
-    <div>
-      <input type="text" name="author" placeholder="Enter author name" />
-      <button onClick={(e)=>onClick(e, props.onFreets)}>Search</button>
-      <label>
-        Sort by votes
-        <input type="checkbox" name="sort" onClick={props.onSorted} />
-      </label>
-    </div>
-  )
+  async search ( event ) {
+    const author = event.target.author;
+    const freets = await freetAPI.search( author );
+    this.props.onFreets( freets );
+  }
+
+  render () {
+    return (
+      <div>
+        <input type="text" name="author" placeholder="Enter author name" />
+        <button onClick={this.search.bind(this)}>Search</button>
+        <label>
+          Sort by votes
+          <input  type="checkbox" 
+                  name="sort" 
+                  checked={this.props.isSorted}
+                  onClick={this.props.onSorted} />
+        </label>
+      </div>
+    )
+  }
+
 }
 
 export default FreetSearch;

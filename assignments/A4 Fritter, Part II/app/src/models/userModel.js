@@ -16,6 +16,9 @@ const freetModel = require('./freetModel');
 // the user store is represented as a dictionary
 const userMap = {};
 
+//TODO automatically do only in dev
+mockPopulate();
+
 // Abstraction function:
 //  Each ownProperty in userMap represents a user.
 //  The key is the user id, and the value contains user
@@ -242,4 +245,20 @@ const deleteAllUserFreets =function ( user_id ) {
   });
 }
 
+/**
+* Populate with mock users to ease development; may break some tests.
+*/
+function mockPopulate() {
+  console.warn('Mock populating userMap');
+
+  const users = [
+    { user_id: '16e91fef-a6e1-4459-9b00-f80a65e458fa', name: 'ThisIsAReallyLongUserName', password: 'a' },
+    { user_id: '5212f9a9-3b9e-4750-a78d-0ad643a3c353', name: 'a', password: 'a' },
+    { user_id: '63948624-649e-4e99-bdbe-36e3ee0f1046', name: 'b', password: 'b' },
+  ];
+
+  users.forEach(( user ) => {
+    userMap[ user.user_id ] = Object.freeze(user);
+  });
+}
 

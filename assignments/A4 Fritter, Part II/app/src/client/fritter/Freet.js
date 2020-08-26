@@ -1,20 +1,19 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
+
+import './Freet.css';
+
 import freetAPI from '../api/freetAPI';
+
+import FreetVotes from './FreetVotes';
 
 
 class Freet extends React.Component {
-
-  async onUpvote () {
-    const freet = this.props.freet;
-    await freetAPI.upvote( freet.freet_id );
-  }
-
-  async onDownvote () {
-    const freet = this.props.freet;
-    await freetAPI.downvote( freet.freet_id );
-  }
 
   freetToQuery () {
     const freet = this.props.freet;
@@ -29,10 +28,6 @@ class Freet extends React.Component {
     return this.props.username === this.props.freet.author;
   }
 
-  isNonAuthorLoggedIn () {
-    return this.props.username 
-            && (this.props.username != this.props.freet.author);
-  }
 
   getEditAndDeleteControls () {
     const freet     = this.props.freet,
@@ -45,39 +40,37 @@ class Freet extends React.Component {
 
     return (
           <React.Fragment>
-            <Link to={editUrl}>Edit</Link>
-            <Link to={deleteUrl}>Delete</Link>
+            <Link to={editUrl}>
+              <FontAwesomeIcon icon={faEdit} />
+            </Link>
+            <Link to={deleteUrl}>
+              <FontAwesomeIcon icon={faTimes} />
+            </Link>
           </React.Fragment>
-    )
-  }
-
-  getVotingControls () {
-    return (
-        <React.Fragment>
-          <button onClick={this.onUpvote.bind(this)}>Upvote</button>
-          <button onClick={this.onDownvote.bind(this)}>Downvote</button>
-        </React.Fragment>
     )
   }
 
   render () {
   
-    const mutatorButtons =  this.isAuthorLoggedIn()       ?
+    const mutators =  this.isAuthorLoggedIn()       ?
                             this.getEditAndDeleteControls() :
                             null;
 
-    const votingButtons  = this.isNonAuthorLoggedIn() ?
-                           this.getVotingControls()   :
-                           null;
+
     const freet = this.props.freet;
 
     return (
-      <div>
-        <p>{freet.author}</p>
-        <p>{freet.message}</p>
-        <p>{freet.votes}</p>
-        {mutatorButtons}
-        {votingButtons}
+      <div className="Freet">
+        <div className="Freet-other">
+          <p>{freet.author}</p>
+        </div>
+        <div>
+          <p className="Freet-message">{freet.message}</p>
+          <div className="Freet-controls">
+            <FreetVotes freet={this.props.freet} username={this.props.username} />
+            {mutators}
+          </div>
+        </div>
       </div>
     )
   }

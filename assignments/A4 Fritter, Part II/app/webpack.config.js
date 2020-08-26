@@ -45,7 +45,7 @@ module.exports = {
         // use style-loader and css-loader to load files
         // make sure to npm install both style and css loader
         use: ['style-loader', 'css-loader']
-      }
+      },
     ]
   },
   devServer: {
