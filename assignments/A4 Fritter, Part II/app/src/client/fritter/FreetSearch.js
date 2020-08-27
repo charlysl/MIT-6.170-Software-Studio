@@ -1,6 +1,10 @@
 import React from 'react';
 
+import './FreetSearch.css';
+
 import freetAPI from '../api/freetAPI.js';
+
+import SearchBox from '../common/SearchBox';
 
 /**
 * @param {Function} props.onFreets - callback to be invoked to notify
@@ -9,23 +13,42 @@ import freetAPI from '../api/freetAPI.js';
 */
 class FreetSearch extends React.Component {
 
-  async search ( event ) {
-    const author = event.target.author;
-    const freets = await freetAPI.search( author );
+  constructor (props) {
+    super(props);
+
+    this.state = {};
+    this.state.term = '';
+  }
+
+  onTermChange ( term ) {
+    this.setState({ term });
+  }
+
+  async onSearch () {
+    const freets = await freetAPI.search( this.state.term );
     this.props.onFreets( freets );
+  }
+
+  onTermClear() {
+    this.setState({ term: '' });
   }
 
   render () {
     return (
-      <div>
-        <input type="text" name="author" placeholder="Enter author name" />
-        <button onClick={this.search.bind(this)}>Search</button>
+      <div className="FreetSearch">
+
+        <SearchBox  term          = {this.state.term}
+                    placeholder   = "Enter author name"
+                    onTermChange  = {this.onTermChange.bind(this)}
+                    onSearch      = {this.onSearch.bind(this)}
+                    onTermClear   = {this.onTermClear.bind(this)} />
+
         <label>
-          Sort by votes
           <input  type="checkbox" 
                   name="sort" 
                   checked={this.props.isSorted}
                   onClick={this.props.onSorted} />
+          Sort by votes
         </label>
       </div>
     )

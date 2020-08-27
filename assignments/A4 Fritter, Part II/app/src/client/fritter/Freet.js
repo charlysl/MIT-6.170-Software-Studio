@@ -19,7 +19,8 @@ class Freet extends React.Component {
     const freet = this.props.freet;
     let pairs = [];
     for ( let property in freet ) {
-      pairs.push( property + '=' + freet[property] );
+      const value = freet[property];
+      pairs.push( property + '=' + encodeURI(value) );
     }
     return pairs.join('&');
   }
@@ -61,15 +62,11 @@ class Freet extends React.Component {
 
     return (
       <div className="Freet">
-        <div className="Freet-other">
-          <p>{freet.author}</p>
-        </div>
-        <div>
-          <p className="Freet-message">{freet.message}</p>
-          <div className="Freet-controls">
-            <FreetVotes freet={this.props.freet} username={this.props.username} />
-            {mutators}
-          </div>
+        <span className="Freet-author">{freet.author}</span>
+        <p className="Freet-message">{freet.message}</p>
+        <div className="Freet-controls">
+          <FreetVotes freet={this.props.freet} username={this.props.username} />
+          {mutators}
         </div>
       </div>
     )

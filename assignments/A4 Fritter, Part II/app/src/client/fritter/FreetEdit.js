@@ -27,7 +27,7 @@ class FreetEdit extends React.Component {
   */
   getMessage () {
     const search = this.props.location.search;
-    return search.match(/message=([^&]+)/)[1];
+    return decodeURI(search.match(/message=([^&]+)/)[1]);
   }
 
   async onClick () {
@@ -46,13 +46,17 @@ class FreetEdit extends React.Component {
 
   render () {
     return (
-      <div>
-        <MessageInput value={this.state.message}
-                      onChange={this.onChange.bind(this)}/>
-        <Link to='/'>Cancel</Link>
-        <button onClick={this.onClick.bind(this)}>
-          Apply
-        </button>
+      <div className="Fritter-controls">
+        <div className="Fritter-inputs">
+          <MessageInput value={this.state.message}
+                        onChange={this.onChange.bind(this)}/>
+        </div>
+        <div className="Fritter-buttons">
+          <Link to='/'>Cancel</Link>
+          <button onClick={this.onClick.bind(this)}>
+            Apply
+          </button>
+        </div>
       </div>
     )
   }

@@ -6,26 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import LoggedOutMenu from './LoggedOutMenu';
 
 function Navigation (props) {
 
   const isLoggedIn = props.username !== ''; 
-
-  let navigation =  isLoggedIn        ?
-                    null              :
-                    <LoggedOutMenu /> ;
-
 
   let menuIcon = null;
 
   if (isLoggedIn) {
 
     let history = useHistory();
+
     if (props.isMenuDisplayed) {
       history.push("/menu");
     } else {
-      history.go(-1);
+      // display previous route only if current route is the menu
+      if (history.location.pathname === '/menu') {
+        history.go(-1);
+      }
     }
 
     let icon = props.isMenuDisplayed ? faTimes : faEllipsisV;
@@ -43,10 +41,10 @@ function Navigation (props) {
         <Link to="/">Fritter</Link>
         {menuIcon}
       </h2>
-
-      {navigation}
     </nav>
   );
 }
+
+
 
 export default Navigation;

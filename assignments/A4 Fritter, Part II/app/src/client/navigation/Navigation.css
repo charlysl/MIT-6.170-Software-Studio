@@ -1,16 +1,3 @@
-.Navigation {
-}
-
-a {
-  color: var(--twitter-color);
-  text-decoration: none;
-}
-
-li {
-  list-style: none;
-}
-
-
 .Navigation-home {
   background-color: black;
   font-family: 'Russo One', sans-serif;

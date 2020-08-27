@@ -1,20 +1,24 @@
 .Freet {
+  background: white;
+  border-style: solid;
+  border-width: 2px 2px 0 2px;
+  border-color: #eee;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
+  padding: 8px;
 }
 
 .Freet p {
-  margin: 5px;
   word-break: break-all;
 }
 
+.Freet-author {
+  font-weight: bold;
+}
+
 .Freet-message {
-  border-style: solid;
-  border-width: 1px;
-  border-color: var(--twitter-color);
-  border-radius: 3px;
-  padding: 5px;
-  width: 200px;
+  margin: 3px 0;
 }
 
 .Freet-controls {
@@ -22,4 +26,5 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-right: 20%;
 }

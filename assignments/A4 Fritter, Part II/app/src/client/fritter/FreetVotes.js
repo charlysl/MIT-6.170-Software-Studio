@@ -34,15 +34,17 @@ class FreetVotes extends React.Component {
 
     if (this.isNonAuthorLoggedIn()) {
       upvote   = <FontAwesomeIcon icon={faCaretUp} 
+                                  className="FreetVotes-icon"
                                   onClick={this.onUpvote.bind(this)} />
       downvote = <FontAwesomeIcon icon={faCaretDown} 
+                                  className="FreetVotes-icon"
                                   onClick={this.onDownvote.bind(this)} /> 
     }
 
     return (
       <div className="FreetVotes">
         {upvote}
-        <p>{this.props.freet.votes}</p>
+        <span className="FreetVotes-votes">{this.props.freet.votes}</span>
         {downvote}
       </div>
     )

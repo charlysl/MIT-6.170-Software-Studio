@@ -37,6 +37,11 @@ class Fritter extends React.Component {
     this.state = {
       username: '',
       isMenuDisplayed: false,
+      isSorted: false,
+      freets: {
+        unsorted: [],
+        sorted: [],
+      }
     };
   }
 
@@ -57,14 +62,45 @@ class Fritter extends React.Component {
     });
   }
 
+
+  onFreets ( freetList ) {
+    console.log('onFreets', freetList);
+    this.setState(( state ) => {
+      // set new sorted and unsorted freets state
+      const freets = {};
+      freets.unsorted = freetList;
+      freets.sorted = Array.from( freets.unsorted );
+      freets.sorted.sort(( freet1, freet2 ) => {
+        return freet1.votes < freet2.votes;
+      });
+      return { freets };
+    });
+  }
+
+  onSorted ( event ) {
+    console.log('Home.onSorted', event);
+
+    const isSorted = event.target.checked;
+
+    this.setState({ isSorted });
+  }
+
+  isLoggedIn () {
+    return this.state.username !== '';
+  }
+
+
           // <Route path='/user/create-success' component={NewUserSuccess}/>
           // <Route path="/editfreet" exact={false} component={EditFreetDialog} />
 
   render () {
+
     return (
       <DebugRouter>
 
-        <Navigation username={this.state.username} onMenu={this.onMenu.bind(this)} isMenuDisplayed={this.state.isMenuDisplayed} />
+        <Navigation username={this.state.username} 
+                    onMenu={this.onMenu.bind(this)} 
+                    isMenuDisplayed={this.state.isMenuDisplayed} />        
 
         <Switch>
 
@@ -99,7 +135,13 @@ class Fritter extends React.Component {
           <Route path='/freet/delete/:freet_id' component={FreetDelete} />
 
           <Route path='/'>
-            <Home username={this.state.username} />
+            <Home username={this.state.username} 
+                  freets={this.state.isSorted ? 
+                          this.state.freets.sorted   : 
+                          this.state.freets.unsorted}  
+                  isSorted={this.state.isSorted}
+                  onFreets={this.onFreets.bind(this)} 
+                  onSorted={this.onSorted.bind(this)}/>
           </Route>
         </Switch>
       </DebugRouter>

@@ -1,0 +1,19 @@
+.FreetCreateStart {
+
+  --radius: 40px;
+
+  background-color:   black;
+  border-radius:      var(--radius);
+  bottom:             50px;
+  box-sizing:         border-box;
+  color:              var(--twitter-color);
+  display:            inline-block;
+  font-family:        "Russo One";
+  font-size:          26px;
+  height:             var(--radius);
+  padding-top:        8px;
+  position:           fixed;
+  right:              30px;
+  text-align:         center;
+  width:              var(--radius);
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Freets.css';
+
 import Freet from './Freet.js';
 
 
@@ -7,7 +9,7 @@ const Freets = function (props) {
   console.log('Freets', props);
 
   return  props.freets ? 
-          getFreetList( props ) : 
+          <div className="Freets">{getFreetList( props )}</div> : 
           null
   ;
 }

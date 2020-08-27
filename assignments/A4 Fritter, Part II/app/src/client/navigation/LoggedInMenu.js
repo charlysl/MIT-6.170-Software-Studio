@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './LoggedInMenu.css';
+
 function LoggedInMenu () {
   return (
-    <ul>
+    <ul className="LoggedInMenu">
       <li>
         <Link to='/user/edit-name'>Edit User Name</Link>
       </li>

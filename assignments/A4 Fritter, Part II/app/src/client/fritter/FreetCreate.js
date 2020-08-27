@@ -29,12 +29,16 @@ class FreetCreate extends React.Component {
 
   render () {
     return (
-      <div>
-        <MessageInput onChange={this.onChange.bind(this)}/>
-        <Link to='/'>Cancel</Link>
-        <button onClick={this.onClick.bind(this)}>
-          Apply
-        </button>
+      <div className="Fritter-controls">
+        <div className="Fritter-inputs">
+          <MessageInput onChange={this.onChange.bind(this)}/>
+        </div>
+        <div className="Fritter-buttons">
+          <Link to='/'>Cancel</Link>
+          <button onClick={this.onClick.bind(this)}>
+            Apply
+          </button>
+        </div>
       </div>
     )
   }

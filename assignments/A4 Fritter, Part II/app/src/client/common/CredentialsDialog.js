@@ -62,13 +62,12 @@ class CredentialsDialog extends React.Component {
     return (
       <ConfirmationDialog apply     = {this.props.apply} 
                           onApply   = {this.onApply.bind(this)}>
+          <NameInput        name      = {this.state.name} 
+                            error     = {this.state.error} 
+                            onChange  = {this.onChange.bind(this)}/>
 
-        <NameInput        name      = {this.state.name} 
-                          error     = {this.state.error} 
-                          onChange  = {this.onChange.bind(this)}/>
-
-        <PasswordInput    password  = {this.state.password} 
-                          onChange  = {this.onChange.bind(this)} />
+          <PasswordInput    password  = {this.state.password} 
+                            onChange  = {this.onChange.bind(this)} />
 
       </ConfirmationDialog>
     )

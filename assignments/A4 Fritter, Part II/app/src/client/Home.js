@@ -3,58 +3,29 @@ import React from 'react';
 import FreetSearch from './fritter/FreetSearch';
 import Freets from './fritter/Freets';
 
+import LoggedOutMenu from './navigation/LoggedOutMenu';
 import FreetCreateStart from './fritter/FreetCreateStart';
 
 
 class Home extends React.Component {
-
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      freets: [],
-      sortedFreets: [],
-      isSorted: false,
-    };
-
-  }
-
-  onFreets ( freets ) {
-    this.setState(( state ) => {
-      state.freets = freets;
-      state.sortedFreets = Array.from( state.freets );
-      state.sortedFreets.sort(( freet1, freet2 ) => {
-        return freet1.votes < freet2.votes;
-      });
-      return state;
-    });
-  }
-
-  onSorted ( event ) {
-    console.log('Home.onSorted', event);
-
-    const isSorted = event.target.checked;
-
-    this.setState({ isSorted });
-  }
 
 
   render () {
     console.log('Home', this.state);
 
     const freetCreateStart = this.props.username ? <FreetCreateStart /> : null;
+    const loggedOutMenu = this.props.username ? null : <LoggedOutMenu />;
 
     return (
       <React.Fragment>
         <header>
-          <FreetSearch  isSorted={this.state.isSorted}
-                        onFreets={this.onFreets.bind(this)} 
-                        onSorted={this.onSorted.bind(this)}/>
+          <FreetSearch  isSorted={this.props.isSorted}
+                        onFreets={this.props.onFreets}
+                        onSorted={this.props.onSorted} />
+          {loggedOutMenu}
         </header>
         <main>
-          <Freets freets={this.state.isSorted ? 
-                          this.state.sortedFreets   : 
-                          this.state.freets} 
+          <Freets freets={this.props.freets} 
                   username={this.props.username}/>
           {freetCreateStart}
         </main>

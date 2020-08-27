@@ -12,16 +12,6 @@ import { useHistory, Link } from 'react-router-dom';
 */
 function ConfirmationDialog (props) {
 
-  // TODO a wit wasteful to genearte the childlist for every render
-  // is there just one child, or more; put in an array.
-  const children =  props.children instanceof Array ?
-                    props.children :
-                    [ props.children ];
-
-  const childList = children.map(( child )=>{
-    return <li>{child}</li>;
-  });
-
   let history = useHistory();
 
   function onCancel () {
@@ -43,17 +33,17 @@ function ConfirmationDialog (props) {
   }
 
   return (
-    <ul>
-      {childList}
-      <li>
+    <div className="Fritter-controls">
+      <div className="Fritter-inputs">
+        {props.children}
+      </div>
+      <div className="Fritter-buttons">
         <button onClick={onCancel}>
           Cancel
         </button>
-      </li>
-      <li>
         {apply}
-      </li>
-    </ul>
+      </div>
+    </div>
   )
 };
 

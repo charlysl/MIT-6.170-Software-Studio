@@ -1,0 +1,15 @@
+.LoggedInMenu {
+  background: black;
+  font-size: 20px;
+  height: 100%;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.LoggedInMenu > li {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: var(--twitter-color);
+  font-size: 16px;
+  padding: 15px 0;
+}
