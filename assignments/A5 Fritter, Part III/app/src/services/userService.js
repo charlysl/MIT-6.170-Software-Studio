@@ -53,7 +53,7 @@ module.exports.remove = function ( user_id ) {
 */
 module.exports.authenticate = function( name, password ) {
   return new Promise((resolve,reject)=>{
-    userModel.get( name )
+    userSqlModel.get( name )
     .then( ( user ) => {
       if ( user.password === password ) {
         return resolve( user.user_id );

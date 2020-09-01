@@ -39,6 +39,32 @@ module.exports.insert = function( name, password ) {
   });
 }
 
+
+/**
+* Get a user by name from storage
+*
+* @param {String} name - user name
+* @return {User} - a promise that resolves to the 
+* user object, with id, name and password
+* @throws {NameNotFound} - if there is no user with given name
+*/
+module.exports.get = function( name ) {
+  return new Promise((resolve,reject)=>{
+    client.query("SELECT * FROM users WHERE name = $1", [ name ])
+    .then(( res )=>{
+      if ( res.rows.length === 0 ) {
+        reject( new Error('NameNotFound: ' + name) );
+      } else {
+        resolve( res.rows[0] );
+      }
+    })
+    .catch((err)=>{
+      reject( handleError(err) );
+    })
+  });
+}
+
+
 /**
 * Centralizes error handling.
 */
