@@ -39,7 +39,7 @@ module.exports.edit = function ( user ) {
 * @param {string} user_id - the user identifier
 */
 module.exports.remove = function ( user_id ) {
-  return userModel.remove( user_id );
+  return userSqlModel.remove( user_id );
 }
 
 /*
