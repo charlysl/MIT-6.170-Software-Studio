@@ -1,0 +1,21 @@
+.SearchBox {
+  background-color: var(--input-background-color);
+  border-color: #ddd;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;  
+  display: inline-block;
+  padding: 0 6px;
+}
+
+.SearchBox-icon {
+  color: #aaa;
+}
+
+  .SearchBox-icon:hover {
+    color: var(--twitter-color);
+  }
+
+.SearchBox-input {
+  margin-bottom: 0;
+}

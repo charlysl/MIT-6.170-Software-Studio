@@ -1,0 +1,9 @@
+.FreetVotes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.FreetVotes-icon, .FreetVotes-votes {
+  margin-right: 5px;
+}

@@ -1,0 +1,61 @@
+{
+  "name": "fritter",
+  "version": "1.0.0",
+  "description": "6.170 3rd assignment",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/start.js",
+    "test": "jest src/test",
+    "hello": "echo Hello World!",
+    "build-client": "node_modules/.bin/webpack",
+    "build-client-watch": "node_modules/.bin/webpack -w",
+    "start-dev": "npm run build-client-watch & nodemon src/start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlysl/MIT-6.170-Software-Studio.git"
+  },
+  "keywords": [
+    "6.170",
+    "OCW",
+    "Fritter",
+    "node.js",
+    "React"
+  ],
+  "author": "carlossl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charlysl/MIT-6.170-Software-Studio/issues"
+  },
+  "homepage": "https://github.com/charlysl/MIT-6.170-Software-Studio#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
+    "axios": "^0.20.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
+    "pg": "^8.3.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "uuid": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.2.2",
+    "nodemon": "^2.0.4",
+    "style-loader": "^1.2.1",
+    "supertest": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
