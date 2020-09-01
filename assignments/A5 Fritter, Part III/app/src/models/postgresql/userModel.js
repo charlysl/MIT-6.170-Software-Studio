@@ -1,16 +1,4 @@
-const { Client } = require('pg');
-
-const client = new Client({
-  user:        'postgres',
-  host:       'localhost',
-  // database:   'postgres',
-  database:   'fritter_test',
-  password:   'password',
-  port:       5432
-});
-
-client.connect();
-
+const client = require('./postgresClient');
 
 /**
 * Insert a user in storage.
@@ -63,6 +51,34 @@ module.exports.get = function( name ) {
     })
   });
 }
+
+
+/**
+* Remove a user
+*
+* TODO should also remove its freets
+*
+* @return {Promise} - a promise that doesn't resolve 
+* to any value.
+*/
+module.exports.remove = function( user_id ) {
+  return new Promise((resolve,reject)=>{
+    client.query("DELETE FROM freets WHERE author_id = $1", 
+            [ user_id ])
+    .then(()=>{
+      return  client.query("DELETE FROM users WHERE user_id = $1", 
+              [ user_id ])
+    })
+    .then(()=>{
+      resolve()
+    })
+    .catch((err)=>{
+      reject( handleError(err) )
+    })
+  })
+}
+
+
 
 
 /**

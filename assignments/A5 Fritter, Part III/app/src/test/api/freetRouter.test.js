@@ -32,7 +32,7 @@ describe('/POST/api/freet', ()=>{
   beforeEach(()=>{
     return createUserAndLogin( agent );
   });
-/*
+
   it('throws 401 when creating a tweet without first logging in', (done)=>{
     supertest(app) //new client session, which is not logged in
     .post('/api/freet')
@@ -43,7 +43,7 @@ describe('/POST/api/freet', ()=>{
       done();
     })
   });
-*/
+
   it('returns 201 when creating a tweet of length 0', (done)=>{
     return testPostFreet( agent, '', done );
   });

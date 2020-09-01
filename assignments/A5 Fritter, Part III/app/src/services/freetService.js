@@ -5,6 +5,7 @@
 */
 
 const freetModel = require('../models/freetModel');
+const freetSqlModel = require('../models/postgresql/freetModel');
 const userModel = require('../models/userModel');
 
 /**
@@ -25,7 +26,7 @@ module.exports.create = function ( author_id, message ) {
   };
 
   return new Promise((resolve,reject)=>{
-    freetModel.insert( freet )
+    freetSqlModel.insert( freet )
     .then(( freet_id )=>{
       resolve( freet_id )
     })

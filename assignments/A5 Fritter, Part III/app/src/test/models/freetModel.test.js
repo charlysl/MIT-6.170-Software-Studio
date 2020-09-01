@@ -4,9 +4,11 @@
 * Tests for models/freetModel.js
 */
 
-const freetModel = require('../../models/freetModel');
+// const freetModel = require('../../models/freetModel');
+const freetModel = require('../../models/postgresql/freetModel');
 
-const userModel = require('../../models/userModel');
+// const userModel = require('../../models/userModel');
+const userModel = require('../../models/postgresql/userModel');
 
 /**
 * Testing Strategy for freetModel.insert
@@ -57,7 +59,8 @@ describe('models/freetModel.insert', ()=>{
     expect(
       freetModel.insert({
         author_id,
-        message
+        message,
+        votes: 0
       })
     ).rejects.toThrow( /MessageTooLong/ );
   });
@@ -65,9 +68,6 @@ describe('models/freetModel.insert', ()=>{
 
   afterEach(()=>{
     return userModel.remove( author_id )
-    .then(()=>{
-      deleteAllFreets();
-    });
   });
 
 });
@@ -118,9 +118,6 @@ describe('models/freetModel.delete', ()=> {
 
   afterEach(()=>{
     return userModel.remove( ids.user_id )
-    .then(()=>{
-      deleteAllFreets();
-    });
   });
 });
 
@@ -228,9 +225,6 @@ describe('models/freetModel.edit', ()=> {
 
   afterEach(()=>{
     return userModel.remove( ids.user_id )
-    .then(()=>{
-      deleteAllFreets();
-    });
   });
 });
 
@@ -281,9 +275,6 @@ describe('models/freetModel.get', ()=>{
 
   afterEach(()=>{
     return userModel.remove( ids.user_id )
-    .then(()=>{
-      deleteAllFreets();
-    });
   });
 
 });
