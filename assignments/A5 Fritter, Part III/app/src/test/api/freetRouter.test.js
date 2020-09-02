@@ -103,7 +103,7 @@ describe('/POST/api/freet', ()=>{
 * Observer: DELETE/api/freet -> 404
 */
 
-describe('tttDELETE/api/freet/:freet_id', ()=>{
+describe('DELETE/api/freet/:freet_id', ()=>{
 
   const agent = supertest.agent(app); // a logged in session
 

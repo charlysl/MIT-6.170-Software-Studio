@@ -31,7 +31,7 @@ module.exports.create = function( name, password) {
 * @throws {DuplicateName} - there is another user with name
 */
 module.exports.edit = function ( user ) {
-  return userModel.edit( user );
+  return userSqlModel.edit( user );
 }
 
 /*

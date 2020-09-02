@@ -79,6 +79,43 @@ module.exports.remove = function( user_id ) {
 }
 
 
+/**
+* Edit a user
+*
+* Modifies user with identifier user_id, with the given
+* name and password. If the name (or password) are not
+* given, then the old name (or password) will be preserved.
+*
+* @param {Object} -  user object, must have user_id property,
+* name and password are optional.
+* @throws {DuplicateName} - if the name is changed to an
+* already existing name.  
+*/
+module.exports.edit = function ( user ) {
+  const user_copy = Object.assign( {}, user );
+  const user_id = user_copy.user_id;
+  delete user_copy.user_id;
+
+  const { assignments, values } = objectToUpdateAssignments( user_copy );
+
+  values.push( user_id );
+
+  const query = "UPDATE users SET " + assignments 
+                      + " WHERE user_id = $" 
+                      +  (values.length);
+
+  console.log('USER EDIT', user, query, values);
+
+  return new Promise((resolve,reject)=>{
+    return client.query( query, values )
+    .then(()=>{
+      resolve()
+    })
+    .catch(( err )=>{
+      reject( handleError(err) );
+    })
+  })
+}
 
 
 /**
@@ -102,3 +139,43 @@ function handleError( err ) {
   return new Error('Caught unexpected error: ' + err.message);
 }
 
+/**
+* Transforms an object into a string of assignments for UPDATE
+*
+* Example:
+*
+*   {prop1: val1, prop2: val2} 
+*
+* is transformed into 
+*
+*   { "prop1=$1, prop2=$2", [val1, val2] }
+*
+* @param {Object} - and object
+* @return {string, Array} the string of assignments and array of values
+*/
+function objectToUpdateAssignments( obj ) {
+
+  let i           = 1,
+      assignments = [],
+      values      = []
+  ;
+
+  Object.keys( obj )
+  .filter(( prop )=>{
+    return obj.hasOwnProperty( prop )
+  })
+  .forEach(( prop )=>{
+    assignments.push( prop + "=$" + (i++) );
+    values.push( obj[ prop ] );
+  })
+  ;
+
+  const result = {
+            assignments:  assignments.join(", "), 
+            values
+  }
+
+  console.log('objectToUpdateAssignments', obj, result);
+
+  return result;
+}

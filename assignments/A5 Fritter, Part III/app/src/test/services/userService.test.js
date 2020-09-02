@@ -84,7 +84,7 @@ describe('services/userService.edit', () => {
       password
     };
 
-    expect(
+    return expect(
       userService.edit( user )
       .then(()=>{
         return userService
@@ -100,7 +100,7 @@ describe('services/userService.edit', () => {
       password: 'new_password'
     };
 
-    expect(
+    return expect(
       userService.edit( user )
       .then(()=>{
         return userService
@@ -112,7 +112,7 @@ describe('services/userService.edit', () => {
   test('throws exception when changing to duplicate name, '
         + 'with a password', 
     () => {
-      expect(
+      return expect(
         userService.create( 'new_name', 'new_password' )
         .then(( the_user_id )=>{
           new_user_id = the_user_id;
@@ -131,7 +131,7 @@ describe('services/userService.edit', () => {
       name
     };
 
-    expect(
+    return expect(
       userService.edit( user )
       .then(()=>{
         return userService
@@ -146,7 +146,7 @@ describe('services/userService.edit', () => {
       password
     };
 
-    expect(
+    return expect(
       userService.edit( user )
       .then(()=>{
         return userService
@@ -161,7 +161,7 @@ describe('services/userService.edit', () => {
       name: 'new_name',
     };
 
-    expect(
+    return expect(
       userService.edit( user )
       .then(()=>{
         return userService
@@ -177,7 +177,7 @@ describe('services/userService.edit', () => {
       password: 'new_password'
     };
 
-    expect(
+    return expect(
       userService.edit( user )
       .then(()=>{
         return userService
@@ -188,7 +188,7 @@ describe('services/userService.edit', () => {
 
   test('throws exception when changing to duplicate name', 
     ()=> {
-      expect(
+      return expect(
         userService.create( 'new_name', 'new_password' )
         .then(( the_user_id )=>{
           new_user_id = the_user_id;
