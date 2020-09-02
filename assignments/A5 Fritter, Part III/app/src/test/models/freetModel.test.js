@@ -323,7 +323,6 @@ describe('models/freetModel.search', ()=>{
       promises.push(
         userModel.insert( name, 'password'+i )
         .then(( user_id )=>{
-
           user_map.set( name, user_id );
 
           one_freet_list = [
@@ -353,7 +352,7 @@ describe('models/freetModel.search', ()=>{
         })
       );
     });
-    Promise.all( promises )
+    return Promise.all( promises )
     .then((the_user_ids)=>{
       user_ids=the_user_ids
     });
@@ -478,9 +477,6 @@ describe('models/freetModel.search', ()=>{
       )
     });
     return Promise.all( promises )
-    .then(()=>{
-        deleteAllFreets();
-    });
   });
 
 });
@@ -544,8 +540,6 @@ const testSearchFreet =
       );
     });
 
-    deleteAllFreets();
-
   });
 }
 
@@ -564,7 +558,6 @@ const deleteAllFreets = function () {
       if (freets_left.length > 0) {
         throw new Error('There are still ' + freets_left.length 
                         + ' undeleted freets'); //assertion
-        console.log(freets_left);
       }
     });
   });

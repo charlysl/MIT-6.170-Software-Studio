@@ -7,6 +7,7 @@
 const freetModel = require('../models/freetModel');
 const freetSqlModel = require('../models/postgresql/freetModel');
 const userModel = require('../models/userModel');
+const userSqlModel = require('../models/postgresql/userModel');
 
 /**
 * Create a new freet.
@@ -83,17 +84,26 @@ module.exports.search = function ( query={} ) {
     //replace author with author_id
     if ( query.hasOwnProperty( 'author' )) {
       delete model_query.author;
-      userModel.get( query.author )
+      userSqlModel.get( query.author )
       .then(( user )=>{
         model_query.author_id = user.user_id;
         resolve( model_query );
+      })
+      .catch(( err )=>{
+        if (err.message.match(/NameNotFound/)) {
+          resolve( null )
+        }
       })
     } else {
       resolve( model_query );
     }
   })
   .then(( model_query )=>{
-    return freetModel.search( model_query );
+    if ( model_query ) {
+      return freetSqlModel.search( model_query );
+    } else {
+      return [];
+    }
   });
 
 }

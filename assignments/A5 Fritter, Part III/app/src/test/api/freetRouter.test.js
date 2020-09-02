@@ -275,7 +275,7 @@ describe('PUT/api/freet/:freet_id', ()=>{
 * [{name0,1,2}, {freet0,1,2}, '?author=name2' ] -> 200 {freet0,1,2}
 */
 
-describe('GET/api/freet', ()=>{
+describe('tttGET/api/freet', ()=>{
 
   const agent = supertest.agent(app);
 
@@ -340,6 +340,15 @@ describe('GET/api/freet', ()=>{
       done();
     });
 
+  });
+
+  it('returns 204 when searching for freets by non-existing user', (done)=>{
+    query = { author: 'does_not_exist' };
+    agent.get('/api/freet').query(query).expect(204)
+    .end((err,res)=>{
+      if (err) return done(err);
+      done();
+    })
   });
 
   afterEach(()=>{

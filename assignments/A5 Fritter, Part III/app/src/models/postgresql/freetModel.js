@@ -32,6 +32,48 @@ module.exports.insert = function ( freet ) {
 }
 
 
+/**
+* Search tweets that have properties with certain values.
+*
+* @param {object} query - properties with their values
+* @return {Array} - a Promise that resolves a freet array
+*/
+module.exports.search = function ( query={} ) {
+  return new Promise((resolve,reject)=>{
+    console.log('QUERY', query);
+
+    let filter = '';
+    let values = [];
+    for ( prop in query ) {
+      if (query.hasOwnProperty( prop )) {
+        filter += " AND " + (prop === 'author' ? 'name' : prop) + " = $1";
+        values.push( query[ prop ] )
+      }
+    }
+
+    client.query("SELECT freet_id, user_id AS author_id, name AS author,"
+                  + " message, votes "
+                  + " FROM users, freets"
+                  + " WHERE users.user_id = freets.author_id"
+                  + filter,
+                  values)
+    .then(( res )=>{
+      // console.log('RES', res);
+      resolve( res.rows )
+    })
+    .catch(( err )=>{
+      reject( handleError( err ) )
+    })
+  })
+}
+
+
+
+
+//------------------------------------------------------------- 
+//                     START PRIVATE FUNCTIONS
+//------------------------------------------------------------- 
+
 function handleError( err ) {
   if (err.code) {
     switch (err.code) {
