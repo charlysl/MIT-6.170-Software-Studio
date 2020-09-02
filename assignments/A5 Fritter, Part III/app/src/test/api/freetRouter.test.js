@@ -1,5 +1,7 @@
 const supertest = require('supertest');
 const app = require('../../app');
+const uuid = require('uuid');
+
 const freetRouter = require('../../api/freetRouter');
 
 /**
@@ -101,7 +103,7 @@ describe('/POST/api/freet', ()=>{
 * Observer: DELETE/api/freet -> 404
 */
 
-describe('DELETE/api/freet/:freet_id', ()=>{
+describe('tttDELETE/api/freet/:freet_id', ()=>{
 
   const agent = supertest.agent(app); // a logged in session
 
@@ -131,7 +133,7 @@ describe('DELETE/api/freet/:freet_id', ()=>{
   })
 
   it('returns 404 when the author deletes a non-existing freet', (done)=>{
-    freet_id = 'some random freet id';
+    freet_id = uuid.v4();
     testModifyNonExistingFreet( agent, 'delete', freet_id, fields, done );
   });
 
@@ -275,7 +277,7 @@ describe('PUT/api/freet/:freet_id', ()=>{
 * [{name0,1,2}, {freet0,1,2}, '?author=name2' ] -> 200 {freet0,1,2}
 */
 
-describe('tttGET/api/freet', ()=>{
+describe('GET/api/freet', ()=>{
 
   const agent = supertest.agent(app);
 

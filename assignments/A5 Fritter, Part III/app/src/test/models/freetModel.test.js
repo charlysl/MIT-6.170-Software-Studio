@@ -4,6 +4,8 @@
 * Tests for models/freetModel.js
 */
 
+const uuid = require('uuid');
+
 // const freetModel = require('../../models/freetModel');
 const freetModel = require('../../models/postgresql/freetModel');
 
@@ -101,8 +103,10 @@ describe('models/freetModel.delete', ()=> {
 
   test('throws FreetNotFound when deleting freet with non-existing freet_id', 
     ()=>{
+      const some_random_freet_id = uuid.v4();
+      
       expect(
-        freetModel.delete( 'some random freet id' )
+        freetModel.delete( some_random_freet_id )
       ).rejects.toThrow( /FreetNotFound/ );
   });
 
@@ -259,8 +263,10 @@ describe('models/freetModel.get', ()=>{
 
   test('throws FreetNotFound when getting freet with non-existing freet_id', 
     ()=>{
+      const some_random_freet_id = uuid.v4();
+
       expect(
-        freetModel.get( 'some random freet id' )
+        freetModel.get( some_random_freet_id )
       ).rejects.toThrow( /FreetNotFound/ );
   });
 

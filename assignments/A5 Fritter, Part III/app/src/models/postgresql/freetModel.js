@@ -23,6 +23,7 @@ module.exports.insert = function ( freet ) {
     client.query( "INSERT INTO freets (freet_id, author_id, message, votes) VALUES ($1,$2,$3,$4)", 
                   values)
     .then(()=>{
+      console.log('FREET CREATE', freet_id);
       resolve( freet_id )
     })
     .catch((err)=>{
@@ -67,6 +68,48 @@ module.exports.search = function ( query={} ) {
   })
 }
 
+
+/**
+* Delete a freet.
+*
+* @param {string} freet_id - the freet identifier
+* @throws FreetNotFound - if there is no freet with given identifier
+*/
+module.exports.delete = function( freet_id ) {
+  return new Promise((resolve,reject)=>{
+    client.query("DELETE FROM freets WHERE freet_id = $1", [ freet_id ])
+    .then(( res )=>{
+      console.log('FREET DELETE', freet_id, res.rowCount);
+      if (res.rowCount === 0) {
+        reject( new Error("FreetNotFound: " + freet_id) )
+      } else {
+        resolve();
+      }
+    })
+  })
+}
+
+
+/**
+* Get a freet.
+*
+* @param {string} freet_id - the freet identifier
+* @return {Object} - the freet object,
+* @throws FreetNotFound - if there is no freet with given identifier
+*/
+module.exports.get = function( freet_id ) {
+  return new Promise((resolve,reject)=>{
+    client.query("SELECT * FROM freets WHERE freet_id = $1", [ freet_id ])
+    .then(( res )=>{
+      console.log('FREET GET', freet_id, res.rowCount);
+      if (res.rowCount === 0) {
+        reject( new Error('FreetNotFound') );
+      } else {
+        resolve( res.rows[0] );
+      }
+    })
+  })
+}
 
 
 

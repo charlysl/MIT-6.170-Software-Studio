@@ -1,3 +1,5 @@
+const uuid = require('uuid');
+
 const freetService = require('../../services/freetService');
 const userService = require('../../services/userService');
 
@@ -38,7 +40,7 @@ describe('services/freetService.create', ()=>{
   });
 
   it('returns a freet id when creating a freet with a message of length 0', ()=>{
-    expect(
+    return expect(
       freetService.create( user_id, '' )
     ).resolves.toMatch( /.+/ );
   });
@@ -97,22 +99,26 @@ describe('services/freetService.delete', ()=>{
   });
 
   test('deletes freet whose author is the user', ()=>{
-    expect(
+    return expect(
       freetService.delete( ids.user_id, ids.freet_id )
-    ).resolves.toBeUndefined;
+    ).resolves.toBeUndefined();
   })
 
   test('throws NotAuthorized when deleting freet whose author is not  the user', 
     ()=>{
-    expect(
-      freetService.delete( 'some random user id', ids.freet_id )
-    ).rejects.toThrow( 'NotAuthorized' );
+      const some_random_user_id = uuid.v4();
+    
+      return expect(
+        freetService.delete( some_random_user_id, ids.freet_id )
+      ).rejects.toThrow( 'NotAuthorized' );
   });
 
   test('throws FreetNotFound when deleting non existing freet', ()=>{
-    expect(
-      freetService.delete( ids.user_id, 'some random freet_id' )
-    ).rejects.toThrow( 'FreetNotFound' );
+      const some_random_freet_id = uuid.v4();
+    
+      return expect(
+        freetService.delete( ids.user_id, some_random_freet_id )
+      ).rejects.toThrow( 'FreetNotFound' );
   })
 
   afterEach(()=>{
@@ -167,8 +173,7 @@ describe('services/freetService.edit', ()=>{
   });
 
   test('edits freet whose author is the user', ()=>{
-
-    expect(
+    return expect(
       freetService.edit( ids.user_id, freet )
     ).resolves.toBeUndefined;
   });
@@ -176,7 +181,7 @@ describe('services/freetService.edit', ()=>{
   test('throws NotAuthorized when editing a freet' 
         + ' whose author is not the user', 
     ()=>{
-    expect(
+    return expect(
       freetService.edit( 'some random user id', freet )
     ).rejects.toThrow( 'NotAuthorized' );
   });
@@ -185,7 +190,7 @@ describe('services/freetService.edit', ()=>{
     const bad_freet = Object.assign( freet );
     bad_freet.freet_id = 'some random freet_id';
 
-    expect(
+    return expect(
       freetService.delete( freet )
     ).rejects.toThrow( 'FreetNotFound' );
   })
@@ -264,7 +269,7 @@ describe('services/freetService.search', ()=>{
 
   test('returns empty array when getting all freets when there are none', 
     ()=>{
-      expect(
+      return expect(
         freetService.search()
         .then(( freets )=>{
           return freets.length;

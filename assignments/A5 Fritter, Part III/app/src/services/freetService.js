@@ -47,9 +47,10 @@ module.exports.create = function ( author_id, message ) {
 * @throws {FreetNotFound} - if there is no freet with the given id
 */
 module.exports.delete = function ( user_id, freet_id ) {
-  return modifyFreet( user_id, freet_id, ()=>{
-    return freetModel.delete( freet_id )
-  });
+  return modifyFreet( user_id, 
+                      freet_id, 
+                      () => freetSqlModel.delete( freet_id )
+  );
 }
 
 /**
@@ -149,7 +150,7 @@ module.exports.vote = function ( user_id, freet_id, is_upvote ) {
 
 const modifyFreet = function ( user_id, freet_id, fn ) {
   return new Promise((resolve,reject)=>{
-    freetModel.get( freet_id )
+    freetSqlModel.get( freet_id )
     .then(( old_freet )=>{
       if ( user_id === old_freet.author_id ) {
         fn()
