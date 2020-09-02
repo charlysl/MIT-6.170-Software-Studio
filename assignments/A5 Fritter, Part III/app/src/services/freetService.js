@@ -65,7 +65,7 @@ module.exports.delete = function ( user_id, freet_id ) {
 */
 module.exports.edit = function ( user_id, freet ) {
   return modifyFreet( user_id, freet.freet_id, ()=>{
-    return freetModel.edit( freet )
+    return freetSqlModel.edit( freet )
   });
 }
 
@@ -119,7 +119,7 @@ module.exports.search = function ( query={} ) {
 */
 module.exports.vote = function ( user_id, freet_id, is_upvote ) {
   return new Promise((resolve,reject)=>{
-    freetModel.get( freet_id )
+    freetSqlModel.get( freet_id )
     .then(( freet )=>{
       if ( user_id === freet.author_id ) {
         reject( new Error('NotAuthorized') );
@@ -131,7 +131,7 @@ module.exports.vote = function ( user_id, freet_id, is_upvote ) {
         const delta = getVoteDelta( is_upvote );
         new_freet.votes += delta;
 
-        return freetModel.edit( new_freet );
+        return freetSqlModel.edit( new_freet );
       }
     })
     .then(()=>{

@@ -196,21 +196,21 @@ describe('PUT/api/freet/:freet_id', ()=>{
       + ' with a message of length 0', (done)=>{
 
     fields.message = '';
-    testModifyFreetThatExists( agent, 'put', freet_id, fields, done );
+    return testModifyFreetThatExists( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 204 when the author edits a freet that exists'
       + ' with a message of 0 < length < 140', (done)=>{
 
     fields.message = 'a message';
-    testModifyFreetThatExists( agent, 'put', freet_id, fields, done );
+    return testModifyFreetThatExists( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 204 when the author edits a freet that exists'
       + ' with a message of length 140', (done)=>{
 
     fields.message = createMessageOfLength( 140 );
-    testModifyFreetThatExists( agent, 'put', freet_id, fields, done );
+    return testModifyFreetThatExists( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 204 when the author edits a freet that exists'
@@ -229,16 +229,16 @@ describe('PUT/api/freet/:freet_id', ()=>{
   });
 
   it('throws 401 when editing a freet without logging in', (done)=>{
-    testModifyFreetWithoutLoggingIn( agent, 'put', freet_id, fields, done );
+    return testModifyFreetWithoutLoggingIn( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 403 when not the author edits a freet that exists', (done)=>{
-    testModifyFreetNotAuthor( agent, 'put', freet_id, fields, done );
+    return testModifyFreetNotAuthor( agent, 'put', freet_id, fields, done );
   });
 
   it('returns 404 when the author edits a non-existing freet', (done)=>{
-    freet_id = 'some random freet id';
-    testModifyNonExistingFreet( agent, 'put', freet_id, fields, done );
+    freet_id = uuid.v4();
+    return testModifyNonExistingFreet( agent, 'put', freet_id, fields, done );
   });
 
   afterEach(()=>{
@@ -439,7 +439,7 @@ describe('POST/api/freet/:freet_id/vote', ()=>{
     ;
 
 
-    agent
+    return agent
     .post('/api/freet/' + freet_id + '/vote')
     .send({direction: 'up'})
     .expect(401)
@@ -454,7 +454,7 @@ describe('POST/api/freet/:freet_id/vote', ()=>{
           freet_id  = ids.freet_id
     ;
 
-    agent
+    return agent
     .post('/api/freet/' + freet_id + '/vote')
     .send({direction: 'up'})
     .expect(403)
@@ -471,7 +471,7 @@ describe('POST/api/freet/:freet_id/vote', ()=>{
           freet_id        = ids.freet_id
     ;
 
-    testFreetVoting( agent, freet_id, direction, expected_votes, done );
+    return testFreetVoting( agent, freet_id, direction, expected_votes, done );
   });
 
   it('returns 204 when downvoting a freet if not author logged in', (done)=>{
@@ -481,15 +481,15 @@ describe('POST/api/freet/:freet_id/vote', ()=>{
           freet_id        = ids.freet_id
     ;
 
-    testFreetVoting( agent, freet_id, direction, expected_votes, done );
+    return testFreetVoting( agent, freet_id, direction, expected_votes, done );
   })
 
   it('returns 404 when upvoting a freet that does not exist', (done)=>{
     const agent     = not_author_agent,
-          freet_id  = 'some random freet id'
+          freet_id  = uuid.v4()
     ;
 
-    agent
+    return agent
     .post('/api/freet/' + freet_id + '/vote')
     .send({direction: 'up'})
     .expect(404)

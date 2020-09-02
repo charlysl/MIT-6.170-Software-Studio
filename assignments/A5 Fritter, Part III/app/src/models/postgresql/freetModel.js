@@ -1,6 +1,7 @@
 const uuid = require('uuid');
 
 const client = require('./postgresClient');
+const sqlUtils = require('./sqlUtils');
 
 /**
 * Insert a freet into the storage.
@@ -107,6 +108,45 @@ module.exports.get = function( freet_id ) {
       } else {
         resolve( res.rows[0] );
       }
+    })
+  })
+}
+
+
+
+/**
+* Edit a freet.
+*
+* Only the following freet properties can be edited:
+* - message
+* - votes
+*
+* @param {Object} - a freet object
+* @throws {MessageTooLong} - if the message has more than 140 characters
+*/
+module.exports.edit = function( freet ) {
+  const freet_copy = Object.assign( {}, freet );
+  const freet_id = freet_copy.freet_id;
+  delete freet_copy.freet_id;
+
+  const { assignments, values } = 
+    sqlUtils.objectToUpdateAssignments( freet_copy );
+
+  values.push( freet_id );
+
+  const query = "UPDATE freets SET " + assignments 
+                      + " WHERE freet_id = $" 
+                      +  (values.length);
+
+  console.log('FREET EDIT', freet, query, values);
+
+  return new Promise((resolve,reject)=>{
+    return client.query( query, values )
+    .then(()=>{
+      resolve()
+    })
+    .catch(( err )=>{
+      reject( handleError(err) );
     })
   })
 }

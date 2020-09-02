@@ -239,7 +239,7 @@ describe('models/userModel.remove', ()=>{
   });
 
   test('removes user', () => {
-    expect(
+    return expect(
       userModel.remove( user_id )
       .then(()=>{
         return userModel.get( name );

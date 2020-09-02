@@ -175,20 +175,20 @@ describe('services/freetService.edit', ()=>{
   test('edits freet whose author is the user', ()=>{
     return expect(
       freetService.edit( ids.user_id, freet )
-    ).resolves.toBeUndefined;
+    ).resolves.toBeUndefined();
   });
 
   test('throws NotAuthorized when editing a freet' 
         + ' whose author is not the user', 
     ()=>{
     return expect(
-      freetService.edit( 'some random user id', freet )
+      freetService.edit( uuid.v4(), freet )
     ).rejects.toThrow( 'NotAuthorized' );
   });
 
   test('throws FreetNotFound when editing non existing freet', ()=>{
     const bad_freet = Object.assign( freet );
-    bad_freet.freet_id = 'some random freet_id';
+    bad_freet.freet_id = uuid.v4();
 
     return expect(
       freetService.delete( freet )

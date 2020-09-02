@@ -1,5 +1,7 @@
 const client = require('./postgresClient');
 
+const sqlUtils = require('./sqlUtils');
+
 /**
 * Insert a user in storage.
 *
@@ -96,7 +98,8 @@ module.exports.edit = function ( user ) {
   const user_id = user_copy.user_id;
   delete user_copy.user_id;
 
-  const { assignments, values } = objectToUpdateAssignments( user_copy );
+  const { assignments, values } = 
+    sqlUtils.objectToUpdateAssignments( user_copy );
 
   values.push( user_id );
 
@@ -139,43 +142,3 @@ function handleError( err ) {
   return new Error('Caught unexpected error: ' + err.message);
 }
 
-/**
-* Transforms an object into a string of assignments for UPDATE
-*
-* Example:
-*
-*   {prop1: val1, prop2: val2} 
-*
-* is transformed into 
-*
-*   { "prop1=$1, prop2=$2", [val1, val2] }
-*
-* @param {Object} - and object
-* @return {string, Array} the string of assignments and array of values
-*/
-function objectToUpdateAssignments( obj ) {
-
-  let i           = 1,
-      assignments = [],
-      values      = []
-  ;
-
-  Object.keys( obj )
-  .filter(( prop )=>{
-    return obj.hasOwnProperty( prop )
-  })
-  .forEach(( prop )=>{
-    assignments.push( prop + "=$" + (i++) );
-    values.push( obj[ prop ] );
-  })
-  ;
-
-  const result = {
-            assignments:  assignments.join(", "), 
-            values
-  }
-
-  console.log('objectToUpdateAssignments', obj, result);
-
-  return result;
-}

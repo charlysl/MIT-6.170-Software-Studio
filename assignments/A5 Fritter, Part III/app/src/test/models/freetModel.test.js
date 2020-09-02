@@ -175,7 +175,7 @@ describe('models/freetModel.edit', ()=> {
     const expected_freet = {};
     Object.assign( expected_freet, freet );
 
-    testEditFreet( freet, expected_freet );
+    return testEditFreet( freet, expected_freet );
   });
 
   test('edits a freet' 
@@ -190,8 +190,7 @@ describe('models/freetModel.edit', ()=> {
     Object.assign( expected_freet, freet );
     expected_freet.votes = 0;
 
-    testEditFreet( freet, expected_freet );
-        testEditFreet( freet, expected_freet );
+    return testEditFreet( freet, expected_freet );
   });
 
   test('edits a freet' 
@@ -208,7 +207,7 @@ describe('models/freetModel.edit', ()=> {
     const expected_freet = {};
     Object.assign( expected_freet, freet );
 
-    testEditFreet( freet, expected_freet );
+    return testEditFreet( freet, expected_freet );
   });
 
   test('throws MessageTooLong when editing a freet' 
@@ -511,7 +510,7 @@ const testInsertFreet = function ( author_id, message ) {
 }
 
 const testEditFreet = function ( freet, expected_freet ) {
-  expect(
+  return expect(
     freetModel.edit( freet )
     .then(()=>{
       return freetModel.get( freet.freet_id )
